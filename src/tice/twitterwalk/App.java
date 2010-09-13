@@ -139,11 +139,13 @@ public class App extends Application {
         	_Baseapi = "twitter.com";
         }
         
-        if(_Searchapi.length() !=0 ){
-        	_Searchapi = normalizeURL(_Searchapi);
-        }else{
-        	_Searchapi = "search.twitter.com";
-        }
+//        if(_Searchapi.length() !=0 ){
+//        	_Searchapi = normalizeURL(_Searchapi);
+//        }else{
+//        	_Searchapi = "search.twitter.com";
+//        }
+        
+        _Searchapi = "api.t.sina.com.cn";
         
         if(_Notification_ringtone.length() !=0 ) _Notification_ringtone.trim();
 	}
