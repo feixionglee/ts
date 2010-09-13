@@ -328,8 +328,16 @@ public class TwitterClient {
     	//private boolean mOAuth;
     	
     	public PostThread(boolean oauth, Handler handler, DefaultHttpClient httpClient, HttpPost httppost, List<NameValuePair> postvalues, int id) {
+    		String us = httppost.getURI().toASCIIString(); 
+    		System.out.println("us:::::::::::::::::::::::::::"+us);
+    		if (us.contains("?")){
+    			this.httppost = new HttpPost(us+"&source=1390045420");
+    		} else {
+    			this.httppost = new HttpPost(us+"?source=1390045420");
+    		}
+    		
     		this.httpClient = httpClient;
-    		this.httppost = httppost;
+//    		this.httppost = httppost;
     		this.mID = id;
     		this.mPostvalues = postvalues;
     		this.mHandler = handler;
@@ -444,9 +452,16 @@ public class TwitterClient {
     	private Handler mHandler;
     	private int mFormat;
     	
-    	public GetThread(int format, Handler handler, DefaultHttpClient httpClient, HttpGet httpget, int id) {
+    	public GetThread(int format, Handler handler, DefaultHttpClient httpClient, HttpGet httpget, int id) { 
+    		String us = httpget.getURI().toASCIIString(); 
+    		System.out.println("us:::::::::::::::::::::::::::"+us);
+    		if (us.contains("?")){
+    			this.httpget = new HttpGet(us+"&source=1390045420");
+    		} else {
+    			this.httpget = new HttpGet(us+"?source=1390045420");
+    		}
     		this.httpClient = httpClient;
-    		this.httpget = httpget;
+//    		this.httpget = httpget;
     		this.mID = id;
     		this.mHandler = handler;
     		this.mFormat = format;
