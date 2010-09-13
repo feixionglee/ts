@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+
+    <string-array name="display_listlength">
+        <item>25</item>
+        <item>35</item>
+        <item>45</item>
+		<item>50</item>
+    </string-array>
+    
+    <string-array name="values_listlength">
+        <item>25</item>
+        <item>35</item>
+        <item>45</item>
+		<item>50</item>
+    </string-array>
+
+    <string-array name="display_fontsize">
+        <item>12</item>
+		<item>14</item>
+		<item>16</item>
+		<item>18</item>
+		<item>20</item>
+		<item>22</item>
+    </string-array>
+    
+    <string-array name="values_fontsize">
+        <item>12</item>
+		<item>14</item>
+		<item>16</item>
+		<item>18</item>
+		<item>20</item>
+		<item>22</item>
+    </string-array>
+
+	<string-array name="notification_interval">
+		<item>1 min</item>
+		<item>5 mins</item>
+		<item>15 mins</item>
+		<item>30 mins</item>
+		<item>1 hour</item>
+		<item>2 hour</item>
+		<item>3 hours</item>
+		<item>6 hours</item>
+		<item>12 hours</item>
+		<item>1 day</item>
+	</string-array>
+
+
+	<string-array name="notification_interval_value">
+		<item>60000</item>
+		<item>300000</item>
+		<item>900000</item>
+		<item>1800000</item>
+		<item>3600000</item>
+		<item>7200000</item>
+		<item>10800000</item>
+		<item>21600000</item>
+		<item>43200000</item>
+		<item>86400000</item>
+	</string-array>
+
+	<string-array name="uploadpictureurl">
+		<item>Twitpic</item>
+		<item>Twitgoo</item>
+		<item>Yfrog</item>
+		<item>Img.ly</item>
+	</string-array>
+
+	<string-array name="uploadpicture_value">
+		<item>http://twitpic.com/api/upload</item>
+		<item>http://twitgoo.com/api/upload</item>
+		<item>http://yfrog.com/api/upload</item>
+		<item>http://img.ly/api/upload</item>
+	</string-array>
+
+	<string-array name="shortenlinkurl">
+		<item>tinyurl</item>
+		<item>tr.im</item>
+		<item>is.gd</item>
+		<item>surl.me</item>
+		<item>fwd4.me</item>
+		<item>kl.am</item>
+		<item>aa.cx</item>
+		<item>bit.ly</item>
+	</string-array>
+
+	<string-array name="shortenlink_value">
+		<item>http://tinyurl.com/api-create.php?url</item>
+		<item>http://api.tr.im/v1/trim_simple?url</item>
+		<item>http://is.gd/api.php?longurl</item>
+		<item>http://surl.me/api-create.php?url</item>
+		<item>http://api.fwd4.me/?url</item>
+		<item>http://kl.am/api/shorten/?format=text&amp;url</item>
+		<item>http://aa.cx/api.php?url</item> 
+		<item>http://api.bit.ly/shorten?version=2.0.1&amp;login=junytang&amp;apiKey=R_2ca38ac83782a79f8de4826818c84e72&amp;longUrl</item>
+	</string-array>
+
+	<string-array name="picturequality">
+		<item>Small</item>
+		<item>Medium</item>
+		<item>Large</item>
+	</string-array>
+
+	<string-array name="picturequality_value">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+	</string-array>
+	
+	<string-array name="display_theme">
+		<item>Default</item>
+		<item>Light</item>
+		<item>Dark</item>
+	</string-array>
+
+	<string-array name="values_theme">
+		<item>2131165184</item>
+		<item>2131165185</item>
+		<item>2131165186</item>
+	</string-array>
+
+	
+</resources>

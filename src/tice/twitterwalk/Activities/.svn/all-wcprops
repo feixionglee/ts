@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities
+END
+SearchActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/SearchActivity.java
+END
+HomeActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/HomeActivity.java
+END
+MentionActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/MentionActivity.java
+END
+DirectActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/DirectActivity.java
+END
+UserInfoActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/UserInfoActivity.java
+END
+UserStatusesActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/UserStatusesActivity.java
+END
+StatusesShowActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/StatusesShowActivity.java
+END
+ShareContentActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/ShareContentActivity.java
+END
+FavoriteActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/FavoriteActivity.java
+END
+AccountsActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/AccountsActivity.java
+END
+TrendsActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/Activities/TrendsActivity.java
+END

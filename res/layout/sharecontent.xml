@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" android:layout_height="wrap_content" android:background="#fffefefa" android:paddingBottom="2px" android:paddingLeft="5px" android:paddingRight="5px" android:paddingTop="5px">
+
+	<LinearLayout
+    	android:layout_height="wrap_content" 
+    	android:layout_width="fill_parent" 
+    	android:orientation="horizontal" >
+
+<!-- 
+		<LinearLayout
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="fill_parent" 
+	    	android:orientation="vertical"
+	    	android:layout_weight="1.0">
+-->						
+			<FrameLayout 
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1.0">
+						
+				<EditText android:id="@+id/EditText"
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"
+					android:layout_marginTop="2px" 
+					android:hint="Input your tweet ..."
+					android:minLines="5"
+					android:layout_weight="1.0" 
+					android:paddingRight="26px" android:maxLength="300" android:maxLines="5" android:gravity="top">
+				</EditText>
+		
+				<TextView android:id="@+id/HintTextLength"
+					android:layout_width="30px" 
+					android:layout_height="30px"
+					android:hint="140"
+					android:layout_weight="1.0"
+					android:layout_gravity="right|bottom"
+					android:gravity="bottom|right"
+					android:layout_marginRight="7px"
+					android:layout_marginBottom="8px">
+				</TextView>	
+				
+				<Button android:id="@+id/Gallery" 
+					android:layout_weight="1.0"
+					android:layout_gravity="right" 
+					android:layout_height="30px" 
+					android:layout_width="30px" 
+					android:layout_marginTop="1px" 
+					android:layout_marginRight="3px" android:background="@drawable/camera">
+				</Button>
+				
+			</FrameLayout>	
+			
+		<!-- </LinearLayout>-->
+		
+		<LinearLayout
+	    	android:orientation="horizontal" 
+	    	android:layout_height="fill_parent" 
+	    	android:layout_width="wrap_content">
+								
+			<Button android:text="Send" 
+				android:id="@+id/Send" 
+				android:layout_height="fill_parent" android:paddingLeft="15px" android:paddingRight="15px" android:layout_width="wrap_content">
+			</Button>
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/PreviewPanel"
+    	android:layout_height="130px" 
+    	android:layout_width="fill_parent" 
+    	android:orientation="horizontal" android:layout_marginBottom="5px">
+
+		<LinearLayout
+	    	android:layout_height="fill_parent" 
+	    	android:layout_width="fill_parent" 
+		    android:layout_weight="1.0" android:gravity="center">
+
+			<ImageView android:id="@+id/ImagePrview"
+		    	android:layout_height="wrap_content" 
+		    	android:layout_width="wrap_content"/>
+		</LinearLayout>
+
+		<LinearLayout
+	    	android:layout_height="130px" 
+	    	android:layout_width="wrap_content" 
+	    	android:orientation="vertical">
+		    
+		    <Button android:id="@+id/ClosePreview"
+				android:text="Remove"	     
+				android:layout_weight="1.0"
+				android:layout_height="fill_parent" 
+				android:layout_width="100px" android:layout_marginBottom="-3px"/>
+
+		    <Button android:id="@+id/Upload"
+				android:text="Upload"	     
+				android:layout_weight="1.0"
+				android:layout_height="fill_parent" 
+				android:layout_width="100px" android:layout_marginBottom="-3px"/>
+
+		    <Button android:id="@+id/PostURL"
+				android:text="Post Link"	     
+				android:layout_weight="1.0"
+				android:layout_height="fill_parent" 
+				android:layout_width="100px" android:layout_marginBottom="-3px"/>
+
+
+		</LinearLayout>	
+			
+	</LinearLayout>
+
+</LinearLayout>

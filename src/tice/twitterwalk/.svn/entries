@@ -1,0 +1,89 @@
+10
+
+dir
+38
+http://twigee.googlecode.com/svn/trunk/src/tice/twitterwalk
+http://twigee.googlecode.com/svn
+
+
+
+2009-12-14T14:57:53.313910Z
+25
+junytang@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7d1e6e5e-e653-11de-b136-e12340cf38ae
+
+App.java
+file
+
+
+
+
+2010-09-10T09:56:21.000000Z
+ee55dc3c460dcdd55da1e448b2ec4f72
+2009-12-11T15:24:13.143250Z
+11
+ch.linghu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8217
+
+Activities
+dir
+
+DB
+dir
+
+TweetsProvider
+dir
+
+List
+dir
+
+XmlParse
+dir
+
+Util
+dir
+
+Setting
+dir
+
+HttpClient
+dir
+
+trace
+dir
+

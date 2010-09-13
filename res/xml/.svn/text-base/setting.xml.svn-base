@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- This is a primitive example showing the different types of preferences available. -->
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+		<PreferenceCategory
+            android:title="@string/twitteraccount">
+
+           	<Preference
+	            android:key="accounts"
+	            android:title="@string/accounts"
+	            android:summary="Your favorite twitter accounts"/>
+<!--  
+	        <EditTextPreference
+	        		android:key="username"
+	                android:title="@string/username"
+	                android:summary="Your twitter account"/>
+
+	        <EditTextPreference
+	        		android:key="password"
+	        		android:password="true"
+	                android:title="@string/password"
+	                android:summary="Your twitter password"/>
+-->	                
+		</PreferenceCategory>
+
+		<PreferenceCategory
+            android:title="@string/connect">     
+             
+  	        <EditTextPreference
+	        		android:key="baseapi"
+	                android:title="@string/apiaddress"
+					android:summary="Base twitter api address"
+					android:defaultValue="twitter.com"/>
+
+  	        <EditTextPreference
+	        		android:key="searchapi"
+	                android:title="@string/searchapi"
+					android:summary="Twitter search api address"
+					android:defaultValue="search.twitter.com"/>
+
+	        <CheckBoxPreference
+	                android:key="https"
+	                android:title="@string/usessl"
+	                android:summary="use secure http connection"
+	                android:defaultValue="false"/>
+                
+		</PreferenceCategory>   
+		
+		<PreferenceCategory
+            android:title="@string/shortenlinkservices">    		
+		
+		    <ListPreference
+	            android:key="shortenlinkapi"
+	            android:title="@string/shortenlinkservices"
+	            android:summary="Choose your favorite shorten link service"
+	            android:entries="@array/shortenlinkurl"
+	            android:entryValues="@array/shortenlink_value"
+	            android:defaultValue="http://tinyurl.com/api-create.php?url"/>  
+	            
+		</PreferenceCategory>
+		
+		<PreferenceCategory
+            android:title="@string/picturesharing">    		
+		
+		    <ListPreference
+	            android:key="pictureapi"
+	            android:title="@string/pictureservice"
+	            android:summary="Choose your favorite photo sharing service"
+	            android:entries="@array/uploadpictureurl"
+	            android:entryValues="@array/uploadpicture_value"
+	            android:defaultValue="http://twitpic.com/api/upload"/>  
+
+		    <ListPreference
+	            android:key="picturequality"
+	            android:title="@string/picturequality"
+	            android:summary="Choose your uploading pciture size according to your connection speed"
+	            android:entries="@array/picturequality"
+	            android:entryValues="@array/picturequality_value"
+	            android:defaultValue="1"/>  
+	            
+		</PreferenceCategory>
+		
+		<PreferenceCategory
+            android:title="@string/display"> 
+            
+            <ListPreference
+	            android:key="theme"
+	            android:title="@string/theme"
+	            android:summary="Color scheme for different display style"
+	            android:entries="@array/display_theme"
+	            android:entryValues="@array/values_theme"
+	            android:defaultValue="25"/>    
+            
+            
+		    <ListPreference
+	            android:key="tweetscount"
+	            android:title="@string/listlength"
+	            android:summary="Number of tweets in every refresh"
+	            android:entries="@array/display_listlength"
+	            android:entryValues="@array/values_listlength"
+	            android:defaultValue="25"/>    
+
+	        <CheckBoxPreference
+	                android:key="longclick"
+	                android:title="@string/longclick"
+	                android:summary="Long click tweet to open the links, hashtags and users (needs restart app)"
+	                android:defaultValue="true"/>
+
+	        <CheckBoxPreference
+	                android:key="autohidetoolbar"
+	                android:title="@string/autohidetoolbar"
+	                android:summary="Auto hide the toolbar when screen scrolls (needs restart app)"
+	                android:defaultValue="true"/>
+	        <CheckBoxPreference
+	                android:key="statusdbar"
+	                android:title="@string/statusdbar"
+	                android:summary="Show or hide the status bar"
+	                android:defaultValue="true"/>
+
+	        <CheckBoxPreference
+	                android:key="refreshafterpost"
+	                android:title="@string/refreshafterpost"
+	                android:summary="Refresh the timeline after posting"
+	                android:defaultValue="false"/>
+
+	        <CheckBoxPreference
+	                android:key="refreonlaunch"
+	                android:title="@string/refreonlaunch"
+	                android:summary="Refresh the timeline on launch"
+	                android:defaultValue="false"/>
+
+		    <ListPreference
+	            android:key="fontsize"
+	            android:title="@string/fontsize"
+	            android:summary="Font size of the tweet list. Needs to reopen the application"
+	            android:entries="@array/display_fontsize"
+	            android:entryValues="@array/values_fontsize"
+	            android:defaultValue="16"/>    
+
+	        <CheckBoxPreference
+	                android:key="displayicon"
+	                android:title="@string/displayicon"
+	                android:summary="Display/Hide user profile icon"
+	                android:defaultValue="true"/>
+
+		    <Preference
+	            android:key="clearcache"
+	            android:title="@string/clearcache"
+	            android:summary="Clear image cache to save phone storage space"/>   
+
+        </PreferenceCategory>   
+        
+        <PreferenceCategory
+            android:title="@string/notification">   
+		              	
+	       	<CheckBoxPreference
+		        	android:key="notification"
+		            android:title="@string/notification"
+		            android:defaultValue="false"/>
+            
+        	<PreferenceScreen
+		            android:title="@string/notification_setting"
+		            android:dependency="notification">
+
+		        	<ListPreference
+			            android:key="notification_interval"
+			            android:title="@string/notification_interval"
+			            android:summary="The interval time for every background refresh"
+			            android:entries="@array/notification_interval"
+			            android:entryValues="@array/notification_interval_value"
+			            android:dependency="notification"
+			            android:defaultValue="86400000"/>  
+				
+		
+				<PreferenceCategory
+		            android:title="@string/notification_timeline"> 
+		       		<CheckBoxPreference
+			        	android:key="notification_home"
+			            android:title="@string/notification_home"
+			            android:summary="Notification for home tweets"
+			            android:dependency="notification"
+			            android:defaultValue="false"/>
+		
+		       		<CheckBoxPreference
+			        	android:key="notification_mention"
+			            android:title="@string/notification_mention"
+			            android:summary="Notification for mention tweets"
+			            android:dependency="notification"
+			            android:defaultValue="false"/>
+		
+		       		<CheckBoxPreference
+			        	android:key="notification_direct"
+			            android:title="@string/notification_direct"
+			            android:summary="Notification for direct messages"
+			            android:dependency="notification"
+			            android:defaultValue="false"/>
+		        </PreferenceCategory>  
+		          
+		        <PreferenceCategory
+		            android:title="@string/notification_method"> 
+		       		
+		       		<CheckBoxPreference
+			        	android:key="notification_sound"
+			            android:title="@string/notification_sound"
+			            android:summary="Sound notification"
+			            android:defaultValue="true"/>  
+		       		
+		       		<RingtonePreference
+                        android:dependency="notification_sound"
+                        android:key="notification_ringtone"
+                        android:title="Select sound"
+                        android:ringtoneType="notification"
+                        android:showDefault="true"
+                        android:defaultValue="content://settings/system/notification_sound" />
+		       		
+		       		<CheckBoxPreference
+			        	android:key="notification_vibrate"
+			            android:title="@string/notification_vibrate"
+			            android:summary="Vibration notification"
+			            android:defaultValue="true"/>
+
+		       		<CheckBoxPreference
+			        	android:key="notification_led"
+			            android:title="@string/notification_led"
+			            android:summary="LED notification"
+			            android:defaultValue="true"/>
+			            			            
+		       	</PreferenceCategory>
+		       	     
+        	</PreferenceScreen>
+        	
+        </PreferenceCategory>
+        
+        <PreferenceCategory
+            android:title="Advance">    
+	        <PreferenceScreen
+	            android:title="Advance Settings">   
+					<CheckBoxPreference
+						android:key="removead"
+						android:title="Remove ad code"
+				        android:summary="Remove ad code when twitter api uses godaddy's free host"
+				        android:defaultValue="false"/>
+	        </PreferenceScreen>
+        </PreferenceCategory>
+                
+        <PreferenceCategory
+            android:title="@string/others">    
+            
+           	<Preference
+	            android:key="about"
+	            android:title="@string/about"/>
+	        
+        </PreferenceCategory>
+        
+</PreferenceScreen>
+

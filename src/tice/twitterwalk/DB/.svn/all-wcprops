@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/25/trunk/src/tice/twitterwalk/DB
+END
+DBTweetsHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/25/trunk/src/tice/twitterwalk/DB/DBTweetsHelper.java
+END
+DbAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/20/trunk/src/tice/twitterwalk/DB/DbAdapter.java
+END
+DBImagesHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/25/trunk/src/tice/twitterwalk/DB/DBImagesHelper.java
+END

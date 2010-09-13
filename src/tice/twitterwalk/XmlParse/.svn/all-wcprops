@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse
+END
+XmlFavoritesHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse/XmlFavoritesHandler.java
+END
+XmlHomeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse/XmlHomeHandler.java
+END
+XmlFriendsHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse/XmlFriendsHandler.java
+END
+XmlStatusesHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse/XmlStatusesHandler.java
+END
+XmlMentionsHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse/XmlMentionsHandler.java
+END
+XmlDirectsHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse/XmlDirectsHandler.java
+END
+XmlUserHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2/trunk/src/tice/twitterwalk/XmlParse/XmlUserHandler.java
+END

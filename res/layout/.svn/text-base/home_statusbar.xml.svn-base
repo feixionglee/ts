@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ScrollView01" android:layout_width="fill_parent"
+	android:scrollbarStyle="outsideOverlay" android:layout_height="wrap_content">
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<LinearLayout android:id="@+id/PreviewPanel"
+			android:layout_height="130px" android:layout_width="fill_parent"
+			android:orientation="horizontal" android:layout_marginBottom="5px">
+
+			<LinearLayout android:layout_height="fill_parent"
+				android:layout_width="fill_parent" android:layout_weight="1.0"
+				android:gravity="center" android:clickable="true">
+
+				<ImageView android:id="@+id/ImagePrview"
+					android:layout_height="wrap_content" android:layout_width="wrap_content" />
+			</LinearLayout>
+
+			<LinearLayout android:layout_height="130px"
+				android:layout_width="wrap_content" android:orientation="vertical">
+
+				<Button android:id="@+id/ClosePreview" android:text="Remove"
+					android:layout_weight="1.0" android:layout_height="fill_parent"
+					android:layout_width="100px" android:layout_marginBottom="-3px" />
+
+				<Button android:id="@+id/Upload" android:text="Upload"
+					android:layout_weight="1.0" android:layout_height="fill_parent"
+					android:layout_width="100px" android:layout_marginBottom="-3px" />
+
+				<Button android:id="@+id/PostURL" android:text="Post Link"
+					android:layout_weight="1.0" android:layout_height="fill_parent"
+					android:layout_width="100px" android:layout_marginBottom="-3px" />
+
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<FrameLayout android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_weight="1.0">
+			
+			<EditText android:id="@+id/EditText" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="2px"
+				android:hint="Input your tweet ..." android:minLines="2"
+				android:maxLength="300"
+				android:maxLines="5" android:layout_marginRight="65px" android:paddingRight="30px" android:inputType="textCapSentences|textAutoCorrect|textMultiLine">
+			</EditText>
+
+			<TextView android:id="@+id/HintTextLength"
+				android:hint="140" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|right" android:gravity="right" android:layout_marginBottom="8px" android:layout_marginRight="72px">
+			</TextView>
+
+			<Button android:id="@+id/Gallery" android:layout_height="30px"
+				android:layout_width="30px" android:background="@drawable/camera" android:layout_gravity="top|right" android:layout_marginRight="68px" android:layout_marginTop="3px">
+			</Button>
+
+			<Button android:text="Send" android:id="@+id/Send"
+				android:layout_width="65px" android:layout_gravity="bottom|right" android:layout_height="60px">
+			</Button>
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+</ScrollView>

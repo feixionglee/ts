@@ -1,0 +1,6 @@
+.DS_Store
+bin/*
+gen/tice/twitterwalk/R.java
+*.class
+*.apk
+*.dex

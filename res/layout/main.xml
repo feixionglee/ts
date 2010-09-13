@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+<!--
+	<com.admob.android.ads.AdView
+		xmlns:admobsdk="http://schemas.android.com/apk/res/tice.twitterwalk"
+		android:id="@+id/ad" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" admobsdk:backgroundColor="#FFFFFF"
+		admobsdk:textColor="#000000"
+		admobsdk:keywords="android twitter client java mobile iphone game web social network facebook application" />
+-->
+	<FrameLayout android:id="@+id/FrameLayout00"
+		android:layout_height="fill_parent" android:layout_width="fill_parent">
+
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="fill_parent" android:layout_height="fill_parent" android:id="@+id/MainFrame">
+
+			<LinearLayout android:id="@+id/InfoLayout"
+				android:layout_width="fill_parent" android:layout_height="wrap_content">
+			</LinearLayout>
+
+			<ListView android:layout_width="fill_parent"
+				android:layout_weight="1" android:layout_height="fill_parent"
+				android:id="@+id/android:list" android:nextFocusLeft="@+id/menubtn"
+				android:nextFocusRight="@+id/menubtn" android:listSelector="@drawable/shape_5"
+				android:drawSelectorOnTop="true">
+			</ListView>
+
+			<LinearLayout android:id="@+id/FixToolbarLayout"
+				android:layout_width="fill_parent" android:orientation="horizontal"
+				android:layout_gravity="bottom" android:layout_height="wrap_content"
+				android:paddingTop="18px" android:paddingBottom="2px"
+				android:paddingLeft="5px" android:paddingRight="5px"
+				android:background="@drawable/menu_background_fill_parent_width">
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<Button android:id="@+id/menubtn" android:background="@drawable/menu_show"
+			android:layout_gravity="right" android:layout_marginRight="4px"
+			android:layout_marginTop="4px" android:nextFocusLeft="@+id/ListView"
+			android:nextFocusRight="@+id/ListView" android:nextFocusDown="@+id/ListView"
+			android:nextFocusUp="@+id/ListView" android:layout_height="35px"
+			android:layout_width="35px">
+		</Button>
+
+		<LinearLayout android:id="@+id/StatusLayout"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal" android:layout_gravity="bottom"
+			android:paddingBottom="2px" android:paddingLeft="5px"
+			android:paddingRight="5px" android:paddingTop="18px"
+			android:background="@drawable/menu_background_fill_parent_width">
+		</LinearLayout>
+
+
+		<LinearLayout android:id="@+id/ToolbarLayout"
+			android:layout_width="fill_parent" android:orientation="horizontal"
+			android:layout_gravity="bottom" android:layout_height="wrap_content"
+			android:paddingTop="18px" android:paddingBottom="2px"
+			android:paddingLeft="5px" android:paddingRight="5px"
+			android:background="@drawable/menu_background_fill_parent_width">
+		</LinearLayout>
+
+	</FrameLayout>
+
+</LinearLayout>

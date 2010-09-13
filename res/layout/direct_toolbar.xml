@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:orientation="vertical" android:layout_height="wrap_content">
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_weight="1" android:layout_height="wrap_content">
+
+		<Button android:text="Reply" android:id="@+id/reply"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawablePadding="-12px" android:layout_height="52px"
+			android:drawableLeft="@drawable/ic_menu_revert">
+		</Button>
+	
+		<Button android:text="Delete" android:id="@+id/delete"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawablePadding="-12px" android:layout_height="52px"
+			android:drawableLeft="@drawable/ic_menu_close_clear_cancel">
+		</Button>
+		
+		<Button android:text="View" android:id="@+id/links"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawableLeft="@drawable/ic_menu_view"
+			android:drawablePadding="-12px" android:layout_height="52px">
+		</Button>
+				
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_weight="1" android:layout_height="wrap_content">
+		
+		<Button android:text="Inbox" android:id="@+id/inbox"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawablePadding="-12px" android:layout_height="52px"
+			android:drawableLeft="@drawable/ic_menu_back">
+		</Button>
+	
+		<Button android:text="Outbox" android:id="@+id/outbox"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawablePadding="-12px" android:layout_height="52px"
+			android:drawableLeft="@drawable/ic_menu_forward">
+		</Button>
+	</LinearLayout>
+
+</LinearLayout>

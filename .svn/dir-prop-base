@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 34
+.settings
+assets
+bin
+gen
+keystore
+
+END

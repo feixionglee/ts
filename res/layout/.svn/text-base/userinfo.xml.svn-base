@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+	
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:background="@drawable/popup_full_bright"
+		android:layout_marginTop="5px" android:layout_height="wrap_content">
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_weight="1" android:layout_margin="3px" android:layout_height="wrap_content">
+
+			<LinearLayout android:id="@+id/userinfo_image"
+				android:layout_width="60dip" android:orientation="vertical"
+				android:gravity="top|center_horizontal" android:padding="5px"
+				android:layout_height="wrap_content">
+
+				<ImageView android:id="@+id/userinfo_icon"
+					android:layout_height="wrap_content" android:layout_width="wrap_content" />
+
+				<TextView android:id="@+id/userinfo_blank"
+					android:layout_height="wrap_content" android:textSize="6px"
+					android:layout_width="fill_parent" android:paddingLeft="5px" />
+
+				<Button android:id="@+id/userinfo_btnfollow"
+					android:layout_height="29px" android:textSize="10px"
+					android:layout_width="55px" android:text="UnFollow"
+					android:paddingLeft="3px" android:paddingRight="3px">
+				</Button>
+
+				<Button android:id="@+id/userinfo_btnblock"
+					android:layout_height="29px" android:textSize="10px"
+					android:layout_width="55px" android:text="Block"
+					android:paddingLeft="3px" android:paddingRight="3px">
+				</Button>
+
+
+			</LinearLayout>
+
+
+			<ScrollView android:id="@+id/ScrollView01" 
+				android:layout_width="fill_parent" 
+				android:layout_height="100px" android:scrollbarStyle="outsideOverlay">
+
+				<LinearLayout android:orientation="vertical"
+					android:layout_height="wrap_content" android:layout_width="fill_parent">
+	
+					<TextView android:id="@+id/userinfo_name"
+						android:layout_height="wrap_content" android:textSize="16px"
+						android:layout_width="fill_parent" android:paddingLeft="5px"
+						android:paddingRight="5px" />
+	
+					<TextView android:id="@+id/userinfo_follow"
+						android:layout_height="wrap_content" android:textSize="14px"
+						android:layout_width="fill_parent" android:paddingLeft="5px"
+						android:paddingRight="5px" />
+	
+					<TextView android:id="@+id/userinfo_info"
+						android:layout_height="wrap_content" android:textSize="14px"
+						android:layout_width="fill_parent" android:paddingLeft="5px"
+						android:paddingRight="5px" />
+	
+				</LinearLayout>
+			
+			</ScrollView>
+			
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

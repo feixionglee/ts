@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:orientation="vertical" android:layout_height="wrap_content">
+
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_weight="1" android:layout_height="wrap_content">
+
+		<Button android:text="RE" android:id="@+id/reply"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawablePadding="-12px" android:layout_height="52px"
+			android:drawableLeft="@drawable/ic_menu_revert">
+		</Button>
+
+		<Button android:text="RT" android:id="@+id/retweet"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawableLeft="@drawable/ic_menu_share"
+			android:drawablePadding="-12px" android:layout_height="52px">
+		</Button>
+		
+		<Button android:text="DM" android:id="@+id/direcrmsg"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawableLeft="@drawable/ic_menu_compose"
+			android:drawablePadding="-12px" android:layout_height="52px">
+		</Button>
+
+		<Button android:text="View" android:id="@+id/links"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawableLeft="@drawable/ic_menu_view"
+			android:drawablePadding="-12px" android:layout_height="52px">
+		</Button>
+		
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_weight="1" android:layout_height="wrap_content">
+
+		<Button android:text="Threads" android:id="@+id/thread"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawablePadding="-12px" android:layout_height="52px"
+			android:drawableLeft="@drawable/ic_menu_friendslist">
+		</Button>
+
+		<Button android:text="Favorite" android:id="@+id/favorite"
+			android:layout_width="fill_parent" android:layout_weight="1"
+			android:paddingLeft="1px" android:paddingRight="1px"
+			android:drawableLeft="@drawable/ic_menu_star"
+			android:drawablePadding="-12px" android:layout_height="52px">
+		</Button>
+
+		<Button android:id="@+id/userfollow" android:layout_width="fill_parent"
+			android:layout_weight="1" android:paddingLeft="1px"
+			android:paddingRight="1px" android:text="Follow"
+			android:drawableLeft="@drawable/ic_menu_invite"
+			android:drawablePadding="-12px" android:layout_height="52px">
+		</Button>
+		
+		<Button android:id="@+id/userunfollow" android:layout_width="fill_parent"
+			android:layout_weight="1" android:paddingLeft="1px"
+			android:paddingRight="1px" android:text="Remove"
+			android:drawableLeft="@drawable/ic_menu_delete"
+			android:drawablePadding="-12px" android:layout_height="52px">
+		</Button>
+		
+	</LinearLayout>
+</LinearLayout>

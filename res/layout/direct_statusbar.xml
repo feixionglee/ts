@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="horizontal"
+	android:layout_height="wrap_content">
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:orientation="vertical"
+		android:layout_weight="1.0">
+
+		<EditText android:id="@+id/Receive" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_marginTop="2px"
+			android:maxLines="1" android:minLines="1" android:maxLength="100"
+			android:layout_weight="1.0" android:hint="Receiver's name ..."
+			android:autoLink="none" android:saveEnabled="true"  android:inputType="textCapSentences|textAutoCorrect|textMultiLine">
+		</EditText>
+
+		<FrameLayout android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<EditText android:id="@+id/EditText" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="2px"
+				android:hint="Input your message ..." android:maxLines="5"
+				android:minLines="2" android:maxLength="140" android:layout_weight="1.0"
+				android:paddingRight="25px" android:autoLink="none"
+				android:saveEnabled="true"  android:inputType="textCapWords|textCapSentences|textAutoCorrect|textMultiLine">
+			</EditText>
+
+			<TextView android:id="@+id/HintTextLength"
+				android:layout_width="fill_parent" android:hint="140"
+				android:layout_weight="1.0" android:gravity="right"
+				android:layout_gravity="bottom" android:layout_marginBottom="8px"
+				android:layout_marginRight="7px" android:layout_height="wrap_content">
+			</TextView>
+		</FrameLayout>
+
+	</LinearLayout>
+
+
+	<Button android:text="Send" android:id="@+id/Send"
+		android:layout_width="wrap_content" android:layout_height="fill_parent"
+		android:paddingLeft="15px" android:paddingRight="15px">
+	</Button>
+
+</LinearLayout>

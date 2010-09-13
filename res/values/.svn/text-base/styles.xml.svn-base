@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="DefaultTheme">
+	 	<item name="android:windowBackground">@drawable/theme_default_listbackground</item> 
+		<item name="ListViewDivider">@drawable/theme_default_divider</item>
+		<item name="ListViewBackground">@drawable/theme_default_listbackground</item>
+		<item name="ListViewBackgroundAt">@drawable/theme_default_listbackgroundat</item>
+		<item name="ListViewBackgroundMy">@drawable/theme_default_listbackgroundmy</item>
+		<item name="ListViewBackgroundSelect">@drawable/theme_default_listbackgroundselect</item>
+		<item name="TextViewColor">#ff333333</item>
+		<item name="TextViewColorSelect">#ff333333</item>
+	</style>
+
+	<style name="LightTheme">
+		<item name="android:windowBackground">@drawable/theme_light_listbackground</item>
+		<item name="ListViewDivider">@drawable/theme_default_divider</item>
+		<item name="ListViewBackground">@drawable/theme_light_listbackground</item>
+		<item name="ListViewBackgroundAt">@drawable/theme_light_listbackgroundat</item>
+		<item name="ListViewBackgroundMy">@drawable/theme_light_listbackgroundmy</item>
+		<item name="ListViewBackgroundSelect">@drawable/theme_light_listbackgroundselect</item>
+		<item name="TextViewColor">#ff595959</item>
+		<item name="TextViewColorSelect">#ff595959</item>
+	</style>
+	
+	<style name="DarkTheme">
+		<item name="android:windowBackground">@drawable/theme_dark_listbackground</item> 
+		<item name="android:popupBackground">@drawable/theme_dark_listbackground</item> 
+  		<item name="ListViewDivider">@drawable/theme_dark_divider</item>
+		<item name="ListViewBackground">@drawable/theme_dark_listbackground</item>
+		<item name="ListViewBackgroundAt">@drawable/theme_dark_listbackgroundat</item>
+		<item name="ListViewBackgroundMy">@drawable/theme_dark_listbackgroundmy</item>
+		<item name="ListViewBackgroundSelect">@drawable/theme_dark_listbackgroundselect</item>
+		<item name="TextViewColor">#ffdadbde</item>
+		<item name="TextViewColorSelect">#ffdadbde</item>
+	</style>
+	
+</resources>
+
+<!-- 
+  <item name="windowBackground">@drawable/screen_background_light</item> 
+  <item name="colorBackground">@android:color/background_light</item> 
+  <item name="colorForeground">@color/bright_foreground_light</item> 
+  <item name="colorForegroundInverse">@android:color/bright_foreground_light_inverse</item> 
+  <item name="textColorPrimary">@android:color/primary_text_light</item> 
+  <item name="textColorSecondary">@android:color/secondary_text_light</item> 
+  <item name="textColorTertiary">@android:color/tertiary_text_light</item> 
+  <item name="textColorPrimaryInverse">@android:color/primary_text_dark</item> 
+  <item name="textColorSecondaryInverse">@android:color/secondary_text_dark</item> 
+  <item name="textColorTertiaryInverse">@android:color/tertiary_text_dark</item> 
+  <item name="textColorPrimaryDisableOnly">@android:color/primary_text_light_disable_only</item> 
+  <item name="textColorPrimaryInverseDisableOnly">@android:color/primary_text_dark_disable_only</item> 
+  <item name="textColorPrimaryNoDisable">@android:color/primary_text_light_nodisable</item> 
+  <item name="textColorSecondaryNoDisable">@android:color/secondary_text_light_nodisable</item> 
+  <item name="textColorPrimaryInverseNoDisable">@android:color/primary_text_dark_nodisable</item> 
+  <item name="textColorSecondaryInverseNoDisable">@android:color/secondary_text_dark_nodisable</item> 
+  <item name="textColorHint">@android:color/hint_foreground_light</item> 
+  <item name="textColorHintInverse">@android:color/hint_foreground_dark</item> 
+  <item name="popupWindowStyle">@android:style/Widget.PopupWindow</item> 
+  <item name="textCheckMark">@android:drawable/indicator_check_mark_light</item> 
+  <item name="textCheckMarkInverse">@android:drawable/indicator_check_mark_dark</item> 
+  <item name="gestureOverlayViewStyle">@android:style/Widget.GestureOverlayView.White</item> 
+  <item name="listViewStyle">@android:style/Widget.ListView.White</item> 
+  <item name="listDivider">@drawable/divider_horizontal_bright</item> 
+  <item name="listSeparatorTextViewStyle">@android:style/Widget.TextView.ListSeparator.White</item> 
+  <item name="progressBarStyle">@android:style/Widget.ProgressBar.Inverse</item> 
+  <item name="progressBarStyleSmall">@android:style/Widget.ProgressBar.Small.Inverse</item> 
+  <item name="progressBarStyleLarge">@android:style/Widget.ProgressBar.Large.Inverse</item> 
+  <item name="progressBarStyleInverse">@android:style/Widget.ProgressBar</item> 
+  <item name="progressBarStyleSmallInverse">@android:style/Widget.ProgressBar.Small</item> 
+  <item name="progressBarStyleLargeInverse">@android:style/Widget.ProgressBar.Large</item> 
+ -->
