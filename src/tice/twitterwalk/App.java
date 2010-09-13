@@ -166,15 +166,13 @@ public class App extends Application {
 
         try{
 			try {
-//				host = new URI(url);
-				host = new URI("http://api.t.sina.com.cn");
+				host = new URI(url);
 			} catch (URISyntaxException e) {
-				host = new URI("http://api.t.sina.com.cn");
-//		        if(_Https == true){
-//		        	host = new URI("https://twitter.com");
-//		        }else{
-//		        	host = new URI("http://twitter.com");
-//		        }
+		        if(_Https == true){
+		        	host = new URI("https://twitter.com");
+		        }else{
+		        	host = new URI("http://twitter.com");
+		        }
 			} 
         }catch (Exception e){}
         
