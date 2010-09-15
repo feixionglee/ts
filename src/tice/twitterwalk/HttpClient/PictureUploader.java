@@ -8,6 +8,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+import tice.twitterwalk.Util.Base64Encoder;
+
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -30,13 +33,14 @@ class PictureUploader {
 		this.password = password;
 		this.handler = handler;
 	}
-
+	
 	public boolean uploadPicture(String pictureFileName, InputStream data)
-	{
+	{	
 		if (data != null){
 			try
 			{
-				URL connectURL = new URL(postUrl);
+//				URL connectURL = new URL(postUrl);
+				URL connectURL = new URL("http://api.t.sina.com.cn/statuses/upload.json");
 				HttpURLConnection conn = (HttpURLConnection)connectURL.openConnection();
 				conn.setDoInput(true);
 				conn.setDoOutput(true);
@@ -45,13 +49,17 @@ class PictureUploader {
 				conn.setRequestProperty("User-Agent", "myGeoDiary-V1");
 				conn.setRequestProperty("Connection","Keep-Alive");
 				conn.setRequestProperty("Content-Type","multipart/form-data;boundary="+boundary);
+				String authorization = "Basic " +
+                	new String(new Base64Encoder().encode((name + ":" + password).getBytes()));
+				conn.addRequestProperty("Authorization", authorization);
+				
 				conn.connect();
 
 				dataStream = new DataOutputStream(conn.getOutputStream());
 
-				writeFormField("username", name);
-				writeFormField("password", password);
-				writeFileField("media", pictureFileName, "image/jpg", data);
+				writeFormField("status", "password");
+				writeFormField("source", "1390045420");
+				writeFileField("pic", pictureFileName, "image/jpg", data);
 
 				// final closing boundary line
 				dataStream.writeBytes(twoHyphens + boundary + twoHyphens + CRLF);
@@ -110,7 +118,7 @@ class PictureUploader {
 
 			return new String(data, 0, len);
 		}
-		catch(Exception e) { }
+		catch(Exception e) {}
 		return "";
 	}
 
@@ -168,6 +176,6 @@ class PictureUploader {
 			dataStream.writeBytes(CRLF);
 			data.close();
 		}
-		catch(Exception e) {}
+		catch(Exception e) { }
 	}
 }
