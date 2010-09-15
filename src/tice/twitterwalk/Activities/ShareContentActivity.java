@@ -159,7 +159,7 @@ public class ShareContentActivity extends Activity {
     	EditText edit = (EditText)findViewById(R.id.EditText);
     	Button gallery = (Button)findViewById(R.id.Gallery);
     	Button closepreview = (Button)findViewById(R.id.ClosePreview);
-    	Button upload = (Button)findViewById(R.id.Upload);
+//    	Button upload = (Button)findViewById(R.id.Upload);
     	Button posturl = (Button)findViewById(R.id.PostURL);
 
     	if(Send != null){
@@ -171,14 +171,33 @@ public class ShareContentActivity extends Activity {
         			String text = edit.getText().toString();
         			
         			if(text.length() != 0){
-         				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
-         				inputMethodManager.hideSoftInputFromWindow(edit.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS );
-        				
-         				if (_App._twitter != null) _App._twitter.Post_statuses_post(mHandler, 0, text);
-
-        				v.setEnabled(false);
-        				edit.setEnabled(false);
-        				if(gallery != null)	gallery.setEnabled(false);
+        				if(_UploadFile == null){
+	         				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
+	         				inputMethodManager.hideSoftInputFromWindow(edit.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS );
+	        				
+	         				if (_App._twitter != null) _App._twitter.Post_statuses_post(mHandler, 0, text);
+	
+	        				v.setEnabled(false);
+	        				edit.setEnabled(false);
+	        				if(gallery != null)	gallery.setEnabled(false);
+        				}else {
+        					_Progressdialog = new ProgressDialog(ShareContentActivity.this);
+                        	_Progressdialog.setMessage("Uploading picture ...");
+                        	_Progressdialog.setIndeterminate(true);
+                        	_Progressdialog.setCancelable(false);
+                        	_Progressdialog.show();
+                        	
+                        	Button closepreview = (Button)findViewById(R.id.ClosePreview);
+//                        	Button upload = (Button)findViewById(R.id.Upload);
+                        	Button posturl = (Button)findViewById(R.id.PostURL);
+                        	
+                        	closepreview.setEnabled(false);
+//                        	upload.setEnabled(false);
+                        	posturl.setEnabled(false);
+            	        	
+                        	if (_App._twitter != null) _App._twitter.Post_image(mHandler, _App._Pictureapi, _App._Username, _App._Password, _UploadFile, text);
+        		          	_UploadFile = null;
+        				}
         			}
         		}
          		
@@ -270,29 +289,29 @@ public class ShareContentActivity extends Activity {
         	});
     	}
     	
-    	if(upload != null){
-    		upload.setOnClickListener(new OnClickListener(){
-    			public void onClick(View v) {
-    	        	if (_UploadFile == null) return;
-	    	       	
-                	_Progressdialog = new ProgressDialog(ShareContentActivity.this);
-                	_Progressdialog.setMessage("Uploading picture ...");
-                	_Progressdialog.setIndeterminate(true);
-                	_Progressdialog.setCancelable(false);
-                	_Progressdialog.show();
-                	
-                	Button closepreview = (Button)findViewById(R.id.ClosePreview);
-                	Button upload = (Button)findViewById(R.id.Upload);
-                	Button posturl = (Button)findViewById(R.id.PostURL);
-                	
-                	closepreview.setEnabled(false);
-                	upload.setEnabled(false);
-                	posturl.setEnabled(false);
-    	        	
-                	if (_App._twitter != null) _App._twitter.Post_image(mHandler, _App._Pictureapi, _App._Username, _App._Password, _UploadFile);
-    			}
-        	});
-    	}
+//    	if(upload != null){
+//    		upload.setOnClickListener(new OnClickListener(){
+//    			public void onClick(View v) {
+//    	        	if (_UploadFile == null) return;
+//	    	       	
+//                	_Progressdialog = new ProgressDialog(ShareContentActivity.this);
+//                	_Progressdialog.setMessage("Uploading picture ...");
+//                	_Progressdialog.setIndeterminate(true);
+//                	_Progressdialog.setCancelable(false);
+//                	_Progressdialog.show();
+//                	
+//                	Button closepreview = (Button)findViewById(R.id.ClosePreview);
+//                	Button upload = (Button)findViewById(R.id.Upload);
+//                	Button posturl = (Button)findViewById(R.id.PostURL);
+//                	
+//                	closepreview.setEnabled(false);
+//                	upload.setEnabled(false);
+//                	posturl.setEnabled(false);
+//    	        	
+//                	if (_App._twitter != null) _App._twitter.Post_image(mHandler, _App._Pictureapi, _App._Username, _App._Password, _UploadFile);
+//    			}
+//        	});
+//    	}
     }
     
     protected void InitTwitterClient(){

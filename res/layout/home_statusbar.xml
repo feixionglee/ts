@@ -26,10 +26,6 @@
 					android:layout_weight="1.0" android:layout_height="fill_parent"
 					android:layout_width="100px" android:layout_marginBottom="-3px" />
 
-				<Button android:id="@+id/Upload" android:text="Upload"
-					android:layout_weight="1.0" android:layout_height="fill_parent"
-					android:layout_width="100px" android:layout_marginBottom="-3px" />
-
 				<Button android:id="@+id/PostURL" android:text="Post Link"
 					android:layout_weight="1.0" android:layout_height="fill_parent"
 					android:layout_width="100px" android:layout_marginBottom="-3px" />

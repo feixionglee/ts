@@ -20,18 +20,20 @@ class PictureUploader {
 	static String twoHyphens = "--";
 	static String boundary = "*****tice.twitterwalk*****";
 
+	private String status = "";
 	private String postUrl = null;
 	private String name = null;
 	private String password = null;
 	private Handler handler = null;
 	private DataOutputStream dataStream = null;
 
-	public PictureUploader(Handler handler, String uri, String name, String password)
+	public PictureUploader(Handler handler, String uri, String name, String password, String status)
 	{
 		this.postUrl = uri;
 		this.name = name;
 		this.password = password;
 		this.handler = handler;
+		this.status = status;
 	}
 	
 	public boolean uploadPicture(String pictureFileName, InputStream data)
@@ -57,7 +59,7 @@ class PictureUploader {
 
 				dataStream = new DataOutputStream(conn.getOutputStream());
 
-				writeFormField("status", "password");
+				writeFormField("status", status);
 				writeFormField("source", "1390045420");
 				writeFileField("pic", pictureFileName, "image/jpg", data);
 

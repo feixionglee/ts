@@ -263,16 +263,17 @@ public class TwitterClient {
 	}
 	
 	class ImagePostThread extends Thread {
-		private String uri, user, pass;
+		private String uri, user, pass, status;
 		Uri file;
 		private Handler mHandler;
     	
-    	public ImagePostThread(Handler handler, String uri, String user, String pass, Uri file) {
+    	public ImagePostThread(Handler handler, String uri, String user, String pass, Uri file, String status) {
     		this.uri = uri;
     		this.user = user;
     		this.pass = pass;
     		this.file = file;
     		this.mHandler = handler;
+    		this.status = status;
     	}
 
     	@Override
@@ -307,7 +308,7 @@ public class TwitterClient {
 	        	
 	        	ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
 	    		
-	    		PictureUploader uploader = new PictureUploader(mHandler, uri, user, pass); 
+	    		PictureUploader uploader = new PictureUploader(mHandler, uri, user, pass, status); 
 	    		uploader.uploadPicture("upload.jpg", input);
 	    		
 	    		thePhoto.close();
@@ -1079,9 +1080,9 @@ public class TwitterClient {
 		}
 	}
 	
-	public void Post_image(Handler handler, String uri, String user, String pass, Uri file){
+	public void Post_image(Handler handler, String uri, String user, String pass, Uri file, String status){
 		try{
-			ImagePostThread thread = new ImagePostThread(handler, uri, user, pass, file);
+			ImagePostThread thread = new ImagePostThread(handler, uri, user, pass, file, status);
 		 	thread.start();
 		} catch (Exception e) {
 			Bundle err = new Bundle();
