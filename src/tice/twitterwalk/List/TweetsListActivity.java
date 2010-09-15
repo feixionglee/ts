@@ -1606,10 +1606,10 @@ public class TweetsListActivity extends Activity {
     		{
     			if (_Progressdialog.isShowing()) _Progressdialog.dismiss();
             	Button closepreview = (Button)findViewById(R.id.ClosePreview);
-            	Button upload = (Button)findViewById(R.id.Upload);
+//            	Button upload = (Button)findViewById(R.id.Upload);
             	Button posturl = (Button)findViewById(R.id.PostURL);
             	closepreview.setEnabled(true);
-            	upload.setEnabled(true);
+//            	upload.setEnabled(true);
             	posturl.setEnabled(true);
             	ErrorMsg = String.format("%s", msg.getData().getString(TwitterClient.KEY));
             	try{
@@ -1639,10 +1639,10 @@ public class TweetsListActivity extends Activity {
     		{
     			if (_Progressdialog.isShowing()) _Progressdialog.dismiss();
             	Button closepreview = (Button)findViewById(R.id.ClosePreview);
-            	Button upload = (Button)findViewById(R.id.Upload);
+//            	Button upload = (Button)findViewById(R.id.Upload);
             	Button posturl = (Button)findViewById(R.id.PostURL);
             	closepreview.setEnabled(true);
-            	upload.setEnabled(true);
+//            	upload.setEnabled(true);
             	posturl.setEnabled(true);
 
             	EditText edit = (EditText)findViewById(R.id.EditText);
