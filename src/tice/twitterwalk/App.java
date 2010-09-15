@@ -106,10 +106,12 @@ public class App extends Application {
 	
 		_Username = settings.getString("username", "");
 		_Password = settings.getString("password", "");
-		_Baseapi = settings.getString("baseapi", "twitter.com");
-		_Searchapi = settings.getString("searchapi", "search.twitter.com");
-		_Pictureapi = settings.getString("pictureapi", "http://twitpic.com/api/upload");
-		_Shortenlinkapi = settings.getString("shortenlinkapi", "http://tinyurl.com/api-create.php?url");
+//		_Baseapi = settings.getString("baseapi", "twitter.com");
+//		_Searchapi = settings.getString("searchapi", "search.twitter.com");
+//		_Pictureapi = settings.getString("pictureapi", "http://twitpic.com/api/upload");
+//		_Shortenlinkapi = settings.getString("shortenlinkapi", "http://tinyurl.com/api-create.php?url");
+		_Baseapi = _Searchapi = _Pictureapi = _Shortenlinkapi = "api.t.sina.com.cn";
+		
 		_Https = settings.getBoolean("https", false);
 		_Tweetscount = Integer.valueOf(settings.getString("tweetscount", "25"));
 		_LongClick = settings.getBoolean("longclick", true);
@@ -128,24 +130,23 @@ public class App extends Application {
 		_Notification_ringtone = settings.getString("notification_ringtone", "content://settings/system/notification_sound");
 		_Notification_vibrate = settings.getBoolean("notification_vibrate", true);
 		_Notification_led = settings.getBoolean("notification_led", true);
-		_PictureQuality = Integer.valueOf(settings.getString("picturequality","1"));
+//		_PictureQuality = Integer.valueOf(settings.getString("picturequality","1"));
 		_Theme = Integer.valueOf(settings.getString("theme",String.valueOf(R.style.DefaultTheme)));
 		_RemoveAD = settings.getBoolean("removead", false);
 
-        if(_Baseapi.length() !=0 ){
-        	_Https = isHttps(_Baseapi);
-            _Baseapi = normalizeURL(_Baseapi);
-        }else{
-        	_Baseapi = "twitter.com";
-        }
+//        if(_Baseapi.length() !=0 ){
+//        	_Https = isHttps(_Baseapi);
+//            _Baseapi = normalizeURL(_Baseapi);
+//        }else{
+//        	_Baseapi = "twitter.com";
+//        }
         
 //        if(_Searchapi.length() !=0 ){
 //        	_Searchapi = normalizeURL(_Searchapi);
 //        }else{
 //        	_Searchapi = "search.twitter.com";
 //        }
-        
-        _Searchapi = "api.t.sina.com.cn";
+
         
         if(_Notification_ringtone.length() !=0 ) _Notification_ringtone.trim();
 	}

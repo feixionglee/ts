@@ -38,7 +38,8 @@
 	                android:summary="Your twitter password"/>
 -->	                
 		</PreferenceCategory>
-
+		
+<!--	
 		<PreferenceCategory
             android:title="@string/connect">     
              
@@ -61,7 +62,9 @@
 	                android:defaultValue="false"/>
                 
 		</PreferenceCategory>   
-		
+-->
+
+<!--	
 		<PreferenceCategory
             android:title="@string/shortenlinkservices">    		
 		
@@ -73,8 +76,10 @@
 	            android:entryValues="@array/shortenlink_value"
 	            android:defaultValue="http://tinyurl.com/api-create.php?url"/>  
 	            
-		</PreferenceCategory>
-		
+		</PreferenceCategory>		
+-->
+
+<!--
 		<PreferenceCategory
             android:title="@string/picturesharing">    		
 		
@@ -94,8 +99,9 @@
 	            android:entryValues="@array/picturequality_value"
 	            android:defaultValue="1"/>  
 	            
-		</PreferenceCategory>
-		
+		</PreferenceCategory>		
+-->
+
 		<PreferenceCategory
             android:title="@string/display"> 
             
