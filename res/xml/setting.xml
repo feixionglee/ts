@@ -24,7 +24,7 @@
            	<Preference
 	            android:key="accounts"
 	            android:title="@string/accounts"
-	            android:summary="Your favorite twitter accounts"/>
+	            android:summary="Your favorite weibo accounts"/>
 <!--  
 	        <EditTextPreference
 	        		android:key="username"

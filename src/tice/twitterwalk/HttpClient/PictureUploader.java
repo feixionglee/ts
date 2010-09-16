@@ -72,7 +72,7 @@ class PictureUploader {
 
 				String response = getResponse(conn);
 
-				if (response.contains("=\"ok\">")) {
+				if (response.startsWith("{")) {
 	    			Bundle ret = new Bundle();
 	    			ret.putString(TwitterClient.KEY, response);
 					TwitterClient.SendMessage(handler, TwitterClient.HTTP_POSTIMAGE_SUCCESSFUL, ret);

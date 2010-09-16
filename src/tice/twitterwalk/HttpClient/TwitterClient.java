@@ -1085,9 +1085,10 @@ public class TwitterClient {
 			ImagePostThread thread = new ImagePostThread(handler, uri, user, pass, file, status);
 		 	thread.start();
 		} catch (Exception e) {
-			Bundle err = new Bundle();
-			err.putString(KEY, e.getLocalizedMessage());
-			SendMessage(handler, HTTP_ERROR, err);
+			
+//			Bundle err = new Bundle();
+//			err.putString(KEY, e.getLocalizedMessage());
+//			SendMessage(handler, HTTP_ERROR, err);
 		}
 	}
 	
