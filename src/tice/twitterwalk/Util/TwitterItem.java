@@ -18,12 +18,13 @@ public class TwitterItem{
     public boolean mFollowing;
     public boolean mLoading = false;
     public int mRead = 0;
-    public String mAccount; 
+    public String mAccount;
     public Bitmap mImage;
+    public String mPicuri;
     public int mType = TwitterClient.HOME_HOME;
     //public Bitmap mImage;
 
-    public TwitterItem(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconuri, int type, String account){
+    public TwitterItem(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconuri, int type, String account, String picuri){
         try {
 	    	mScreenname = screenname;
 	        mTitle = title;
@@ -39,9 +40,10 @@ public class TwitterItem{
 	        mRead = read;
 	        mType = type;
 	        mAccount = account;
-	        
+          mPicuri = picuri;
+
 	    	mTimeSource = TweetsListActivity.CreateTimeSource(mTime, mSource);
-	        
+
 		} catch (Exception e) {}
     }
 
@@ -63,9 +65,10 @@ public class TwitterItem{
 	        mTimeSource = obj.mTimeSource;
 	        mType = obj.mType;
 	        mAccount = obj.mAccount;
+	        mPicuri = obj.mPicuri;
 		} catch (Exception e) {}
     }
-    
+
     public TwitterItem(){
         try {
 	    	mScreenname = "";
@@ -83,6 +86,7 @@ public class TwitterItem{
 	        mTimeSource = "";
 	        mType = TwitterClient.HOME_HOME;
 	        mAccount = "";
+	        mPicuri = "";
 		} catch (Exception e) {}
     }
 }

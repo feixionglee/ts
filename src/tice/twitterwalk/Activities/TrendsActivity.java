@@ -81,7 +81,7 @@ public class TrendsActivity extends TweetsListActivity {
  		TwitterItem item;
  		for(int i=0;i<count;i++){
  			item = data.Get(i);
- 			_Items.addThread(READ_STATE_READ, " ", "", item.mText, 0 , "", i, item.mReplyID, false, false, "", true);
+ 			_Items.addThread(READ_STATE_READ, " ", "", item.mText, 0 , "", i, item.mReplyID, false, false, "", true, "");
  		}
 
  		

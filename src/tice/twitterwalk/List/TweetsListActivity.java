@@ -511,7 +511,7 @@ public class TweetsListActivity extends Activity {
 		}
 		if(tweetCursor == null) return;
     	if (tweetCursor.getCount() != 0) {
-			String screenname,title,text,source,replyid,iconuri;
+			String screenname,title,text,source,replyid,iconuri,picuri;
 			long time,id;
 			boolean favorited,following;
 			int read;
@@ -529,7 +529,8 @@ public class TweetsListActivity extends Activity {
 				following = (tweetCursor.getInt(DBTweetsHelper.COL_FOLLOWING) == 1)? true : false;
 				read = tweetCursor.getInt(DBTweetsHelper.COL_READ);
 				iconuri = tweetCursor.getString(DBTweetsHelper.COL_ICONURL);
-				_Items.addThread(read, screenname, title, text, time, source, id, replyid, favorited, following, iconuri, true);
+				picuri = "";
+				_Items.addThread(read, screenname, title, text, time, source, id, replyid, favorited, following, iconuri, true, picuri);
 				
 				//if(id > _LastID){
 				//	_LastID = id;
@@ -552,7 +553,7 @@ public class TweetsListActivity extends Activity {
 				}
 			}
 			
-			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true);
+			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, picuri);
 			_Items.SetLoadingItem();
 
 		}
@@ -1843,7 +1844,7 @@ public class TweetsListActivity extends Activity {
  		//_Items.notifyDataSetChanged();
  		
  		if (items.size() != 0 && _Items.getCount() <= TwitterClient.MAX_TWEETS_COUNT){
- 			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true);
+ 			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, "");
  			_Items.SetLoadingItem();
  		}
  		

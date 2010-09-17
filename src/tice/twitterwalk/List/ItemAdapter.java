@@ -359,7 +359,7 @@ public class ItemAdapter extends BaseAdapter {
     	notifyDataSetChanged();
     }
 
-    public void addThread(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconrui, boolean append){
+    public void addThread(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconrui, boolean append, String picuri){
     	
     	int count = mItem.size();
     	//if(screenname.length() == 0 && count < _App._Tweetscount - 5) return;
@@ -371,9 +371,9 @@ public class ItemAdapter extends BaseAdapter {
     				return;
     			}
     		}
-    		mItem.add(new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui,mCtx._ActivityType, _App._Username));
+    		mItem.add(new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui,mCtx._ActivityType, _App._Username, picuri));
     	}else{
-   			mItem.add(0,new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui, mCtx._ActivityType, _App._Username));
+   			mItem.add(0,new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui, mCtx._ActivityType, _App._Username, picuri));
     	}
     	
     	notifyDataSetChanged();

@@ -26,6 +26,7 @@ public class DbAdapter {
     
     private DBTweetsHelper mDBTweetsHelper = null;;
     private DBImagesHelper mDBImagesHelper = null;;
+    private DBPicsHelper mDBPicsHelper = null;
     
     private final Context mCtx;
 
@@ -37,6 +38,7 @@ public class DbAdapter {
     	try{
     		mDBTweetsHelper = new DBTweetsHelper(mCtx);
     		mDBImagesHelper = new DBImagesHelper(mCtx);
+    		mDBPicsHelper = new DBPicsHelper(mCtx);
     	}catch (Exception e){}
         return this;
     }
@@ -45,12 +47,14 @@ public class DbAdapter {
         try{	
     		if(mDBTweetsHelper != null) mDBTweetsHelper.close();
         	if(mDBImagesHelper != null) mDBImagesHelper.close();
+        	if(mDBPicsHelper != null) mDBPicsHelper.close();
 		}catch (Exception e){}
     }
 
     public void ClearCache(){
     	try{
     		mDBImagesHelper.ClearCache();
+    		mDBPicsHelper.ClearCache();
     	}catch (Exception e){}
     }
 
@@ -58,6 +62,7 @@ public class DbAdapter {
     	try{
     		mDBImagesHelper.CleanDB();
     		mDBTweetsHelper.CleanDB();
+    		mDBPicsHelper.CleanDB();
     	}catch (Exception e){}
     }
     
@@ -67,9 +72,20 @@ public class DbAdapter {
     	}catch (Exception e){}
     	return -1;
     }
-    
+        
     public Cursor fetchImage(String screenmane){
         return mDBImagesHelper.fetchImage(screenmane);
+    }
+    
+    public long InsertPic(Long status_id, byte[] data ){
+    	try{
+    		return mDBPicsHelper.InsertPic( status_id, data );
+    	}catch (Exception e){}
+    	return -1;
+    }
+    
+    public Cursor fetchPics(Long status_id){
+        return mDBPicsHelper.fetchPic(status_id);
     }
     
 	public void beginTransaction(){
