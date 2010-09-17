@@ -26,13 +26,13 @@ import android.widget.AbsListView.OnScrollListener;
 public class ItemAdapter extends BaseAdapter {
 
 	public App _App = null;
-	
+
 	public static Pattern p1 = Pattern.compile("https?://?((([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?)+)",Pattern.CASE_INSENSITIVE);
 	public static Pattern p2 = Pattern.compile("@[a-zA-Z0-9_]+", Pattern.CASE_INSENSITIVE);
 	public static Pattern p3 = Pattern.compile("#[a-zA-Z0-9_]+( |$)", Pattern.CASE_INSENSITIVE);
-	
+
 	private static int IMAGE_CACHE_SIZE = 12;
-	
+
     public class ViewHolder {
     	TextView title;
     	TextView text;
@@ -46,6 +46,7 @@ public class ItemAdapter extends BaseAdapter {
     	ProgressBar progressbar;
     	ImageView favorite;
     	ImageView conversation;
+    	ImageView pic;
     }
 
     boolean mInRefresh = false;
@@ -60,36 +61,36 @@ public class ItemAdapter extends BaseAdapter {
 	private int mtextviewcolor;
 	private int mtextviewcolorselect;
 	private int mScrollState;
-    
+
     public ItemAdapter(Context context) {
-    	
+
     	_App = (App)context.getApplicationContext();
-    	
+
         mInflater = LayoutInflater.from(context);
         mCtx = (TweetsListActivity)context;
-        
+
         mFav = BitmapFactory.decodeResource(context.getResources(), R.drawable.star_on);
         mUnFav = BitmapFactory.decodeResource(context.getResources(), R.drawable.star_off);
         mBlank = BitmapFactory.decodeResource(context.getResources(), R.drawable.default_profile_1_normal);
         mUnRead = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_sms_unread_msg_indicator);
         mConversation = BitmapFactory.decodeResource(context.getResources(), R.drawable.conversationt);
-        
+
 	    TypedArray atts = context.obtainStyledAttributes(new int []
 	                                  {R.attr.ListViewBackground,	R.attr.ListViewBackgroundAt,
 	                                   R.attr.ListViewBackgroundMy, R.attr.ListViewBackgroundSelect,
 	                                   R.attr.TextViewColor, R.attr.TextViewColorSelect});
-	    
-	    
+
+
 	    mListbackground = atts.getResourceId(0, R.drawable.theme_default_listbackground);
 	    mListbackgroundat = atts.getResourceId(1, R.drawable.theme_default_listbackgroundat);
 	    mListbackgroundmy = atts.getResourceId(2, R.drawable.theme_default_listbackgroundmy);
 	    mListbackgroundselset = atts.getResourceId(3, R.drawable.theme_default_listbackgroundselect);
 	    mtextviewcolor = atts.getColor(4, 0xff313031);
 	    mtextviewcolorselect = atts.getColor(5, 0xff313031);
-	    
+
 	    atts.recycle();
     }
-    
+
     public int getCount() {
         return mItem.size();
     }
@@ -99,12 +100,12 @@ public class ItemAdapter extends BaseAdapter {
         mItem.remove(i);
         notifyDataSetChanged();
     }
- 
+
     public void RemoveAll() {
         mItem.clear();
         notifyDataSetChanged();
     }
-    
+
     public void Clear(){
     	mItem.clear();
     	notifyDataSetChanged();
@@ -114,7 +115,7 @@ public class ItemAdapter extends BaseAdapter {
     	if (i >= mItem.size() || i < 0 ) return null;
     	return mItem.get(i);
     }
-    
+
     public Object getItem(int position) {
         return position;
     }
@@ -122,59 +123,60 @@ public class ItemAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    
+
     synchronized public View getView(int position, View convertView, ViewGroup parent) {
 
     	if(position >= mItem.size()) return convertView;
-    	
+
         ViewHolder holder;
         TwitterItem item = mItem.get(position);
-        
+
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.list_item, null);
 
             holder = new ViewHolder();
-            
+
 			holder.progressbar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
 			holder.progressbar.setVisibility(View.GONE);
-            
+
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.text = (TextView) convertView.findViewById(R.id.text);
             holder.timesource = (TextView) convertView.findViewById(R.id.timesource);
-            
+
            	holder.title.setTextSize(_App._Fontsize);
            	holder.text.setTextSize(_App._Fontsize);
            	holder.timesource.setTextSize(_App._Fontsize - 4);
-            
+
            	holder.imagelayout = (LinearLayout) convertView.findViewById(R.id.image_left);
            	holder.icon = (ImageView) convertView.findViewById(R.id.icon_left);
+           	holder.pic = (ImageView) convertView.findViewById(R.id.status_pic);
            	//holder.icon = (ImageView) new IconImageView(mCtx);
            	//holder.imagelayout.addView(holder.icon, 50, 50);
-           	
+
            	//holder.imagelayout_right = (LinearLayout) convertView.findViewById(R.id.image_right);
            	//holder.icon_right = (ImageView) convertView.findViewById(R.id.icon_right);
            	//holder.icon_right = (IconImageView) new IconImageView(mCtx);
            	//holder.imagelayout_left.addView(holder.icon_right, 50, 50);
-        	
+
         	holder.itemline = (LinearLayout) convertView.findViewById(R.id.itemline);
         	holder.unread = (ImageView) convertView.findViewById(R.id.unreadimage);
         	holder.unread.setImageBitmap(mUnRead);
-        	
+
         	holder.favorite = (ImageView) convertView.findViewById(R.id.favoriteindicate);
         	holder.favorite.setImageBitmap(mFav);
 
         	holder.conversation = (ImageView) convertView.findViewById(R.id.conversation);
         	holder.conversation.setImageBitmap(mConversation);
-        	
+
         	if(item.mScreenname.length() != 0 && _App._twitter != null){
             	item.mImage = _App._twitter.LoadIcon(mCtx._Handler, item.mScreenname, item.mImageurl);
            	}
-        	
+
         	//holder.text.setLinksClickable(false);
         	//holder.text.setLinkTextColor(0xaa0000ff);
-        	
+
         	convertView.setTag(holder);
-        	
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
@@ -192,7 +194,7 @@ public class ItemAdapter extends BaseAdapter {
                 icon = holder.icon_right;
         	}
         }
-*/        
+*/
 	    if(position >= IMAGE_CACHE_SIZE){
 	    	int count = mItem.size() - 1;
 	    	if(position <= count){
@@ -222,13 +224,13 @@ public class ItemAdapter extends BaseAdapter {
 	    }
 
 	    if (item.mRead == TweetsListActivity.READ_STATE_UNKNOW) item.mRead = TweetsListActivity.READ_STATE_UNREAD;
-	    
+
 	    holder.itemline.setBackgroundResource(mListbackground);
 
        	holder.title.setTextColor(mtextviewcolor);
       	holder.timesource.setTextColor(mtextviewcolor);
        	holder.text.setTextColor(mtextviewcolor);
-        
+
         String search = "@" + _App._Username;
         if(item.mText.contains(search) == true){
         	holder.itemline.setBackgroundResource(mListbackgroundat);
@@ -239,11 +241,11 @@ public class ItemAdapter extends BaseAdapter {
         	holder.itemline.setBackgroundResource(mListbackgroundmy);
         	//holder.itemline.setBackgroundColor(0xffeafee7);
         }
-        
+
         if(position == mCtx._CurrentThread){
         	holder.itemline.setBackgroundResource(mListbackgroundselset);
         	//holder.itemline.setBackgroundColor(0xffffc82e);
-           	
+
            	holder.title.setTextColor(mtextviewcolorselect);
           	holder.timesource.setTextColor(mtextviewcolorselect);
            	holder.text.setTextColor(mtextviewcolorselect);
@@ -252,8 +254,9 @@ public class ItemAdapter extends BaseAdapter {
         holder.favorite.setVisibility(View.GONE);
         holder.conversation.setVisibility(View.GONE);
         holder.icon.setVisibility(View.VISIBLE);
+        holder.pic.setVisibility(View.VISIBLE);
     	holder.progressbar.setVisibility(View.GONE);
-    	
+
     	if(item.mRead == TweetsListActivity.READ_STATE_READ){
     		//holder.unread.setImageBitmap(null);
     		holder.unread.setVisibility(View.INVISIBLE);
@@ -261,22 +264,22 @@ public class ItemAdapter extends BaseAdapter {
     		//holder.unread.setImageBitmap(mUnRead);
     		holder.unread.setVisibility(View.VISIBLE);
     	}
-    	
+
        	if (item.mFavorite == true){
        		holder.favorite.setVisibility(View.VISIBLE);
        	}
-       	
+
        	if(TextUtils.isEmpty(item.mReplyID) == false && item.mReplyID.matches("null") == false){
        		holder.conversation.setVisibility(View.VISIBLE);
        	}
-       	
+
         if(item.mLoading == true){
         	holder.progressbar.setVisibility(View.VISIBLE);
         }
-  
+
         if(_App._Displayicon == true){
         	holder.imagelayout.setVisibility(View.VISIBLE);
-            
+
  	        switch (mScrollState) {
  	        case OnScrollListener.SCROLL_STATE_IDLE:
  	        case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
@@ -284,7 +287,7 @@ public class ItemAdapter extends BaseAdapter {
  	            	item.mImage = _App._twitter.LoadIcon(mCtx._Handler, item.mScreenname, item.mImageurl);
  	           	}
  	        }
- 	        
+
             if(item.mImage == null){
             	holder.icon.setImageBitmap(mBlank);
             }else{
@@ -298,7 +301,8 @@ public class ItemAdapter extends BaseAdapter {
        	holder.title.setText(item.mScreenname);
       	holder.timesource.setText(item.mTimeSource);
        	holder.text.setText(item.mText);
-       	
+//       	holder.pic.setImageBitmap(mBlank);
+
        	if (item.mScreenname.length() == 0){
         	holder.title.setText("");
         	holder.timesource.setText("");
@@ -306,7 +310,7 @@ public class ItemAdapter extends BaseAdapter {
         	holder.favorite.setVisibility(View.INVISIBLE);
         	holder.icon.setVisibility(View.INVISIBLE);
         }
-       	
+
  		//Linkify.addLinks(holder.text, p1, "");
  		//Linkify.addLinks(holder.text, p2, "");
  		//Linkify.addLinks(holder.text, p3, "");
@@ -317,12 +321,12 @@ public class ItemAdapter extends BaseAdapter {
     public void SetScrollState(int state){
     	mScrollState = state;
     }
-    
+
     public void ReplaceThread(int index, TwitterItem obj,int type){
     	if(index >= mItem.size()) return;
-    	
+
     	TwitterItem item = mItem.get(index);
-    	
+
     	item.mScreenname = obj.mScreenname;
     	item.mTitle = obj.mTitle;
     	item.mTime = obj.mTime;
@@ -337,9 +341,9 @@ public class ItemAdapter extends BaseAdapter {
     	item.mRead = obj.mRead;
        	item.mTimeSource = obj.mTimeSource;
     }
-    
+
     public void addThread(int index, TwitterItem obj, int addtype, int type){
-    	
+
     	int count = mItem.size();
     	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;
 
@@ -348,37 +352,37 @@ public class ItemAdapter extends BaseAdapter {
 				return;
 			}
 		}
-    	
+
     	if(addtype == TweetsListActivity.ADD_TYPE_APPEND){
     		mItem.add(new TwitterItem(obj));
     	}else{
-    		if(index >= mItem.size() ) index = mItem.size(); 
+    		if(index >= mItem.size() ) index = mItem.size();
     		mItem.add(index, new TwitterItem(obj));
     	}
-    	
+
     	notifyDataSetChanged();
     }
 
-    public void addThread(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconrui, boolean append, String picuri){
-    	
+    public void addThread(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconrui, boolean append, String picurl){
+
     	int count = mItem.size();
     	//if(screenname.length() == 0 && count < _App._Tweetscount - 5) return;
     	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;
-    	
+
     	if(append == true){
     		if(count != 0){
     			if(mItem.get(count - 1).mID == id ){
     				return;
     			}
     		}
-    		mItem.add(new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui,mCtx._ActivityType, _App._Username, picuri));
+    		mItem.add(new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui,mCtx._ActivityType, _App._Username, picurl));
     	}else{
-   			mItem.add(0,new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui, mCtx._ActivityType, _App._Username, picuri));
+   			mItem.add(0,new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui, mCtx._ActivityType, _App._Username, picurl));
     	}
-    	
+
     	notifyDataSetChanged();
     }
-    
+
     public void SetLoadingItem(){
     	int count = mItem.size();
     	if(count == 0) return;
@@ -389,7 +393,7 @@ public class ItemAdapter extends BaseAdapter {
 			item.mLoading = false;
 		}
     }
-    
+
     public void SetStartLoadingItem(){
     	int count = mItem.size();
     	if(count == 0) return;

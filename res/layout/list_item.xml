@@ -47,7 +47,14 @@
 			<TextView android:id="@+id/text" android:layout_width="fill_parent"
 				android:gravity="left|center" android:paddingRight="3px" android:textSize="16px"
 				android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:paddingLeft="2px"/>
+			
+			
 		</LinearLayout>
+
+		<ImageView android:id="@+id/status_pic" 
+						android:layout_width="100dip" android:layout_height="100dip"
+						android:gravity="left|center" android:layout_gravity="center_vertical" 
+						android:paddingRight="3px" android:paddingLeft="2px"/>
 
 		<TextView android:id="@+id/timesource" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:gravity="right|top"
