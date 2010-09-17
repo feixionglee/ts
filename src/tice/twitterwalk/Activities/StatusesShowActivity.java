@@ -92,7 +92,7 @@ public class StatusesShowActivity extends TweetsListActivity {
 // 		}
 
  		//boolean read = _DbHelper.FindTweet(DbAdapter.DATABASE_TABLES[_ActivityType], item.mID);
- 		_Items.addThread(READ_STATE_READ, item.mScreenname, item.mTitle, item.mText, item.mTime, item.mSource, id, item.mReplyID, item.mFavorite, false, item.mImageurl, true, item.mPicuri);
+ 		_Items.addThread(READ_STATE_READ, item.mScreenname, item.mTitle, item.mText, item.mTime, item.mSource, id, item.mReplyID, item.mFavorite, false, item.mImageurl, true, item.mPicurl);
     }
  	
  	private void UpdateListView(Bundle bundle,boolean append, boolean order){

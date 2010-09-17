@@ -88,7 +88,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 public class TweetsListActivity extends Activity {
 
 	public App _App = null;
-	
+
 	public final static int INPUT_NEWPOST = 1;
 	public final static int INPUT_REPLY = 2;
 	public final static int INPUT_RETWEET = 3;
@@ -112,7 +112,7 @@ public class TweetsListActivity extends Activity {
 	private static double last_distance = 0;
 	private static int last_freecount = -1;
 	private static long last_click_time = 0;
-	
+
 	protected int _CurrentThread = -1;
 	protected ArrayList<String> _Links;
 	protected ArrayList<String> _Replies;
@@ -152,11 +152,11 @@ public class TweetsListActivity extends Activity {
 	public interface UpdateViewCallback{
 		public void Update(Message msg,boolean append, boolean order);
 	}
-	
+
     protected void SetWindowTitle(int type){
     	String app_name = getResources().getString(R.string.app_name);
     	String title = app_name;
-    	
+
     	switch (type){
     	case TwitterClient.HOME_HOME:
     		title = String.format("Home");
@@ -185,7 +185,7 @@ public class TweetsListActivity extends Activity {
     	case TwitterClient.HOME_SEARCH:
     		title = String.format("Search");
     		_ActivityName = "Search";
-    		break;    
+    		break;
     	case TwitterClient.HOME_USERINFO:
     		title = String.format("Profile");
     		_ActivityName = "UserInformation";
@@ -201,39 +201,39 @@ public class TweetsListActivity extends Activity {
     	case TwitterClient.HOME_FOLLOWERS:
     		title = String.format("Followers");
     		_ActivityName = "Followers";
-    		break; 
+    		break;
     	}
 
     	title = String.format("%s | %s | %s", app_name, _App._Username, title);
-    	
+
         final TextView leftText = (TextView) findViewById(R.id.title_text);
         leftText.setText(title);
 
         //_App._tracker.trackPageView("/" + _ActivityName);
     }
-	
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        
-        switch(resultCode){ 
-        case APP_CHAINCLOSE: 
-             setResult(APP_CHAINCLOSE); 
-             finish(); 
+
+        switch(resultCode){
+        case APP_CHAINCLOSE:
+             setResult(APP_CHAINCLOSE);
+             finish();
              if(_ActivityType == TwitterClient.HOME_HOME){
             	 //_AlarmMgr.cancel(_Sender);
             	 if(_App._NotiServices != null){
             		 stopService(_App._NotiServices);
             	 }
              }
-             break; 
-        } 
-    	
+             break;
+        }
+
     	super.onActivityResult(requestCode, resultCode, data);
 
         if ((requestCode == 1 || requestCode == 2) && resultCode == Activity.RESULT_OK){
 
         	try {
-	        	
+
         		if(requestCode == 1){
         			_UploadFile = data.getData();
         		}else if (requestCode == 2){
@@ -252,23 +252,23 @@ public class TweetsListActivity extends Activity {
                     _bitmap.recycle();
                     _bitmap = null;
         		}
-        		
+
 	        	int samplesize = 12;
 	        	BitmapFactory.Options options;
 	        	ImageView view = (ImageView) findViewById(R.id.ImagePrview);
 	        	InputStream thePhoto = getContentResolver().openInputStream(_UploadFile);
 	        	InputStream testSize = getContentResolver().openInputStream(_UploadFile);
-	        	
+
 	        	options = new BitmapFactory.Options();
 	        	options.inJustDecodeBounds = true;
 	        	BitmapFactory.decodeStream(testSize, null,options);
-	        	
+
 	        	if(options.outHeight >= options.outHeight){
-	        		samplesize = options.outHeight / PREVIEW_HEIGHT; 
+	        		samplesize = options.outHeight / PREVIEW_HEIGHT;
 	        	}else{
 	        		samplesize = options.outWidth / PREVIEW_WIDTH;
 	        	}
-	
+
 	        	if (_bitmap != null){
 	        		_bitmap.recycle();
 	        		_bitmap = null;
@@ -278,44 +278,44 @@ public class TweetsListActivity extends Activity {
 	        	options.inJustDecodeBounds = false;
 	        	options.inPreferredConfig = Bitmap.Config.RGB_565;
 	        	_bitmap = BitmapFactory.decodeStream(thePhoto, null,options);
-	      	
+
 	        	_Previewpanel.setVisibility(View.VISIBLE);
 	        	view.setImageBitmap(_bitmap);
-	        	
+
 	        	thePhoto.close();
 	        	testSize.close();
-	
+
 	        } catch (FileNotFoundException e) { } catch (IOException e) { }
 	    }
     }
-    
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
     	_App = (App)getApplicationContext();
-        
+
 //        if(_SensorMgr == null){
 //        	_SensorMgr = (SensorManager)getSystemService(SENSOR_SERVICE);
-//        	_Sensor = _SensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); 
+//        	_Sensor = _SensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 //           	_SensorMgr.registerListener(SensorEventListener,_Sensor,SensorManager.SENSOR_DELAY_UI);
 //        }
 
 		registerReceiver(mReceiver, new IntentFilter("tice.twitterwalk.INAPP_AUTO_REFRESH"));
-        
+
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 
         setTheme(_App._Theme);
         setContentView(R.layout.main);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title_1);
         setMyProgressBarVisibility(false);
-        
+
         _list = (ListView)findViewById(android.R.id.list);
         _Statuspanel = (LinearLayout)findViewById(R.id.StatusLayout);
         _FixToolbarpanel = (LinearLayout)findViewById(R.id.FixToolbarLayout);
        	_Toolbarpanel = (LinearLayout)findViewById(R.id.ToolbarLayout);
-        
+
        	_Toolbarpanel.setVisibility(View.INVISIBLE);
         _Statuspanel.setVisibility(View.INVISIBLE);
 
@@ -324,9 +324,9 @@ public class TweetsListActivity extends Activity {
         }else{
         	_Toolbarpanel = _FixToolbarpanel;
         }
-        
+
 	    TypedArray atts = obtainStyledAttributes(new int []{R.attr.ListViewBackground,R.attr.ListViewDivider});
-        
+
         _Items = new ItemAdapter(this);
         _Links = new ArrayList<String>();
         _Replies = new ArrayList<String>();
@@ -343,29 +343,29 @@ public class TweetsListActivity extends Activity {
         _list.setOnItemLongClickListener(OnItemLongClickListener);
 
         atts.recycle();
-        
+
         _App._HaveNotification = false;
         LoadTweetItemsFromDB();
         mOldAccount = _App._Username;
     }
-    
+
     @Override
 	protected void onDestroy() {
-    	
+
 //    	_SensorMgr.unregisterListener(SensorEventListener,_Sensor);
 
 		try{unregisterReceiver(mReceiver);}catch(Exception e){}
-		
+
 		super.onDestroy();
 	}
-    
+
     @Override
     protected void onResume() {
-       
+
     	super.onResume();
-       
+
     	_App._InApp = true;
-    	
+
         if(_App._ReloadSettings == true){
         	_App._ReloadSettings = false;
             _App.LoadSettings(this);
@@ -382,9 +382,9 @@ public class TweetsListActivity extends Activity {
 			_Items.notifyDataSetChanged();
 			SetWindowTitle(_ActivityType);
         }
-        
+
         _App._NotificationMgr.cancelAll();
-        
+
         if(_App._ShowStatusbar == false){
         	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
@@ -394,14 +394,14 @@ public class TweetsListActivity extends Activity {
 
 		final TextView rightText = (TextView) findViewById(R.id.title_api);
 		rightText.setText(_App._TitleString);
-		
+
 		if(_Refresh == true){
 			setMyProgressBarVisibility(true);
 		}
-		
+
 		if(_App._HaveNotification == true){
 			_App._HaveNotification = false;
-			LoadTweetItemsFromDB();	
+			LoadTweetItemsFromDB();
 		}
     }
 
@@ -413,75 +413,75 @@ public class TweetsListActivity extends Activity {
 				UpdateTweetItemsToDB();
 			}
  		}).start();
-    	
+
     	super.onPause();
 
     	_App._InApp = false;
     }
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() { 
-        public void onReceive(Context context, Intent intent) { 
-			
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+
 			if( (_ActivityType == TwitterClient.HOME_HOME && _App._Notification_home == true) ||
 				(_ActivityType == TwitterClient.HOME_MENTIONS && _App._Notification_mention == true) ||
 				( _ActivityType == TwitterClient.HOME_DIRECT && _App._Notification_direct == true) )
 			{
-				
+
 				String str = String.format("Refreshing...");
 				Toast.makeText(_App._this, str, Toast.LENGTH_SHORT).show();
-				
+
 				setMyProgressBarVisibility(true);
 				if (_App._twitter != null) _App._twitter.Get_timeline(_Handler, _ActivityType);
 				PanelAnimationOff(false, _Statuspanel);
 				PanelAnimationOff(false, _Toolbarpanel);
 			}
-        } 
-    }; 
-    
+        }
+    };
+
     SensorEventListener SensorEventListener = new SensorEventListener(){
-		
+
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
-			
+
 		}
 
 		public void onSensorChanged(SensorEvent event) {
-			
+
 			if (_Refresh == true) return;
-			
-			long curTime = System.currentTimeMillis(); 
+
+			long curTime = System.currentTimeMillis();
 			float x,y,z;
-			
+
 
 			if ((curTime - last_update) > 100) {
 				//long diffTime = (curTime - last_update);
 				last_update = curTime;
-				
-				x = event.values[SensorManager.DATA_X];     
-				y = event.values[SensorManager.DATA_Y];     
+
+				x = event.values[SensorManager.DATA_X];
+				y = event.values[SensorManager.DATA_Y];
 				z = event.values[SensorManager.DATA_Z];
-				
-				double distance = Math.sqrt(Math.pow(x-last_x, 2) + Math.pow(y-last_y, 2) + Math.pow(z-last_z, 2));				
-				
+
+				double distance = Math.sqrt(Math.pow(x-last_x, 2) + Math.pow(y-last_y, 2) + Math.pow(z-last_z, 2));
+
 				if (distance >= 10 && distance <= 20) {
 					last_freecount = 0;
-					last_distance += distance;					
+					last_distance += distance;
 
 					if(last_distance >= 35){
 
 						String str = String.format("Refreshing...");
 						Toast.makeText(_App._this, str, Toast.LENGTH_SHORT).show();
-						
+
 						_Refresh = true;
 						//_InRefresh = true;
 						last_distance = 0;
 						last_freecount = 0;
-						
+
 						setMyProgressBarVisibility(true);
 						if (_App._twitter != null) _App._twitter.Get_timeline(_Handler, _ActivityType);
 						PanelAnimationOff(false, _Statuspanel);
 						PanelAnimationOff(false, _Toolbarpanel);
 					}
-					
+
 				}else{
 					if( last_freecount >= 0){
 						last_freecount ++;
@@ -491,19 +491,19 @@ public class TweetsListActivity extends Activity {
 						}
 					}
 				}
-				
-				last_x = x;  
-				last_y = y;  
-				last_z = z;  
+
+				last_x = x;
+				last_y = y;
+				last_z = z;
 			}
 		}
     };
- 	
+
 	protected void LoadTweetItemsFromDB(){
     	Cursor tweetCursor;
-    	
+
     	String limit = String.format("%d", _App._Tweetscount);
-    	
+
 		if(_ActivityType == TwitterClient.HOME_FRIENDS || _ActivityType == TwitterClient.HOME_FOLLOWERS){
 			tweetCursor = _App._DbHelper.fetchAll(_App._Username, _ActivityType, null, limit);
 		}else{
@@ -511,7 +511,7 @@ public class TweetsListActivity extends Activity {
 		}
 		if(tweetCursor == null) return;
     	if (tweetCursor.getCount() != 0) {
-			String screenname,title,text,source,replyid,iconuri,picuri;
+			String screenname,title,text,source,replyid,iconuri,picurl;
 			long time,id;
 			boolean favorited,following;
 			int read;
@@ -529,19 +529,19 @@ public class TweetsListActivity extends Activity {
 				following = (tweetCursor.getInt(DBTweetsHelper.COL_FOLLOWING) == 1)? true : false;
 				read = tweetCursor.getInt(DBTweetsHelper.COL_READ);
 				iconuri = tweetCursor.getString(DBTweetsHelper.COL_ICONURL);
-				picuri = "";
-				_Items.addThread(read, screenname, title, text, time, source, id, replyid, favorited, following, iconuri, true, picuri);
-				
+				picurl = "";
+				_Items.addThread(read, screenname, title, text, time, source, id, replyid, favorited, following, iconuri, true, picurl);
+
 				//if(id > _LastID){
 				//	_LastID = id;
 				//}
 				//if(id < _PrevID){
 				//	_PrevID = id;
 				//}
-				
+
 			}while (tweetCursor.moveToNext());
 			tweetCursor.close();
-			
+
 			Date now = new Date();
 			if(_ActivityType == TwitterClient.HOME_HOME){
 				if(now.getTime() - time >= 30 * 60 * 1000){
@@ -552,20 +552,20 @@ public class TweetsListActivity extends Activity {
 //					_PrevID = Long.MAX_VALUE;
 				}
 			}
-			
-			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, picuri);
+
+			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, picurl);
 			_Items.SetLoadingItem();
 
 		}
     }
 
     protected long UpdateTweetItemsToDB(){
-    	
+
         int count = _Items.getCount();
         TwitterItem item;
         long ret = 0;
         ContentValues values = new ContentValues();
-        
+
         for(int i=0;i<count && i < _App._Tweetscount;i++){
         	item = _Items.Get(i);
         	if(item != null){
@@ -574,16 +574,16 @@ public class TweetsListActivity extends Activity {
 	        	ret = _App._DbHelper.updatetweet(_App._Username, _ActivityType, item.mID,values);
         	}
         }
-        
+
         return ret;
     }
 
     protected long SaveTweetItemsToDB(ArrayList<TwitterItem> items){
-    	
+
         int count = items.size();
         TwitterItem item;
         long ret = 0;
-	        
+
         for(int i=0;i<count;i++){
         	item = items.get(i);
         	if(TextUtils.isEmpty(item.mScreenname) == false){
@@ -592,18 +592,18 @@ public class TweetsListActivity extends Activity {
 	        	ret = _App._DbHelper.updatetweet(_ActivityType,item);
         	}
         }
-        
+
         return ret;
     }
-    
+
     protected long SaveTweetItemsToDB(){
-    	
+
         int count = _Items.getCount();
         TwitterItem item;
         long ret = 0;
 
         _App._DbHelper.deleteAll(_App._Username, _ActivityType);
-	        
+
         for(int i=0;i<count && i < _App._Tweetscount;i++){
         	item = _Items.Get(i);
         	if(item != null && TextUtils.isEmpty(item.mScreenname) == false){
@@ -612,15 +612,15 @@ public class TweetsListActivity extends Activity {
 	        	ret = _App._DbHelper.createtweet(_ActivityType,item);
         	}
         }
-        
+
         return ret;
     }
-    
+
 /*    protected void InitTwitterClient(){
 
         int port;
         String url,searchurl;
-        
+
         if(_App._Https == true){
         	url = String.format("https://%s", _App._Baseapi);
         	searchurl = String.format("https://%s", _App._Searchapi);
@@ -630,77 +630,77 @@ public class TweetsListActivity extends Activity {
         	searchurl = String.format("http://%s", _App._Searchapi);
         	port = PORT;
         }
-        
+
         URI host = null;
 		try {
 			host = new URI(url);
 
 			_App._twitter = new TwitterClient(this, host.getHost(), port, url, searchurl, _App._Username, _App._Password);
-	        
+
 		} catch (URISyntaxException e) {
 			Bundle err = new Bundle();
 			err.putString(TwitterClient.KEY, e.getLocalizedMessage());
 			TwitterClient.SendMessage(_Handler, TwitterClient.HTTP_ERROR, err);
-		} 
+		}
     }*/
 
  	protected void PanelAnimationOn(boolean top, ViewGroup layout){
-    	
+
  		if (layout.getVisibility() == View.INVISIBLE){
  			int height = layout.getHeight();
- 			
+
  			height = ( ( top == true ) ? ( height * (-1)) : height );
 
- 			TranslateAnimation myAnimation1=new TranslateAnimation(0, 0, height, 0); 
+ 			TranslateAnimation myAnimation1=new TranslateAnimation(0, 0, height, 0);
  			//AlphaAnimation myAnimation2=new AlphaAnimation(0.5f, 1f);
- 			
+
  			myAnimation1.setDuration(400);
  			myAnimation1.setInterpolator( new AccelerateInterpolator((float) 0.1) );
  			//myAnimation2.setDuration(200);
- 			
+
  			AnimationSet animSet = new AnimationSet(true);
- 			
+
  			animSet.addAnimation(myAnimation1);
  			//animSet.addAnimation(myAnimation2);
- 			
+
 	        layout.startAnimation(animSet);
 	        layout.setVisibility(View.VISIBLE);
  		}
  	}
- 	
+
  	protected void PanelAnimationOff(boolean top, ViewGroup layout){
- 		
+
  		if(layout == _Toolbarpanel && _App._AutoHideToolbar == false) return;
- 		
+
  		if (layout.getVisibility() == View.VISIBLE){
  			int height = layout.getHeight();
- 			
+
  			height = ( ( top == true ) ? ( height * (-1) ) : height );
- 			
- 			TranslateAnimation myAnimation1=new TranslateAnimation(0, 0, 0, height); 
+
+ 			TranslateAnimation myAnimation1=new TranslateAnimation(0, 0, 0, height);
  			//AlphaAnimation myAnimation2=new AlphaAnimation(1f, 0.5f);
-	        
+
  			myAnimation1.setDuration(400);
  			myAnimation1.setInterpolator( new DecelerateInterpolator((float) 0.1) );
  			//myAnimation2.setDuration(200);
- 			
+
  			AnimationSet animSet = new AnimationSet(true);
- 			
+
  			animSet.addAnimation(myAnimation1);
  			//animSet.addAnimation(myAnimation2);
- 			
+
 	        layout.startAnimation(animSet);
 	        layout.setVisibility(View.INVISIBLE);
  		}
  	}
- 	
+
  	private void EnableAllButtons(){
-		
- 		TwitterItem item = _Items.Get(_CurrentThread); 
- 		
+
+ 		TwitterItem item = _Items.Get(_CurrentThread);
+
  		Button threads =  (Button)findViewById(R.id.thread);
 		Button delete =  (Button)findViewById(R.id.delete);
-		
+
 		if(threads != null){
 			threads.setEnabled(false);
 			if(item != null){
@@ -710,7 +710,7 @@ public class TweetsListActivity extends Activity {
 				}
 			}
 		}
-		
+
 		if(delete != null){
 			delete.setEnabled(false);
 			if (item != null){
@@ -722,22 +722,22 @@ public class TweetsListActivity extends Activity {
  	}
 
  	private void doReplySingle(){
- 		
+
  		TwitterItem item = _Items.Get(_CurrentThread);
  		if(item == null) return;
- 		
+
 		String reply="";
 		EditText edit = (EditText)findViewById(R.id.EditText);
 		String name = "";
-		
+
 		if(_Replies.size() == 0){
 			name =  "@" + item.mScreenname;
 		}else{
 			name = _Replies.get(0);
 		}
-		
+
 		_InputType = INPUT_REPLY;
-		
+
 		String oldtext = edit.getText().toString();
 		reply = oldtext;
 		if(item != null && oldtext.indexOf(name) == -1){
@@ -747,20 +747,20 @@ public class TweetsListActivity extends Activity {
 		edit.setText(reply);
 		edit.setSelection(reply.length());
 		PanelAnimationOn(false, _Statuspanel);
-		PanelAnimationOff(false, _Toolbarpanel);	
-		
+		PanelAnimationOff(false, _Toolbarpanel);
+
  	}
- 	
+
  	private void doReplyMulti(){
- 		
+
  		TwitterItem item = _Items.Get(_CurrentThread);
  		if(item == null) return;
- 		
+
  		String name="";
 		String reply="";
 		EditText edit = (EditText)findViewById(R.id.EditText);
 		String oldtext = edit.getText().toString();
-		
+
 		_InputType = INPUT_REPLY;
 
 		for(int i =0;i<_Replies.size();i++){
@@ -769,16 +769,16 @@ public class TweetsListActivity extends Activity {
 				reply +=name + " ";
 			}
 		}
-		
+
 		edit.setText(String.format("%s%s", reply, oldtext));
 		edit.setSelection(reply.length());
 		PanelAnimationOn(false, _Statuspanel);
-		PanelAnimationOff(false, _Toolbarpanel);	
-		
+		PanelAnimationOff(false, _Toolbarpanel);
+
  	}
- 	
+
  	private void doReply(){
- 		
+
 		TwitterItem item = _Items.Get(_CurrentThread);
 		if(item == null) return;
 
@@ -797,8 +797,8 @@ public class TweetsListActivity extends Activity {
 					_Replies.add(name);
 				}
 			}
-		}  
- 		
+		}
+
 		if(_Replies.size() <= 1){
 			doReplySingle();
 		}else{
@@ -810,15 +810,15 @@ public class TweetsListActivity extends Activity {
             		if (which == 1) doReplyMulti();
                 }
             })
-            .show();			
+            .show();
 		}
  	}
- 	
+
     public void InitButtons(){
 
         _Previewpanel = (LinearLayout)findViewById(R.id.PreviewPanel);
         if(_Previewpanel != null) _Previewpanel.setVisibility(View.GONE);
-    	
+
     	Button reply =  (Button)findViewById(R.id.reply);
     	Button retweet =  (Button)findViewById(R.id.retweet);
     	Button destory =  (Button)findViewById(R.id.delete);
@@ -835,7 +835,7 @@ public class TweetsListActivity extends Activity {
     	Button inbox = (Button)findViewById(R.id.inbox);
     	Button outbox = (Button)findViewById(R.id.outbox);
     	Button links = (Button)findViewById(R.id.links);
-    	
+
     	if(reply != null){
 	    	reply.setOnClickListener(new OnClickListener(){
 				public void onClick(View v) {
@@ -854,7 +854,7 @@ public class TweetsListActivity extends Activity {
 				}
 	    	});
     	}
-    	
+
     	if(retweet != null){
 	    	retweet.setOnClickListener(new OnClickListener(){
 				public void onClick(View v) {
@@ -869,7 +869,7 @@ public class TweetsListActivity extends Activity {
 				}
 	    	});
     	}
-    	
+
     	if(destory != null){
         	destory.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -899,7 +899,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(thread != null){
         	thread.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -915,7 +915,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(Send != null){
          	Send.setOnClickListener(new OnClickListener(){
         		public void onClick(View v) {
@@ -924,14 +924,14 @@ public class TweetsListActivity extends Activity {
         			Button gallery = (Button)findViewById(R.id.Gallery);
         			EditText edit = (EditText)findViewById(R.id.EditText);
         			String text = edit.getText().toString();
-        			
+
         			if(text.length() != 0){
         				if (_UploadFile == null){
 	         				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
 	         				inputMethodManager.hideSoftInputFromWindow(edit.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS );
-	        				
+
 	        				setMyProgressBarVisibility(true);
-	        				
+
 	        				if(_ActivityType == TwitterClient.HOME_SEARCH ){
 	        					if (_App._twitter != null) _App._twitter.Get_search(_Handler, text);
 	        				}else{
@@ -959,27 +959,27 @@ public class TweetsListActivity extends Activity {
         		          	_Progressdialog = new ProgressDialog(_Context);
         		          	_Progressdialog.setMessage("Uploading picture ...");
         		          	_Progressdialog.setIndeterminate(true);
-        		          	_Progressdialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL); 
+        		          	_Progressdialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         		          	_Progressdialog.setCancelable(false);
         		          	_Progressdialog.show();
-        		          	
+
         		          	Button closepreview = (Button)findViewById(R.id.ClosePreview);
 //        		          	Button upload = (Button)findViewById(R.id.Upload);
         		          	Button posturl = (Button)findViewById(R.id.PostURL);
-        		          	
+
         		          	closepreview.setEnabled(false);
 //        		          	upload.setEnabled(false);
         		          	posturl.setEnabled(false);
-        		        	
+
         		          	if (_App._twitter != null) _App._twitter.Post_image(_Handler, _App._Pictureapi, _App._Username, _App._Password, _UploadFile, text);
         		          	_UploadFile = null;
         				}
         			}
         		}
-         		
+
          	});
     	}
-    	
+
     	if(favorite != null){
     		favorite.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -1016,7 +1016,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(edit != null){
     		edit.addTextChangedListener(new TextWatcher(){
 
@@ -1027,7 +1027,7 @@ public class TweetsListActivity extends Activity {
 	    				int length = 140 - arg0.toString().length();
 	    				if (length > 10){
 	    					Send.setEnabled(true);
-	    					hint.setHintTextColor(-8355712);	
+	    					hint.setHintTextColor(-8355712);
 	    				}else if(length <= 10 && length >= 0 ){
 	    					Send.setEnabled(true);
 	    					hint.setHintTextColor(0x4fff0000 + 0x10000000 * (10 - length));
@@ -1035,7 +1035,7 @@ public class TweetsListActivity extends Activity {
 	    					hint.setHintTextColor(0xffff0000);
 	    					Send.setEnabled(false);
 	    				}
-	    					
+
 	    				String srt = String.format("%d",length);
 	    				hint.setHint(srt);
     				}
@@ -1048,11 +1048,11 @@ public class TweetsListActivity extends Activity {
 				}
     		});
     	}
-    	
+
     	if(gallery != null){
     		gallery.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
-    				String[] titles = {"Pick from gallery","Capture a picture"}; 
+    				String[] titles = {"Pick from gallery","Capture a picture"};
     	            try{
 	    				new AlertDialog.Builder(_Context)
 	                    .setTitle("Insert Picture ...")
@@ -1065,7 +1065,7 @@ public class TweetsListActivity extends Activity {
 	                        	}else{
 	                                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 	                                startActivityForResult(intent,2);
-	                        		
+
 	                        	}
 	                        }
 	                    })
@@ -1074,7 +1074,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(closepreview != null){
     		closepreview.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -1090,7 +1090,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(posturl != null){
     		posturl.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -1102,38 +1102,38 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
 //    	if(upload != null){
 //    		upload.setOnClickListener(new OnClickListener(){
 //    			public void onClick(View v) {
 //    	        	if (_UploadFile == null) return;
-//	    	       	
+//
 //                	_Progressdialog = new ProgressDialog(_Context);
 //                	_Progressdialog.setMessage("Uploading picture ...");
 //                	_Progressdialog.setIndeterminate(true);
-//                	_Progressdialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL); 
+//                	_Progressdialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 //                	_Progressdialog.setCancelable(false);
 //                	_Progressdialog.show();
-//                	
+//
 //                	Button closepreview = (Button)findViewById(R.id.ClosePreview);
 //                	Button upload = (Button)findViewById(R.id.Upload);
 //                	Button posturl = (Button)findViewById(R.id.PostURL);
-//                	
+//
 //                	closepreview.setEnabled(false);
 //                	upload.setEnabled(false);
 //                	posturl.setEnabled(false);
-//    	        	
+//
 //                	if (_App._twitter != null) _App._twitter.Post_image(_Handler, _App._Pictureapi, _App._Username, _App._Password, _UploadFile);
 //    			}
 //        	});
 //    	}
-    	
+
     	if(directmsg != null){
     		directmsg.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
 					TwitterItem item = _Items.Get(_CurrentThread);
 					if(item != null){
-	    				String receiver = item.mScreenname; 
+	    				String receiver = item.mScreenname;
 	    		    	Intent i = new Intent(_Context, DirectActivity.class);
 	    		    	i.putExtra("receiver", receiver);
 	    		    	startActivityForResult(i, APP_CHAINCLOSE);
@@ -1141,7 +1141,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(menubtn != null){
     		menubtn.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -1149,7 +1149,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(inbox != null){
     		inbox.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -1163,7 +1163,7 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(outbox != null){
     		outbox.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
@@ -1177,15 +1177,15 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-    	
+
     	if(links != null){
-    		
+
     		if(_App._LongClick == true){
     			links.setVisibility(View.GONE);
     		}else{
     			links.setVisibility(View.VISIBLE);
     		}
-    		
+
     		links.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
     				if(_CurrentThread == -1) return;
@@ -1195,17 +1195,17 @@ public class TweetsListActivity extends Activity {
     	}
 
     }
- 	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-			
+
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			
+
 			if( _Statuspanel.getVisibility() == View.VISIBLE || (_App._AutoHideToolbar == true && _Toolbarpanel.getVisibility() == View.VISIBLE ))
 			{
 				PanelAnimationOff(false, _Statuspanel);
  				PanelAnimationOff(false, _Toolbarpanel);
- 				
+
 				EditText edit = (EditText)findViewById(R.id.EditText);
 				if(edit != null){
 					InputMethodManager inputMethodManager = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
@@ -1214,10 +1214,10 @@ public class TweetsListActivity extends Activity {
 				return false;
 			}
 		}
-		
+
 		return super.onKeyDown(keyCode, event);
 	}
-	
+
 	public int findPositionByIDFromUser(Message msg){
 		String json = msg.getData().getString(TwitterClient.KEY);
  		try{
@@ -1236,10 +1236,10 @@ public class TweetsListActivity extends Activity {
 			TwitterClient.SendMessage(_Handler, TwitterClient.HTTP_ERROR, err);
 			return -1;
 		}
- 		
+
 		return -1;
 	}
-	
+
 	public int findPositionByIDFromStatus(Message msg){
 		String json = msg.getData().getString(TwitterClient.KEY);
  		try{
@@ -1257,10 +1257,10 @@ public class TweetsListActivity extends Activity {
 			TwitterClient.SendMessage(_Handler, TwitterClient.HTTP_ERROR, err);
 			return -1;
 		}
- 		
+
 		return -1;
 	}
-	
+
 	public void defaultonItemClick(int position, Bundle b) {
 		if (position >= _Items.getCount() || position < 0 ) return;
 		int count = _Items.getCount() - 1;
@@ -1300,74 +1300,74 @@ public class TweetsListActivity extends Activity {
 				}
 			}
 		}
-		
+
 //		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 //	    clipboard.setText(_Items.Get(position).mScreenname);
-		
+
 		_CurrentThread = position;
 		PanelAnimationOn(false, _Toolbarpanel);
 		PanelAnimationOff(false, _Statuspanel);
 		_Items.notifyDataSetInvalidated();
-		
+
 		_Items.Get(position).mRead = READ_STATE_READ;
-		
+
 		EnableAllButtons();
 	}
 
 	private void defaultOnItemLongClick(int position){
-	
+
 		if(position >= _Items.getCount() || position < 0) return;
-		
+
 		boolean popdlg = true;
 		String link = "";
 		String text = _Items.Get(position).mText;
 		String screenname = _Items.Get(position).mScreenname.trim();
-		
+
 		if(screenname.length() == 0) return;
 
 		_CurrentThread = position;
-		
+
 		_Links.clear();
-		
+
 		Matcher m1 = ItemAdapter.p1.matcher(text);
     	Matcher m2 = ItemAdapter.p2.matcher(text);
     	Matcher m3 = ItemAdapter.p3.matcher(text);
-    	
+
     	_Links.add("@" + screenname);
-    	
-		while(m2.find()){  
+
+		while(m2.find()){
 			 link = m2.group();
 			 if (_Links.indexOf(link) == -1){
 				 _Links.add(link);
 			 }
-		}  
-		
-		while(m1.find()){  
+		}
+
+		while(m1.find()){
 			 link = m1.group();
 			 if (_Links.indexOf(link) == -1){
 				 _Links.add(link);
 			 }
-		}  
+		}
 
-		while(m3.find()){  
+		while(m3.find()){
 			 link = m3.group();
 			 if (_Links.indexOf(link) == -1){
 				 _Links.add(link);
 			 }
-		}  
-		
+		}
+
 		_Links.add("Share ...");
 		_Links.add("Mark as unread");
 		_Links.add("Copy to clipboard");
-		
+
 		if( popdlg == true){
-			
+
             int count = _Links.size();
             String[] links = new String[count];
             for (int i=0;i<count;i++){
             	links[i] = _Links.get(i);
             }
-            
+
             try{
 		        new AlertDialog.Builder(TweetsListActivity.this)
 	            .setTitle("View Content")
@@ -1401,50 +1401,50 @@ public class TweetsListActivity extends Activity {
 	            		}else if(_Links.get(which).indexOf("#") == 0){
 	            			Intent i = new Intent(_Context, SearchActivity.class);
 	            			i.putExtra("search", _Links.get(which).substring(1));
-	                        startActivityForResult(i,APP_CHAINCLOSE);	            			
+	                        startActivityForResult(i,APP_CHAINCLOSE);
 	            		}else{
-	            			Uri uri = Uri.parse(_Links.get(which));  
-	            			Intent it  = new Intent(Intent.ACTION_VIEW,uri);  
+	            			Uri uri = Uri.parse(_Links.get(which));
+	            			Intent it  = new Intent(Intent.ACTION_VIEW,uri);
 	            			ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 	            		    clipboard.setText(uri.toString());
-	            			startActivity(it); 
+	            			startActivity(it);
 	            		}
 	                }
 	            })
 	            .show();
             }catch (Exception err){}
-		}		
+		}
 	}
-	
+
  	private OnItemLongClickListener OnItemLongClickListener = new OnItemLongClickListener(){
 
 		public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-			
+
 			defaultOnItemLongClick(position);
-			
+
 			return true;
 		}
- 		
+
  	};
- 	
+
  	private OnScrollListener OnScrollListener = new OnScrollListener (){
- 		
+
  		public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,int totalItemCount){
  		}
- 		
+
  		public void onScrollStateChanged(AbsListView view, int scrollState) {
-			
+
  			_Items.SetScrollState(scrollState);
- 			
+
  	        switch (scrollState) {
  	        case SCROLL_STATE_IDLE:
  	        {
  	            mScrolling = false;
- 	            
+
  	            int firstVisibleItem = view.getFirstVisiblePosition();
  	            int lastVisibleItem = view.getLastVisiblePosition();
  	 			TwitterItem temp;
- 	 	        
+
  	 			for(int i=0;i<_Items.getCount();i++){
  	 				if(i < firstVisibleItem || i > lastVisibleItem ){
  	 					temp = _Items.Get(i);
@@ -1459,7 +1459,7 @@ public class TweetsListActivity extends Activity {
  	        case SCROLL_STATE_TOUCH_SCROLL:
  	            mScrolling = true;
  	            if (_CurrentThread != -1){
- 	            	PanelAnimationOff(false, _Toolbarpanel);   	
+ 	            	PanelAnimationOff(false, _Toolbarpanel);
  	            }
  	            break;
  	        case SCROLL_STATE_FLING:
@@ -1472,18 +1472,18 @@ public class TweetsListActivity extends Activity {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		
+
 		float y;
 		int action = event.getAction();
-		long curTime; 
-		
+		long curTime;
+
 		if(action ==  MotionEvent.ACTION_DOWN)
 		{
 			y = event.getY();
-			
+
 			if(y <= 50){
-				curTime = System.currentTimeMillis(); 
-				
+				curTime = System.currentTimeMillis();
+
 				if( curTime - last_click_time <= 300){
 					_list.setSelection(0);
 				}
@@ -1494,25 +1494,25 @@ public class TweetsListActivity extends Activity {
 		}
 		return super.onTouchEvent(event);
 	}
- 	
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
         //_Menu = menu;
-        
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main,menu);
 
         return true;
     }
- 	
+
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
     	super.onMenuItemSelected(featureId, item);
 
     	Intent i;
-    	
+
     	switch(item.getItemId()) {
         case R.id.home:
         	i = new Intent(this, HomeActivity.class);
@@ -1551,7 +1551,7 @@ public class TweetsListActivity extends Activity {
             		stopService(_App._NotiServices);
            		}
             }
-        	break;        	
+        	break;
         case R.id.trends_current:
         	i = new Intent(this, TrendsActivity.class);
         	i.putExtra("trends_type",TwitterClient.TRENDS_CURRENT);
@@ -1575,13 +1575,13 @@ public class TweetsListActivity extends Activity {
         	i.putExtra("type",TwitterClient.HOME_FRIENDS);
         	if(_App._MainAtivity != null) _App._MainAtivity.startActivityForResult(i,APP_CHAINCLOSE);
             if(_ActivityType != TwitterClient.HOME_HOME) finish();
-        	break;        
+        	break;
         case R.id.followers:
         	i = new Intent(this, UserStatusesActivity.class);
         	i.putExtra("type",TwitterClient.HOME_FOLLOWERS);
         	if(_App._MainAtivity != null) _App._MainAtivity.startActivityForResult(i,APP_CHAINCLOSE);
             if(_ActivityType != TwitterClient.HOME_HOME) finish();
-        	break;        	
+        	break;
         case R.id.newpost:
 			EditText edit = (EditText)findViewById(R.id.EditText);
 			edit.setSelection(edit.getText().toString().length());
@@ -1594,10 +1594,10 @@ public class TweetsListActivity extends Activity {
 			}
         	break;
     	}
-       
+
         return true;
-    }	
-    
+    }
+
     public void defaulthandleMessage(final Message msg) {
 
     	String ErrorMsg;
@@ -1649,14 +1649,14 @@ public class TweetsListActivity extends Activity {
             	EditText edit = (EditText)findViewById(R.id.EditText);
             	String str = edit.getEditableText().toString();
             	String response = msg.getData().getString(TwitterClient.KEY);
-            	
+
     			Matcher m1 = ItemAdapter.p1.matcher(response);
-            	
-    			while(m1.find()){ 
+
+    			while(m1.find()){
     				_PictureURL = m1.group();
     				break;
     			}
-    			
+
     			if(_PictureURL.length() != 0){
     				edit.setText(_PictureURL + " " + str);
     			}
@@ -1726,7 +1726,7 @@ public class TweetsListActivity extends Activity {
 				setMyProgressBarVisibility(false);
 				String json = msg.getData().getString(TwitterClient.KEY);
 				TwitterItem item = null;
-				
+
 		 		try{
 		 			JSONObject aline = new JSONObject(json);
 		 			long id = aline.getLong("id");
@@ -1746,7 +1746,7 @@ public class TweetsListActivity extends Activity {
 				}
 				_Items.notifyDataSetChanged();
 				break;
-			}    		
+			}
     	case TwitterClient.HTTP_RATE_LIMIT:
     		try{
 	    		TweetsData data = (TweetsData) msg.getData().getSerializable(TwitterClient.KEY);
@@ -1760,22 +1760,22 @@ public class TweetsListActivity extends Activity {
     		} catch (JSONException e1){} catch (Exception e2){}
     	}
     }
-	
+
 	public void defaultUpdateListViewThread(Bundle bundle,int addtype, boolean order){
 		bundle.putInt("append", addtype);
 		new defaultUpdateListAsyncTask().execute(bundle);
     }
-	
+
 	public void setMyProgressBarVisibility(boolean visibilty){
 		ProgressBar progressbar = (ProgressBar) findViewById(R.id.titleProgressBar);
 		progressbar.setVisibility(visibilty == true? View.VISIBLE: View.INVISIBLE);
 	}
-    
+
     public void addThread(ArrayList<TwitterItem> items, TwitterItem obj){
     	obj.mTimeSource = CreateTimeSource(obj.mTime, obj.mSource);
     	items.add(new TwitterItem(obj));
      }
-	
+
 	public boolean defaultDecodeJSON(ArrayList<TwitterItem> items, TwitterItem item){
 		if (_App._twitter != null) _App._twitter.FrechImg(_Handler, item.mImageurl,item.mScreenname);
  		addThread(items, item);
@@ -1785,28 +1785,28 @@ public class TweetsListActivity extends Activity {
 	public void defaultUpdateListViewProcessFrontEnd(ProgressData tweets){
 
 		ArrayList<TwitterItem> items = tweets.items;
-		
+
  		if(items.size() == 0) {
  			_Items.SetLoadingItem();
  			TwitterClient.SendMessage(_Handler, TwitterClient.UI_REFRESHVIEWS, null);
  			return;
  		}
-		
+
  		int index;
  		int count;
 
- 		int addtype = tweets.addtype; 
+ 		int addtype = tweets.addtype;
  		int mincount = Math.min(items.size(), _Items.getCount());
  		count = items.size();
  		TwitterItem t;
- 		
+
  		if(addtype == ADD_TYPE_INSERT){
 	 		for (index = 0; index < count; index++){
 	 			t = items.get(index);
 	 			if(t == null) continue;
 	 			_Items.addThread(index, t, addtype, _ActivityType);
 	 		}
-	 			
+
 	 		if(_Items.getCount() >= TwitterClient.MAX_TWEETS_COUNT){
 	 			for (index = _Items.getCount() - 1; index >= _App._Tweetscount; index = _Items.getCount() - 1){
 	 				_Items.Remove(index);
@@ -1819,13 +1819,13 @@ public class TweetsListActivity extends Activity {
 	 			if(t == null) continue;
  	 			_Items.ReplaceThread(index, t, _ActivityType);
   			}
- 	 			
+
   			for (; index < count; index++){
 	 			t = items.get(index);
 	 			if(t == null) continue;
 				_Items.addThread(index, t, addtype, _ActivityType);
  	 		}
- 	 			
+
  	 		for (index = _Items.getCount() - 1; index >= count;index = _Items.getCount() - 1){
  	 			_Items.Remove(index);
  	 		}
@@ -1833,47 +1833,47 @@ public class TweetsListActivity extends Activity {
  			if(count !=0 && _Items.getCount() != 0){
  	 			_Items.Remove(_Items.getCount() - 1);
  	 		}
- 	 		
+
  			for (index = 0; index < count; index++){
 	 			t = items.get(index);
 	 			if(t == null) continue;
  				_Items.addThread(index, t, addtype, _ActivityType);
  			}
  		}
- 		
+
  		//_Items.notifyDataSetChanged();
- 		
+
  		if (items.size() != 0 && _Items.getCount() <= TwitterClient.MAX_TWEETS_COUNT){
  			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, "");
  			_Items.SetLoadingItem();
  		}
- 		
+
  		new Thread(new Runnable(){
 				public void run() {
 					SaveTweetItemsToDB();
 				}
 		}).start();
- 		
+
  		TwitterClient.SendMessage(_Handler, TwitterClient.UI_REFRESHVIEWS, null);
 	}
 
 	public void defaultUpdateListViewProcessBackEnd(ProgressData tweets, Bundle bundle){
-		
+
 		ArrayList<TwitterItem> items = tweets.items;
-		
+
 		if (_App._twitter != null) _App._twitter.Get_rate_limit_status(_Handler);
-		
+
 		TweetsData data = (TweetsData) bundle.getSerializable(TwitterClient.KEY);
-		
+
  		if(data == null || data.items == null) return;
- 		
+
  		int index = 0;
  		boolean ret = false;
  		Bundle userdata = new Bundle();
  		int count = ( (data.items == null) ? 0 : data.items.size() );
  		TwitterItem insertitem;
  		int readstate;
- 		
+
 		for (index = 0; index < count; index++){
 			insertitem = data.Get(index);
 			if(insertitem != null){
@@ -1886,7 +1886,7 @@ public class TweetsListActivity extends Activity {
 				ret = defaultDecodeJSON(items, insertitem);
 			}
 		}
-	
+
 		count = _Items.getCount();
 		TwitterItem item;
 		for(index=0;index<count;index++){
@@ -1895,23 +1895,23 @@ public class TweetsListActivity extends Activity {
 				item.mTimeSource = CreateTimeSource(item.mTime, item.mSource);;
 			}
 		}
-		
+
 	 	if(_ActivityType == TwitterClient.HOME_USERINFO && data.user != null){
-	 		
+
 	 		userdata.putBoolean("ret", ret);
 	 		userdata.putSerializable(TwitterClient.KEY, data.user);
 	 		TwitterClient.SendMessage(_Handler, TwitterClient.UI_REFRESHVIEWS_PRE, userdata);
 	 	}
 	}
-	
+
 	private class defaultUpdateListAsyncTask extends AsyncTask <Bundle, ProgressData, Long> {
-		
+
 		@Override
 		protected void onPreExecute(){
 			_Refresh = true;
-			setMyProgressBarVisibility(true);	
+			setMyProgressBarVisibility(true);
 		}
-		
+
 		@Override
 		protected Long doInBackground(Bundle... bundle) {
 	 		try{
@@ -1922,31 +1922,31 @@ public class TweetsListActivity extends Activity {
 				publishProgress(tweets);
 	 		} catch (Exception e){}
 			return null;
-		}    
-		
-        protected void onProgressUpdate(ProgressData ... tweets) {         
-			defaultUpdateListViewProcessFrontEnd(tweets[0]);  
-		}    
-        
+		}
+
+        protected void onProgressUpdate(ProgressData ... tweets) {
+			defaultUpdateListViewProcessFrontEnd(tweets[0]);
+		}
+
         @Override
         protected void onPostExecute(Long Result){
         	_Refresh = false;
         }
-	
+
 	}
-	
+
     static public String CreateTimeSource(long time, String source){
     	StringBuilder timesource = new StringBuilder();
-    	
+
     	if(time != 0){
     		timesource.append(TwitterClient.GetSmartTimeString(time));
     	}
-    	
+
     	if(source.length() != 0){
     		timesource.append(" from ");
     		timesource.append(source);
     	}
-    	
+
     	return timesource.toString();
     }
 }
