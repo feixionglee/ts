@@ -784,7 +784,7 @@ public class TwitterClient {
 
  	synchronized public void FrechImg(Handler handler,String uri, Long status_id){
 
- 		if(_App._Displayicon == false) return;
+    // if(_App._Displayicon == false) return;
  		if(uri == null || status_id == null) return;
  		if(uri.length() == 0 || status_id <= 0) return;
 
@@ -793,7 +793,7 @@ public class TwitterClient {
 
 		for(int i=0;i<_App.mDownloadPool.GetCount();i++){
 			ret = _App.mDownloadPool.Get(i);
-			if(ret != null && ret.status_id >= 0 && ret.status_id == status_id){
+			if(ret != null && ret.status_id >= 0l && ret.status_id == status_id){
 				bfound = true;
 				break;
 			}
@@ -843,18 +843,19 @@ public class TwitterClient {
 			FetchImage thread = new FetchImage(handler, httpClient, request,HTTP_FETCH_IMAGE, status_id);
 			thread.setPriority(Thread.NORM_PRIORITY - 3);
 			thread.start();
-		}else{
+		}
+    // else{
 //			Date now = new Date();
 //			long time = imageCursor.getLong(DBPicsHelper.COL_TIME);
 //			if( now.getTime() - time >= 3 * 24 * 60 * 60 * 1000){
-				_App.mDownloadPool.ActiveThread_Push();uri = Uri.encode(uri,":/");
-				HttpGet request = new HttpGet(uri);
-				FetchImage thread = new FetchImage(handler, httpClient, request,HTTP_FETCH_IMAGE, status_id);
-				thread.setPriority(Thread.NORM_PRIORITY - 3);
-				thread.start();
+        // _App.mDownloadPool.ActiveThread_Push();uri = Uri.encode(uri,":/");
+        // HttpGet request = new HttpGet(uri);
+        // FetchImage thread = new FetchImage(handler, httpClient, request,HTTP_FETCH_IMAGE, status_id);
+        // thread.setPriority(Thread.NORM_PRIORITY - 3);
+        // thread.start();
 //			}else{
 //			}
-		}
+    // }
 
 		imageCursor.close();
  	}

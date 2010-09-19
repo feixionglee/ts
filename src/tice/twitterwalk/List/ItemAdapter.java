@@ -258,7 +258,6 @@ public class ItemAdapter extends BaseAdapter {
         holder.favorite.setVisibility(View.GONE);
         holder.conversation.setVisibility(View.GONE);
         holder.icon.setVisibility(View.VISIBLE);
-        holder.pic.setVisibility(View.VISIBLE);
     	holder.progressbar.setVisibility(View.GONE);
 
     	if(item.mRead == TweetsListActivity.READ_STATE_READ){
@@ -320,7 +319,10 @@ public class ItemAdapter extends BaseAdapter {
        	}
 
        	if(item.mPic != null ){
+       		holder.pic.setVisibility(View.VISIBLE);
         	holder.pic.setImageBitmap(item.mPic);
+        }else{
+        	holder.pic.setVisibility(View.GONE);
         }
 
        	if (item.mScreenname.length() == 0){
