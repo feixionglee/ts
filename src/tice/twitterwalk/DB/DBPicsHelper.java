@@ -14,9 +14,8 @@ public class DBPicsHelper extends SQLiteOpenHelper {
     public static final String KEY_DATA = "data";    
 
 	public static final int COL__ID = 0;
-    public static final int COL_SCREENNAME = 1;
-    public static final int COL_TIME = 2;
-    public static final int COL_DATA = 3;    
+    public static final int COL_STATUS_ID = 1;
+    public static final int COL_DATA = 2;    
     
     private static final int DATABASE_VERSION = 82;
     private static final String DATABASE_NAME = "pics";
