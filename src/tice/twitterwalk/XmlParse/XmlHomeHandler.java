@@ -96,6 +96,8 @@ public class XmlHomeHandler extends DefaultHandler {
 	        	mItem.mTitle = body;
 	        } else if (localName.equals("profile_image_url") && in_user == true ){
 	        	mItem.mImageurl = body;
+	        } else if (localName.equals("thumbnail_pic") && in_user == false ){
+	        	mItem.mPicurl = body;
 	        }
 	    
 	    	builder.setLength(0);
