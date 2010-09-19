@@ -303,6 +303,18 @@ public class ItemAdapter extends BaseAdapter {
        	holder.text.setText(item.mText);
 //       	holder.pic.setImageBitmap(mBlank);
 
+       	switch (mScrollState) {
+        case OnScrollListener.SCROLL_STATE_IDLE:
+        case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+        	if(item.mPic == null && item.mID >= 0 && _App._twitter != null){
+            	item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
+           	}
+        }
+
+       	if(item.mPic != null ){
+        	holder.pic.setImageBitmap(item.mPic);
+        }
+
        	if (item.mScreenname.length() == 0){
         	holder.title.setText("");
         	holder.timesource.setText("");
