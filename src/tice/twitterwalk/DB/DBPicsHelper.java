@@ -10,7 +10,7 @@ public class DBPicsHelper extends SQLiteOpenHelper {
 	public static final String KEY__ID = "_id";
 //    public static final String KEY_SCREENNAME = "screenname";
     public static final String KEY_STATUS_ID = "status_id";
-    public static final String KEY_TIME = "time";
+//    public static final String KEY_TIME = "time";
     public static final String KEY_DATA = "data";    
 
 	public static final int COL__ID = 0;

@@ -170,8 +170,12 @@ public class ItemAdapter extends BaseAdapter {
 
         	if(item.mScreenname.length() != 0 && _App._twitter != null){
             	item.mImage = _App._twitter.LoadIcon(mCtx._Handler, item.mScreenname, item.mImageurl);
+            	
            	}
-
+        	if(item.mScreenname.length() != 0 && item.mPicurl.length() != 0 && _App._twitter != null){
+        		item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
+        	}
+        	
         	//holder.text.setLinksClickable(false);
         	//holder.text.setLinkTextColor(0xaa0000ff);
 
@@ -303,13 +307,17 @@ public class ItemAdapter extends BaseAdapter {
        	holder.text.setText(item.mText);
 //       	holder.pic.setImageBitmap(mBlank);
 
-       	switch (mScrollState) {
-        case OnScrollListener.SCROLL_STATE_IDLE:
-        case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-        	if(item.mPic == null && item.mID >= 0 && _App._twitter != null){
-            	item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
-           	}
-        }
+//       	switch (mScrollState) {
+//        case OnScrollListener.SCROLL_STATE_IDLE:
+//        case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+//        	if(item.mPic == null && item.mID >= 0 && item.mPicurl.length() > 0 && _App._twitter != null){
+//            	item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
+//           	}
+//        }
+       	
+    	if(item.mPic == null && item.mPicurl.length() > 0 && _App._twitter != null){
+        	item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
+       	}
 
        	if(item.mPic != null ){
         	holder.pic.setImageBitmap(item.mPic);
@@ -352,6 +360,8 @@ public class ItemAdapter extends BaseAdapter {
     	item.mImage = obj.mImage;
     	item.mRead = obj.mRead;
        	item.mTimeSource = obj.mTimeSource;
+       	item.mPicurl = obj.mPicurl;
+    	item.mPic = obj.mPic;
     }
 
     public void addThread(int index, TwitterItem obj, int addtype, int type){

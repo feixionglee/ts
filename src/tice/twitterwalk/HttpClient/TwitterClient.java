@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.BufferedInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
@@ -666,9 +665,9 @@ public class TwitterClient {
 	    		}
 
 				DownloadPiece p = Pop();
-				if( p.name != "" && p.name.length() > 0 ){
+				if( p.name != "" && p.status_id == 0l ){
 					FrechImg_Impl(p.handler,p.uri,p.name);
-				}else if(p.name == "" && p.status_id > 0){
+				}else if(p.name == "" && p.status_id > 0l){
 					FrechImg_Impl(p.handler,p.uri,p.status_id);
 				}
     		}
@@ -912,6 +911,7 @@ public class TwitterClient {
   public Bitmap LoadPic(Handler handler, Long status_id, String picurl){
     Bitmap icon = null;
     byte[] imagedata = null;
+    System.out.println("status_id:::::::::::"+status_id);
     System.out.println("picurl:::::::::::"+picurl);
 
     if(_App._DbHelper == null) return null;
