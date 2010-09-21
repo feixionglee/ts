@@ -50,7 +50,7 @@ public class XmlHomeHandler extends DefaultHandler {
         	builder = new StringBuilder();
         }else if (localName.equals("user")){
         	in_user = true;
-        }else if (localName.equals("retweet_details")){
+        }else if (localName.equals("retweeted_status")){
         	in_retweet_details = true;
         }else if (localName.equals("error")){
         	in_error = true;
@@ -66,7 +66,7 @@ public class XmlHomeHandler extends DefaultHandler {
         	mTweetsData.items.add(mItem);
         } else if (localName.equals("user")){
         	in_user = false;
-        } else if (localName.equals("retweet_details")){
+        } else if (localName.equals("retweeted_status")){
         	in_retweet_details = false;
         }else if (localName.equals("error")){
         	in_error = false;
