@@ -36,6 +36,8 @@ public class ItemAdapter extends BaseAdapter {
     public class ViewHolder {
     	TextView title;
     	TextView text;
+    	TextView retweeted_screenname;
+    	TextView retweeted_text;
     	TextView timesource;
     	ImageView icon;
     	//IconImageView icon_right;
@@ -44,6 +46,7 @@ public class ItemAdapter extends BaseAdapter {
     	//LinearLayout imagelayout_right;
     	ImageView unread;
     	ProgressBar progressbar;
+    	ProgressBar retweeted_progressbar;
     	ImageView favorite;
     	ImageView conversation;
     	ImageView pic;
@@ -138,10 +141,16 @@ public class ItemAdapter extends BaseAdapter {
 
 			holder.progressbar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
 			holder.progressbar.setVisibility(View.GONE);
+			
+			holder.retweeted_progressbar = (ProgressBar) convertView.findViewById(R.id.retweeted_progressBar);
+			holder.retweeted_progressbar.setVisibility(View.GONE);
 
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.text = (TextView) convertView.findViewById(R.id.text);
             holder.timesource = (TextView) convertView.findViewById(R.id.timesource);
+            
+            holder.retweeted_screenname = (TextView) convertView.findViewById(R.id.retweeted_title);
+            holder.retweeted_text = (TextView) convertView.findViewById(R.id.retweeted_text);
 
            	holder.title.setTextSize(_App._Fontsize);
            	holder.text.setTextSize(_App._Fontsize);
@@ -259,6 +268,7 @@ public class ItemAdapter extends BaseAdapter {
         holder.conversation.setVisibility(View.GONE);
         holder.icon.setVisibility(View.VISIBLE);
     	holder.progressbar.setVisibility(View.GONE);
+    	holder.retweeted_progressbar.setVisibility(View.GONE);
 
     	if(item.mRead == TweetsListActivity.READ_STATE_READ){
     		//holder.unread.setImageBitmap(null);
@@ -304,6 +314,11 @@ public class ItemAdapter extends BaseAdapter {
        	holder.title.setText(item.mScreenname);
       	holder.timesource.setText(item.mTimeSource);
        	holder.text.setText(item.mText);
+
+       	holder.retweeted_screenname.setText(item.mRetweeted_Screenname);
+       	holder.retweeted_text.setText(item.mRetweeted_Text);
+
+       	
 //       	holder.pic.setImageBitmap(mBlank);
 
 //       	switch (mScrollState) {
@@ -364,6 +379,9 @@ public class ItemAdapter extends BaseAdapter {
        	item.mTimeSource = obj.mTimeSource;
        	item.mPicurl = obj.mPicurl;
     	item.mPic = obj.mPic;
+    	
+    	item.mRetweeted_Screenname = obj.mRetweeted_Screenname;
+    	item.mRetweeted_Text = obj.mRetweeted_Text;
     }
 
     public void addThread(int index, TwitterItem obj, int addtype, int type){
@@ -402,6 +420,26 @@ public class ItemAdapter extends BaseAdapter {
     		mItem.add(new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui,mCtx._ActivityType, _App._Username, picurl));
     	}else{
    			mItem.add(0,new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui, mCtx._ActivityType, _App._Username, picurl));
+    	}
+
+    	notifyDataSetChanged();
+    }
+    
+    public void addThread(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconrui, boolean append, String picurl, String retweeted_screenname, String retweeted_text){
+
+    	int count = mItem.size();
+    	//if(screenname.length() == 0 && count < _App._Tweetscount - 5) return;
+    	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;
+
+    	if(append == true){
+    		if(count != 0){
+    			if(mItem.get(count - 1).mID == id ){
+    				return;
+    			}
+    		}
+    		mItem.add(new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui,mCtx._ActivityType, _App._Username, picurl, retweeted_screenname, retweeted_text));
+    	}else{
+   			mItem.add(0,new TwitterItem(read, screenname, title, text, time, source, id, replyid, fav, following, iconrui, mCtx._ActivityType, _App._Username, picurl, retweeted_screenname, retweeted_text));
     	}
 
     	notifyDataSetChanged();

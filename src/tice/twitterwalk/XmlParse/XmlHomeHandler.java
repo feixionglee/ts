@@ -101,6 +101,18 @@ public class XmlHomeHandler extends DefaultHandler {
 	        }
 	    
 	    	builder.setLength(0);
+	    } else if (in_status && in_retweet_details){
+	    	System.out.println("localName====="+localName);
+	    	
+	    	String shit = builder.toString().trim();
+	    	
+    		if (localName.equals("screen_name") && in_user == true){
+        		mItem.mRetweeted_Screenname = shit;	
+        		System.out.println("====="+mItem.mRetweeted_Screenname);
+	        } else if (localName.equals("text") && in_user == false){
+	        	mItem.mRetweeted_Text = String.format("%s", Html.fromHtml(shit));
+	        } 
+	    	builder.setLength(0);
 	    }
     } 
      

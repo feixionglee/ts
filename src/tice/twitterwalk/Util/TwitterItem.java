@@ -24,6 +24,9 @@ public class TwitterItem{
     public Bitmap mPic;
     public int mType = TwitterClient.HOME_HOME;
     //public Bitmap mImage;
+    
+    public String mRetweeted_Screenname;
+    public String mRetweeted_Text;
 
     public TwitterItem(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconuri, int type, String account, String picurl){
         try {
@@ -43,6 +46,36 @@ public class TwitterItem{
 	        mAccount = account;
 	        mPicurl = picurl;
 	        mPic = null;
+	        
+	        mRetweeted_Screenname = "";
+	        mRetweeted_Text = "";
+
+	    	mTimeSource = TweetsListActivity.CreateTimeSource(mTime, mSource);
+
+		} catch (Exception e) {}
+    }
+    
+    public TwitterItem(int read, String screenname, String title, String text, long time, String source, long id, String replyid, boolean fav, boolean following, String iconuri, int type, String account, String picurl, String Retweeted_Screenname, String Retweeted_Text){
+        try {
+	    	mScreenname = screenname;
+	        mTitle = title;
+	        mTime = time;
+	        mSource = source;
+			mText = text;
+	        mID = id;
+	        mReplyID = replyid;
+	        mFavorite = fav;
+	        mFollowing = following;
+	        mImageurl = iconuri;
+	        mImage = null;
+	        mRead = read;
+	        mType = type;
+	        mAccount = account;
+	        mPicurl = picurl;
+	        mPic = null;
+	        
+	        mRetweeted_Screenname = Retweeted_Screenname;
+	        mRetweeted_Text = Retweeted_Text;
 
 	    	mTimeSource = TweetsListActivity.CreateTimeSource(mTime, mSource);
 
@@ -69,6 +102,9 @@ public class TwitterItem{
 	        mAccount = obj.mAccount;
 	        mPicurl = obj.mPicurl;
 	        mPic = null;
+	        
+	        mRetweeted_Screenname = obj.mRetweeted_Screenname;
+	        mRetweeted_Text = obj.mRetweeted_Text;
 		} catch (Exception e) {}
     }
 
@@ -91,6 +127,9 @@ public class TwitterItem{
 	        mAccount = "";
 	        mPicurl = "";
 	        mPic = null;
+	        
+	        mRetweeted_Screenname = "";
+	        mRetweeted_Text = "";
 		} catch (Exception e) {}
     }
 }

@@ -48,6 +48,25 @@
 				android:gravity="left|center" android:paddingRight="3px" android:textSize="16px"
 				android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:paddingLeft="2px"/>
 			
+		</LinearLayout>
+		
+		<LinearLayout android:orientation="horizontal"
+			android:layout_height="wrap_content" android:layout_width="fill_parent">
+			
+			<TextView android:id="@+id/retweeted_title" android:layout_height="wrap_content"
+				android:textStyle="bold" android:textSize="16px"
+				android:layout_width="fill_parent" android:layout_weight="1.0"
+				android:layout_gravity="center_vertical" android:paddingLeft="2px" android:paddingRight="3px"/>
+		
+			<ProgressBar android:id="@+id/retweeted_progressBar" 
+				android:layout_width="22px" 
+				android:indeterminate="true" android:layout_height="22px" 
+				android:layout_gravity="center_vertical">
+			</ProgressBar>
+			
+			<TextView android:id="@+id/retweeted_text" android:layout_width="fill_parent"
+				android:gravity="left|center" android:paddingRight="3px" android:textSize="16px"
+				android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:paddingLeft="2px"/>
 			
 		</LinearLayout>
 

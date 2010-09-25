@@ -511,7 +511,7 @@ public class TweetsListActivity extends Activity {
 		}
 		if(tweetCursor == null) return;
     	if (tweetCursor.getCount() != 0) {
-			String screenname,title,text,source,replyid,iconuri,picurl;
+			String screenname,title,text,source,replyid,iconuri,picurl,reteeted_screenname,reteeted_text;
 			long time,id;
 			boolean favorited,following;
 			int read;
@@ -530,6 +530,8 @@ public class TweetsListActivity extends Activity {
 				read = tweetCursor.getInt(DBTweetsHelper.COL_READ);
 				iconuri = tweetCursor.getString(DBTweetsHelper.COL_ICONURL);
 				picurl = "";
+				reteeted_screenname = tweetCursor.getString(DBTweetsHelper.COL_RETWEETED_SCREENNAME);
+				reteeted_text = tweetCursor.getString(DBTweetsHelper.COL_RETWEETED_TEXT);
 				_Items.addThread(read, screenname, title, text, time, source, id, replyid, favorited, following, iconuri, true, picurl);
 
 				//if(id > _LastID){
