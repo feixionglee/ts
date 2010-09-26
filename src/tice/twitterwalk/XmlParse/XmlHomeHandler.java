@@ -74,51 +74,45 @@ public class XmlHomeHandler extends DefaultHandler {
         	builder.setLength(0);
         }
     	
-    	if(in_status && !in_retweet_details){
-
+    	if(in_status){
     		String body = builder.toString().trim();
-
-    		if (localName.equals("created_at") && in_user == false){
-	        	mItem.mTime = Date.parse(body);
-	        } else if (localName.equals("id") && in_user == false){
-	        	mItem.mID = Long.valueOf(body);
-	        } else if (localName.equals("text") && in_user == false){
-	        	mItem.mText = String.format("%s", Html.fromHtml(body));
-	        } else if (localName.equals("source") && in_user == false){
-	        	mItem.mSource = String.format("%s",Html.fromHtml(body));
-	        } else if (localName.equals("in_reply_to_status_id") && in_user == false){
-	        	mItem.mReplyID = body;
-	        } else if (localName.equals("favorited") && in_user == false){
-	        	mItem.mFavorite = Boolean.parseBoolean(body);
-	        } else if (localName.equals("screen_name") && in_user == true){
-	        	mItem.mScreenname = body;
-	        } else if (localName.equals("name") && (in_user == true)){
-	        	mItem.mTitle = body;
-	        } else if (localName.equals("profile_image_url") && in_user == true ){
-	        	mItem.mImageurl = body;
-	        } else if (localName.equals("bmiddle_pic") && in_user == false ){
-	        	mItem.mPicurl = body;
-	        }
-	    
+    		
+    		if (!in_retweet_details){
+	    		if (localName.equals("created_at") && in_user == false){
+		        	mItem.mTime = Date.parse(body);
+		        } else if (localName.equals("id") && in_user == false){
+		        	mItem.mID = Long.valueOf(body);
+		        } else if (localName.equals("text") && in_user == false){
+		        	mItem.mText = String.format("%s", Html.fromHtml(body));
+		        } else if (localName.equals("source") && in_user == false){
+		        	mItem.mSource = String.format("%s",Html.fromHtml(body));
+		        } else if (localName.equals("in_reply_to_status_id") && in_user == false){
+		        	mItem.mReplyID = body;
+		        } else if (localName.equals("favorited") && in_user == false){
+		        	mItem.mFavorite = Boolean.parseBoolean(body);
+		        } else if (localName.equals("screen_name") && in_user == true){
+		        	mItem.mScreenname = body;
+		        } else if (localName.equals("name") && (in_user == true)){
+		        	mItem.mTitle = body;
+		        } else if (localName.equals("profile_image_url") && in_user == true ){
+		        	mItem.mImageurl = body;
+		        } else if (localName.equals("bmiddle_pic") && in_user == false ){
+		        	mItem.mPicurl = body;
+		        }
+    		} else if (in_retweet_details){
+        		if (localName.equals("screen_name") && in_user == true){
+            		mItem.mRetweeted_Screenname = body;	
+    	        } else if (localName.equals("text") && in_user == false){
+    	        	mItem.mRetweeted_Text = String.format("%s", Html.fromHtml(body));
+    	        } 
+    	    }
 	    	builder.setLength(0);
-	    } else if (in_status && in_retweet_details){
-	    	System.out.println("localName====="+localName);
-	    	
-	    	String shit = builder.toString().trim();
-	    	
-    		if (localName.equals("screen_name") && in_user == true){
-        		mItem.mRetweeted_Screenname = shit;	
-        		System.out.println("====="+mItem.mRetweeted_Screenname);
-	        } else if (localName.equals("text") && in_user == false){
-	        	mItem.mRetweeted_Text = String.format("%s", Html.fromHtml(shit));
-	        } 
-	    	builder.setLength(0);
-	    }
+	    } 
     } 
      
     @Override 
 	public void characters(char ch[], int start, int length) { 
-    	if (in_status && !in_retweet_details || in_error == true){
+    	if (in_status || in_error == true){
     		if(ch[start] == '\r' || ch[start] == '\n') return;
     		builder.append(ch, start, length);
     	}
