@@ -36,7 +36,6 @@ public class ItemAdapter extends BaseAdapter {
     public class ViewHolder {
     	TextView title;
     	TextView text;
-    	TextView retweeted_screenname;
     	TextView retweeted_text;
     	TextView timesource;
     	ImageView icon;
@@ -142,14 +141,12 @@ public class ItemAdapter extends BaseAdapter {
 			holder.progressbar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
 			holder.progressbar.setVisibility(View.GONE);
 			
-			holder.retweeted_progressbar = (ProgressBar) convertView.findViewById(R.id.retweeted_progressBar);
 			holder.retweeted_progressbar.setVisibility(View.GONE);
 
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.text = (TextView) convertView.findViewById(R.id.text);
             holder.timesource = (TextView) convertView.findViewById(R.id.timesource);
             
-            holder.retweeted_screenname = (TextView) convertView.findViewById(R.id.retweeted_title);
             holder.retweeted_text = (TextView) convertView.findViewById(R.id.retweeted_text);
 
            	holder.title.setTextSize(_App._Fontsize);
@@ -315,7 +312,6 @@ public class ItemAdapter extends BaseAdapter {
       	holder.timesource.setText(item.mTimeSource);
        	holder.text.setText(item.mText);
 
-       	holder.retweeted_screenname.setText(item.mRetweeted_Screenname);
        	if (item.mRetweeted_Text.length() > 0){
        		holder.retweeted_text.setText("@"+item.mRetweeted_Screenname+": "+item.mRetweeted_Text);
        	}else{
