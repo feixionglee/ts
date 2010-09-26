@@ -316,7 +316,11 @@ public class ItemAdapter extends BaseAdapter {
        	holder.text.setText(item.mText);
 
        	holder.retweeted_screenname.setText(item.mRetweeted_Screenname);
-       	holder.retweeted_text.setText(item.mRetweeted_Text);
+       	if (item.mRetweeted_Text.length() > 0){
+       		holder.retweeted_text.setText("@"+item.mRetweeted_Screenname+": "+item.mRetweeted_Text);
+       	}else{
+       		holder.retweeted_text.setText(item.mRetweeted_Text);
+       	}
 
        	
 //       	holder.pic.setImageBitmap(mBlank);
