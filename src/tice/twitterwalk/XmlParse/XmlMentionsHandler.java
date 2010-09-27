@@ -17,6 +17,7 @@ public class XmlMentionsHandler extends DefaultHandler {
     protected boolean in_status = false; 
     protected boolean in_user = false; 
     private boolean in_error = false;
+    private boolean in_retweet_details = false;
     
     protected StringBuilder builder;
     protected TwitterItem mItem = null;
@@ -49,6 +50,8 @@ public class XmlMentionsHandler extends DefaultHandler {
         	builder = new StringBuilder();
         }else if (localName.equals("user")){
         	in_user = true;
+        }else if (localName.equals("retweeted_status")){
+        	in_retweet_details = true;
         }else if (localName.equals("error")){
         	in_error = true;
         	builder = new StringBuilder();
@@ -63,7 +66,9 @@ public class XmlMentionsHandler extends DefaultHandler {
         	mTweetsData.items.add(mItem);
         } else if (localName.equals("user")){
         	in_user = false;
-        }else if (localName.equals("error")){
+        } else if (localName.equals("retweeted_status")){
+        	in_retweet_details = false;
+        } else if (localName.equals("error")){
         	in_error = false;
         	mTweetsData.mError = builder.toString();
         	builder.setLength(0);
@@ -72,25 +77,35 @@ public class XmlMentionsHandler extends DefaultHandler {
     	if(in_status){
 
     		String body = builder.toString().trim();
-
-    		if (localName.equals("created_at") && in_user == false){
-	        	mItem.mTime = Date.parse(body);
-	        } else if (localName.equals("id") && in_user == false){
-	        	mItem.mID = Long.valueOf(body);
-	        } else if (localName.equals("text") && in_user == false){
-	        	mItem.mText = String.format("%s", Html.fromHtml(body));
-	        } else if (localName.equals("source") && in_user == false){
-	        	mItem.mSource = String.format("%s",Html.fromHtml(body));
-	        } else if (localName.equals("in_reply_to_status_id") && in_user == false){
-	        	mItem.mReplyID = body;
-	        } else if (localName.equals("favorited") && in_user == false){
-	        	mItem.mFavorite = Boolean.parseBoolean(body);
-	        } else if (localName.equals("screen_name") && in_user == true){
-	        	mItem.mScreenname = body;
-	        } else if (localName.equals("name") && (in_user == true)){
-	        	mItem.mTitle = body;
-	        } else if (localName.equals("profile_image_url") && in_user == true ){
-	        	mItem.mImageurl = body;
+    		if (!in_retweet_details){
+	    		if (localName.equals("created_at") && in_user == false){
+		        	mItem.mTime = Date.parse(body);
+		        } else if (localName.equals("id") && in_user == false){
+		        	mItem.mID = Long.valueOf(body);
+		        } else if (localName.equals("text") && in_user == false){
+		        	mItem.mText = String.format("%s", Html.fromHtml(body));
+		        } else if (localName.equals("source") && in_user == false){
+		        	mItem.mSource = String.format("%s",Html.fromHtml(body));
+		        } else if (localName.equals("in_reply_to_status_id") && in_user == false){
+		        	mItem.mReplyID = body;
+		        } else if (localName.equals("favorited") && in_user == false){
+		        	mItem.mFavorite = Boolean.parseBoolean(body);
+		        } else if (localName.equals("screen_name") && in_user == true && in_retweet_details == false){
+		        	mItem.mScreenname = body;
+		        } else if (localName.equals("name") && (in_user == true)){
+		        	mItem.mTitle = body;
+		        } else if (localName.equals("profile_image_url") && in_user == true ){
+		        	mItem.mImageurl = body;
+		        } 
+    		}else if (in_retweet_details){
+        		if (localName.equals("screen_name") && in_user == true){
+            		mItem.mRetweeted_Screenname = body;	
+    	        } else if (localName.equals("text") && in_user == false){
+    	        	mItem.mRetweeted_Text = String.format("%s", Html.fromHtml(body));
+    	        } 
+    	    }
+    		if (localName.equals("bmiddle_pic") && in_user == false ){
+	        	mItem.mPicurl = body;
 	        }
 	    
 	    	builder.setLength(0);
