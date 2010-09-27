@@ -317,6 +317,7 @@ public class ItemAdapter extends BaseAdapter {
        		shit.setVisibility(View.VISIBLE);
        	}else{
        		holder.retweeted_text.setText(item.mRetweeted_Text);
+       		shit.setVisibility(View.GONE);
        	}
 
        	
