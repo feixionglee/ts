@@ -96,9 +96,7 @@ public class XmlHomeHandler extends DefaultHandler {
 		        	mItem.mTitle = body;
 		        } else if (localName.equals("profile_image_url") && in_user == true ){
 		        	mItem.mImageurl = body;
-		        } else if (localName.equals("bmiddle_pic") && in_user == false ){
-		        	mItem.mPicurl = body;
-		        }
+		        } 
     		} else if (in_retweet_details){
         		if (localName.equals("screen_name") && in_user == true){
             		mItem.mRetweeted_Screenname = body;	
@@ -106,6 +104,9 @@ public class XmlHomeHandler extends DefaultHandler {
     	        	mItem.mRetweeted_Text = String.format("%s", Html.fromHtml(body));
     	        } 
     	    }
+    		if (localName.equals("bmiddle_pic") && in_user == false ){
+	        	mItem.mPicurl = body;
+	        }
 	    	builder.setLength(0);
 	    } 
     } 

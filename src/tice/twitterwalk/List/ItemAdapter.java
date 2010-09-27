@@ -141,8 +141,6 @@ public class ItemAdapter extends BaseAdapter {
 			holder.progressbar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
 			holder.progressbar.setVisibility(View.GONE);
 			
-			holder.retweeted_progressbar.setVisibility(View.GONE);
-
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.text = (TextView) convertView.findViewById(R.id.text);
             holder.timesource = (TextView) convertView.findViewById(R.id.timesource);
@@ -265,7 +263,6 @@ public class ItemAdapter extends BaseAdapter {
         holder.conversation.setVisibility(View.GONE);
         holder.icon.setVisibility(View.VISIBLE);
     	holder.progressbar.setVisibility(View.GONE);
-    	holder.retweeted_progressbar.setVisibility(View.GONE);
 
     	if(item.mRead == TweetsListActivity.READ_STATE_READ){
     		//holder.unread.setImageBitmap(null);
@@ -311,9 +308,13 @@ public class ItemAdapter extends BaseAdapter {
        	holder.title.setText(item.mScreenname);
       	holder.timesource.setText(item.mTimeSource);
        	holder.text.setText(item.mText);
-
+       	
+       	holder.retweeted_text.setVisibility(View.VISIBLE);
+       	LinearLayout shit = (LinearLayout) convertView.findViewById(R.id.retweeted_text_wrap);
+       	
        	if (item.mRetweeted_Text.length() > 0){
        		holder.retweeted_text.setText("@"+item.mRetweeted_Screenname+": "+item.mRetweeted_Text);
+       		shit.setVisibility(View.VISIBLE);
        	}else{
        		holder.retweeted_text.setText(item.mRetweeted_Text);
        	}

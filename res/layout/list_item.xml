@@ -5,16 +5,18 @@
 
 	<LinearLayout android:id="@+id/image_left"
 		android:orientation="vertical" android:gravity="top|center_horizontal"
-		android:paddingTop="5px" android:paddingBottom="5px" android:paddingLeft="5px" 
-		android:layout_height="60dip" android:layout_width="55dip">
- 
+		android:paddingTop="5px" android:paddingBottom="5px"
+		android:paddingLeft="5px" android:layout_height="60dip"
+		android:layout_width="55dip">
+
 		<ImageView android:id="@+id/icon_left" android:layout_width="50dip"
-			android:layout_height="50dip"/>
+			android:layout_height="50dip" />
 
 	</LinearLayout>
 
 	<LinearLayout android:orientation="vertical"
-		android:layout_height="wrap_content" android:layout_width="fill_parent"  android:layout_weight="1" android:paddingLeft="5px">
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:layout_weight="1" android:paddingLeft="5px">
 
 		<LinearLayout android:orientation="horizontal"
 			android:layout_height="wrap_content" android:layout_width="fill_parent"
@@ -23,72 +25,80 @@
 			<TextView android:id="@+id/title" android:layout_height="wrap_content"
 				android:textStyle="bold" android:textSize="16px"
 				android:layout_width="fill_parent" android:layout_weight="1.0"
-				android:layout_gravity="center_vertical" android:paddingLeft="2px" android:paddingRight="3px"/>
+				android:layout_gravity="center_vertical" android:paddingLeft="2px"
+				android:paddingRight="3px" />
 
 			<ImageView android:id="@+id/conversation"
 				android:paddingLeft="5px" android:paddingRight="5px"
-				android:layout_gravity="right|center_vertical" android:layout_height="30px" android:layout_width="30px"/>
-				
+				android:layout_gravity="right|center_vertical"
+				android:layout_height="30px" android:layout_width="30px" />
+
 			<ImageView android:id="@+id/favoriteindicate"
 				android:paddingLeft="5px" android:paddingRight="5px"
-				android:layout_gravity="right|center_vertical" android:layout_height="30px" android:layout_width="30px"/>
+				android:layout_gravity="right|center_vertical"
+				android:layout_height="30px" android:layout_width="30px" />
 
 		</LinearLayout>
 
 		<LinearLayout android:orientation="horizontal"
 			android:layout_height="wrap_content" android:layout_width="fill_parent">
-		
-			<ProgressBar android:id="@+id/ProgressBar" 
-				android:layout_width="22px" 
-				android:indeterminate="true" android:layout_height="22px" 
-				android:layout_gravity="center_vertical">
+
+			<ProgressBar android:id="@+id/ProgressBar"
+				android:layout_width="22px" android:indeterminate="true"
+				android:layout_height="22px" android:layout_gravity="center_vertical">
 			</ProgressBar>
-			
+
 			<TextView android:id="@+id/text" android:layout_width="fill_parent"
-				android:gravity="left|center" android:paddingRight="3px" android:textSize="16px"
-				android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:paddingLeft="2px"/>
-			
-		</LinearLayout>
-		
-		<LinearLayout android:orientation="horizontal"
-			android:layout_height="wrap_content" android:layout_width="fill_parent">
-			
-			<TextView android:id="@+id/retweeted_text" android:layout_width="fill_parent"
-				android:gravity="left|center" android:paddingRight="3px" android:textSize="16px"
-				android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:paddingLeft="2px"/>
-			
+				android:gravity="left|center" android:paddingRight="3px"
+				android:textSize="16px" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical" android:paddingLeft="2px" />
+
 		</LinearLayout>
 
-		<ImageView android:id="@+id/status_pic" 
-						android:layout_width="fill_parent" android:layout_height="wrap_content"
-						android:gravity="left|center" android:layout_gravity="center_vertical" 
-						android:paddingRight="3px" android:paddingLeft="2px"/>
+		<LinearLayout android:id="@+id/retweeted_text_wrap" 
+			android:orientation="vertical" android:visibility="gone"
+			android:background="@drawable/popup" android:layout_height="wrap_content"
+			android:layout_width="fill_parent">
+
+			<TextView android:id="@+id/retweeted_text"
+				android:layout_width="fill_parent" android:gravity="left|center"
+				android:paddingRight="3px" android:textSize="16px"
+				android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+				android:paddingLeft="2px" />
+
+		</LinearLayout>
+
+		<ImageView android:id="@+id/status_pic"
+			android:layout_width="150.0dip" android:layout_height="150.0dip"
+			android:gravity="left|center" android:layout_gravity="center_vertical"
+			android:paddingRight="3px" android:paddingLeft="2px" />
 
 		<TextView android:id="@+id/timesource" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:gravity="right|top"
-			android:paddingRight="3px"
-			android:textSize="12px" android:paddingLeft="2px"/>
+			android:paddingRight="3px" android:textSize="12px"
+			android:paddingLeft="2px" />
 	</LinearLayout>
 
-<!--
-	<LinearLayout android:id="@+id/image_right"
+	<!--
+		<LinearLayout android:id="@+id/image_right"
 		android:orientation="vertical" android:gravity="top|center_horizontal"
-		android:paddingTop="5px" android:paddingBottom="5px" android:paddingLeft="5px" 
-		android:layout_height="60dip" android:layout_width="55dip">
+		android:paddingTop="5px" android:paddingBottom="5px"
+		android:paddingLeft="5px" android:layout_height="60dip"
+		android:layout_width="55dip"> <ImageView android:id="@+id/icon_right"
+		android:layout_width="50dip" android:layout_height="50dip"/>
 
-		<ImageView android:id="@+id/icon_right" android:layout_width="50dip"
-			android:layout_height="50dip"/>
-
-	</LinearLayout>
--->
+		</LinearLayout>
+	-->
 
 	<LinearLayout android:id="@+id/unread"
 		android:orientation="vertical" android:gravity="center"
-		android:paddingRight="2px" 
-		android:paddingTop="10px" android:paddingBottom="10px"
-		android:layout_height="fill_parent" android:layout_width="7dip">
+		android:paddingRight="2px" android:paddingTop="10px"
+		android:paddingBottom="10px" android:layout_height="fill_parent"
+		android:layout_width="7dip">
 
-		<ImageView android:id="@+id/unreadimage" android:layout_height="fill_parent" android:scaleType="fitXY" android:layout_width="6dip"/>
+		<ImageView android:id="@+id/unreadimage"
+			android:layout_height="fill_parent" android:scaleType="fitXY"
+			android:layout_width="6dip" />
 
 	</LinearLayout>
 
