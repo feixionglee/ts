@@ -38,6 +38,7 @@
 
 		</LinearLayout>
 
+<!--
 		<Button android:id="@+id/menubtn" android:background="@drawable/menu_show"
 			android:layout_gravity="right" android:layout_marginRight="4px"
 			android:layout_marginTop="4px" android:nextFocusLeft="@+id/ListView"
@@ -45,7 +46,8 @@
 			android:nextFocusUp="@+id/ListView" android:layout_height="35px"
 			android:layout_width="35px">
 		</Button>
-
+-->
+		
 		<LinearLayout android:id="@+id/StatusLayout"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:orientation="horizontal" android:layout_gravity="bottom"
