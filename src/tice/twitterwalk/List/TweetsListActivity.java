@@ -392,8 +392,8 @@ public class TweetsListActivity extends Activity {
         	getWindow().setFlags(~WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
-		final TextView rightText = (TextView) findViewById(R.id.title_api);
-		rightText.setText(_App._TitleString);
+//		final TextView rightText = (TextView) findViewById(R.id.title_api);
+//		rightText.setText(_App._TitleString);
 
 		if(_Refresh == true){
 			setMyProgressBarVisibility(true);
@@ -1756,8 +1756,8 @@ public class TweetsListActivity extends Activity {
 	    		int remain = Integer.valueOf(data.mJSONObject.getString("remaining_hits"));
 	    		int limit = Integer.valueOf(data.mJSONObject.getString("hourly_limit"));
 	    		String str = String.format("%d%%", (remain * 100) / limit);
-	    		final TextView rightText = (TextView) findViewById(R.id.title_api);
-	    		rightText.setText(str);
+//	    		final TextView rightText = (TextView) findViewById(R.id.title_api);
+//	    		rightText.setText(str);
 	    		_App._TitleString = str;
     		} catch (JSONException e1){} catch (Exception e2){}
     	}

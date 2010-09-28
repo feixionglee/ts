@@ -17,7 +17,8 @@
 		android:layout_width="20px"
         android:layout_height="20px" android:paddingLeft="2px" android:paddingRight="2px" android:layout_gravity="center_vertical" android:paddingTop="3px">
 	</ProgressBar>
-	
+
+<!--	
 	<TextView android:id="@+id/title_api"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
         android:shadowDx="1" android:shadowDy="1" android:shadowRadius="2" 
         android:textColor="#fff6f6f6" 
         android:paddingRight="3px" android:paddingLeft="3px"
-        android:layout_gravity="center_vertical"/>
-	
-	
+        android:layout_gravity="center_vertical"/>	
+-->
+
 </LinearLayout>
