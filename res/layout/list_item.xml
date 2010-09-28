@@ -71,7 +71,7 @@
 		<ImageView android:id="@+id/status_pic"
 			android:layout_width="150.0dip" android:layout_height="150.0dip"
 			android:gravity="left|center" android:layout_gravity="center_vertical"
-			android:paddingRight="3px" android:paddingLeft="2px" />
+			android:paddingTop="3px" android:paddingLeft="2px" />
 
 		<TextView android:id="@+id/timesource" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:gravity="right|top"
