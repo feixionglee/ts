@@ -1024,7 +1024,8 @@ public class TwitterClient {
 			String url = String.format("%s/direct_messages/new.json",mBaseURI);
 
 		 	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("user", screenname));
+			nameValuePairs.add(new BasicNameValuePair("id", screenname));
+			nameValuePairs.add(new BasicNameValuePair("screen_name", screenname));
 			nameValuePairs.add(new BasicNameValuePair("text", text));
 
 		 	HttpPost request = new HttpPost(url);
