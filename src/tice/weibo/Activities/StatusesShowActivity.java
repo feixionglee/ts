@@ -173,6 +173,9 @@ public class StatusesShowActivity extends TweetsListActivity {
 				item.mFollowing = (c.getInt(DBTweetsHelper.COL_FOLLOWING) == 1)? true : false;
 				item.mRead = c.getInt(DBTweetsHelper.COL_READ);
 				item.mImageurl = c.getString(DBTweetsHelper.COL_ICONURL);
+				
+				item.mRetweeted_Screenname = c.getString(DBTweetsHelper.COL_RETWEETED_SCREENNAME);
+				item.mRetweeted_Text = c.getString(DBTweetsHelper.COL_RETWEETED_TEXT);
     			
     			data.items.add(item);
  				b.putSerializable(TwitterClient.KEY, data);
