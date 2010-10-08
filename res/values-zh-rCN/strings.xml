@@ -22,9 +22,9 @@
     <string name="display">显示</string>
     <string name="search">搜索</string>
     <string name="newsearch">New Search</string>
-    <string name="statusdbar">Show Status Bar</string>
-    <string name="refreshafterpost">Refresh After Posting</string>
-    <string name="refreonlaunch">Refresh On Launch</string>
+    <string name="statusdbar">显示状态栏</string>
+    <string name="refreshafterpost">发帖后刷新</string>
+    <string name="refreonlaunch">启动时刷新</string>
     <string name="fontsize">字体大小</string>
     <string name="trends">趋势</string>
     <string name="trends_current">Current</string>
@@ -34,8 +34,8 @@
     <string name="notification">通知</string>
     <string name="notification_setting">通知设置</string>
     <string name="notification_interval">刷新间隔</string>
-    <string name="notification_home">Home Tweets</string>
-    <string name="notification_mention">Mention Tweets</string>
+    <string name="notification_home">主页</string>
+    <string name="notification_mention">\@提到我</string>
     <string name="notification_direct">私信</string>
     <string name="pictureservice">Picture Sharing Service</string>
     <string name="picturesharing">Picture Sharing</string>
@@ -44,21 +44,24 @@
     <string name="notification_timeline">Refresh Timeline</string>
     <string name="notification_method">Notification</string>
     <string name="notification_sound">声音</string>
-    <string name="notification_vibrate">Vibration</string>
+    <string name="notification_vibrate">震动</string>
     <string name="notification_led">LED</string>
     <string name="exit">退出</string>
     <string name="friendsfollowers">朋友</string>
     <string name="following">Following</string>
     <string name="followers">Followers</string>
-    <string name="longclick">Long click to open links</string>
-    <string name="autohidetoolbar">Auto-hide Toolbar</string>
+    <string name="longclick">长按打开菜单</string>
+    <string name="autohidetoolbar">自动隐藏工具栏</string>
     <string name="about">关于</string>
     <string name="others">信息</string>
-    <string name="displayicon">Display profile icon</string>
+    <string name="displayicon">显示头像</string>
     <string name="addaccount">Add</string>
     <string name="editaccount">编辑</string>
     <string name="delaccount">删除</string>
-    <string name="theme">Color Scheme</string>
+    <string name="theme">颜色</string>
+
+    <string name="advance">高级</string>
+    <string name="advance_settings">高级设置</string>
     
     <string name="retweet">转发</string>
     <string name="reply">回复</string>

@@ -60,6 +60,9 @@
     <string name="delaccount">Delete</string>
     <string name="theme">Color Scheme</string>
     
+    <string name="advance">Advance</string>
+    <string name="advance_settings">Advance Settings</string>
+    
     <string name="retweet">Retweet</string>
     <string name="reply">Reply</string>
     <string name="favorite">Favorite</string>

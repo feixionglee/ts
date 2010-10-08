@@ -254,9 +254,9 @@
         </PreferenceCategory>
         
         <PreferenceCategory
-            android:title="Advance">    
+            android:title="@string/advance">    
 	        <PreferenceScreen
-	            android:title="Advance Settings">   
+	            android:title="@string/advance_settings">   
 					<CheckBoxPreference
 						android:key="removead"
 						android:title="Remove ad code"
