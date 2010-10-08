@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jjzz</string>
+    <string name="author">Tice, Jason</string>
+    <string name="thanks">ch.linghu</string>
+    <string name="refresh">刷新</string>
+    <string name="setting">设置</string>
+    <string name="twitteraccount">微博帐户</string>
+    <string name="accounts">帐户</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="connect">连接</string>
+    <string name="apiaddress">Twitter API Address</string>
+    <string name="searchapi">Twitter Search API</string>
+    <string name="usessl">Use Secure Connection</string>
+    <string name="home">主页</string>
+    <string name="mentions">\@提到我</string>
+    <string name="direct">私信</string>
+    <string name="favorites">收藏夹</string>
+    <string name="newpost">新微博</string>
+    <string name="listlength">微博条数</string>
+    <string name="display">显示</string>
+    <string name="search">搜索</string>
+    <string name="newsearch">New Search</string>
+    <string name="statusdbar">Show Status Bar</string>
+    <string name="refreshafterpost">Refresh After Posting</string>
+    <string name="refreonlaunch">Refresh On Launch</string>
+    <string name="fontsize">字体大小</string>
+    <string name="trends">趋势</string>
+    <string name="trends_current">Current</string>
+    <string name="trends_daily">Daily</string>
+    <string name="trends_weekly">Weekly</string>
+    <string name="clearcache">清除图片缓存</string>
+    <string name="notification">通知</string>
+    <string name="notification_setting">通知设置</string>
+    <string name="notification_interval">刷新间隔</string>
+    <string name="notification_home">Home Tweets</string>
+    <string name="notification_mention">Mention Tweets</string>
+    <string name="notification_direct">私信</string>
+    <string name="pictureservice">Picture Sharing Service</string>
+    <string name="picturesharing">Picture Sharing</string>
+    <string name="picturequality">Picture Size</string>
+    <string name="shortenlinkservices">Shorten Link</string>
+    <string name="notification_timeline">Refresh Timeline</string>
+    <string name="notification_method">Notification</string>
+    <string name="notification_sound">声音</string>
+    <string name="notification_vibrate">Vibration</string>
+    <string name="notification_led">LED</string>
+    <string name="exit">退出</string>
+    <string name="friendsfollowers">朋友</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="longclick">Long click to open links</string>
+    <string name="autohidetoolbar">Auto-hide Toolbar</string>
+    <string name="about">关于</string>
+    <string name="others">信息</string>
+    <string name="displayicon">Display profile icon</string>
+    <string name="addaccount">Add</string>
+    <string name="editaccount">编辑</string>
+    <string name="delaccount">删除</string>
+    <string name="theme">Color Scheme</string>
+    
+    <string name="retweet">转发</string>
+    <string name="reply">回复</string>
+    <string name="favorite">收藏</string>
+    
+    <string name="rt">转发</string>
+    <string name="re">回复</string>
+    <string name="dm">私信</string>
+    
+</resources>

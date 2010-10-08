@@ -59,4 +59,14 @@
     <string name="editaccount">Edit</string>
     <string name="delaccount">Delete</string>
     <string name="theme">Color Scheme</string>
+    
+    <string name="retweet">Retweet</string>
+    <string name="reply">Reply</string>
+    <string name="favorite">Favorite</string>
+    
+    <string name="rt">RT</string>
+    <string name="re">RE</string>
+    <string name="dm">DM</string>
+    
+    <string name="get_more_tweets">Click here to load more tweets</string>
 </resources>

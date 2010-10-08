@@ -9,21 +9,21 @@
 		android:layout_width="fill_parent"
 		android:layout_weight="1" android:layout_height="wrap_content">
 
-		<Button android:text="RE" android:id="@+id/reply"
+		<Button android:text="@string/re" android:id="@+id/reply"
 			android:layout_width="fill_parent" android:layout_weight="1"
 			android:paddingLeft="1px" android:paddingRight="1px"
 			android:drawablePadding="-12px" android:layout_height="52px"
 			android:drawableLeft="@drawable/ic_menu_revert">
 		</Button>
 
-		<Button android:text="RT" android:id="@+id/retweet"
+		<Button android:text="@string/rt" android:id="@+id/retweet"
 			android:layout_width="fill_parent" android:layout_weight="1"
 			android:paddingLeft="1px" android:paddingRight="1px"
 			android:drawableLeft="@drawable/ic_menu_share"
 			android:drawablePadding="-12px" android:layout_height="52px">
 		</Button>
 		
-		<Button android:text="DM" android:id="@+id/direcrmsg"
+		<Button android:text= "@string/dm" android:id="@+id/direcrmsg"
 			android:layout_width="fill_parent" android:layout_weight="1"
 			android:paddingLeft="1px" android:paddingRight="1px"
 			android:drawableLeft="@drawable/ic_menu_compose"
