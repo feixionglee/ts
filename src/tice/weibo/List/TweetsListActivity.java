@@ -532,7 +532,7 @@ public class TweetsListActivity extends Activity {
 				picurl = "";
 				reteeted_screenname = tweetCursor.getString(DBTweetsHelper.COL_RETWEETED_SCREENNAME);
 				reteeted_text = tweetCursor.getString(DBTweetsHelper.COL_RETWEETED_TEXT);
-				_Items.addThread(read, screenname, title, text, time, source, id, replyid, favorited, following, iconuri, true, picurl);
+				_Items.addThread(read, screenname, title, text, time, source, id, replyid, favorited, following, iconuri, true, picurl,reteeted_screenname,reteeted_text);
 
 				//if(id > _LastID){
 				//	_LastID = id;
@@ -555,7 +555,7 @@ public class TweetsListActivity extends Activity {
 				}
 			}
 
-			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, picurl);
+			_Items.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, picurl,"","");
 			_Items.SetLoadingItem();
 
 		}
