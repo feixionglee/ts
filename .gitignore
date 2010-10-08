@@ -1,6 +1,6 @@
 .DS_Store
 bin/*
-gen/tice/twitterwalk/R.java
+gen/tice/weibo/R.java
 *.class
 *.apk
 *.dex
