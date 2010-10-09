@@ -928,10 +928,10 @@ public class TweetsListActivity extends Activity {
         			String text = edit.getText().toString();
 
         			if(text.length() != 0){
-        				if (_UploadFile == null){
-	         				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
-	         				inputMethodManager.hideSoftInputFromWindow(edit.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS );
-
+        				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
+         				inputMethodManager.hideSoftInputFromWindow(edit.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS );
+        				
+         				if (_UploadFile == null){
 	        				setMyProgressBarVisibility(true);
 
 	        				if(_ActivityType == TwitterClient.HOME_SEARCH ){
@@ -958,6 +958,7 @@ public class TweetsListActivity extends Activity {
 	        				edit.setEnabled(false);
 	        				if(gallery != null)	gallery.setEnabled(false);
         				} else {
+        					
         		          	_Progressdialog = new ProgressDialog(_Context);
         		          	_Progressdialog.setMessage("Uploading picture ...");
         		          	_Progressdialog.setIndeterminate(true);
@@ -974,7 +975,10 @@ public class TweetsListActivity extends Activity {
         		          	posturl.setEnabled(false);
 
         		          	if (_App._twitter != null) _App._twitter.Post_image(_Handler, _App._Pictureapi, _App._Username, _App._Password, _UploadFile, text);
-        		          	_UploadFile = null;
+        		          	_UploadFile = null;        		          	
+
+        		          	PanelAnimationOff(false, _Statuspanel);
+
         				}
         			}
         		}

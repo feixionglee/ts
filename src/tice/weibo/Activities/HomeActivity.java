@@ -162,16 +162,16 @@ public class HomeActivity extends TweetsListActivity {
 	    		PackageManager pm = this.getPackageManager();
 				pi = pm.getPackageInfo(this.getPackageName(), 0);
 				current = pi.versionName + "\n";
-				if (version.equalsIgnoreCase(current) == false){
-			        new AlertDialog.Builder(this)
-		            .setTitle("Version Check")
-			        .setMessage("New version is on the market!")
-			        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-			            public void onClick(DialogInterface dialog, int whichButton) {
-			            }
-			        })
-			        .show();
-				}
+//				if (version.equalsIgnoreCase(current) == false){
+//			        new AlertDialog.Builder(this)
+//		            .setTitle("Version Check")
+//			        .setMessage("New version is on the market!")
+//			        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+//			            public void onClick(DialogInterface dialog, int whichButton) {
+//			            }
+//			        })
+//			        .show();
+//				}
     		}catch (Exception e){}    	
     	case TwitterClient.UI_REFRESHVIEWS:
        		_Items.notifyDataSetChanged();
