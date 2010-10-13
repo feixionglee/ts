@@ -212,9 +212,6 @@ public class TwitterClient {
         	_App.mDownloadPool.start();
         }
 
-        TestURI(mBaseURI);
-        TestURI(mSearchURI);
-
         /*
         if(RoundShape == null){
         	RoundShape = new ShapeDrawable(new RoundRectShape(new float[] { 5, 5, 5, 5, 5, 5, 5, 5 }, null, null));
@@ -236,26 +233,6 @@ public class TwitterClient {
         */
 	}
 
-	static public boolean TestURI(String uri){
-		try {
-			@SuppressWarnings("unused")
-			URI test = new URI(uri);
-			return true;
-		} catch (URISyntaxException e) {
-			String text = String.format("%s is not a legal url. Please check your setting again.", uri);
-			try{
-				new AlertDialog.Builder(mCtx)
-	            .setTitle("URL Error")
-	            .setMessage(text)
-	            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int whichButton) {
-	 	                }
-	   	            })
-	            .show();
-			}catch (Exception err){}
-			return false;
-		}
-	}
 
 	private void SetCredentials(HttpRequestBase request) {
         if(mUsername.length() != 0 || mPassword.length() != 0){
@@ -580,54 +557,6 @@ public class TwitterClient {
         message.setData(data);
         handler.sendMessage(message);
  	}
-
-/*
- 	private void InitFilePath(){
- 		try{
- 			String sdpath = android.os.Environment.getExternalStorageDirectory().getPath();
- 			String cachepatch = String.format("%s/twitidget/cache", sdpath);
-
-	 		File sdRoot = new File(sdpath);
-	 		if(sdRoot.canWrite() ==true){
-	 			File cache = new File(cachepatch);
-	 			if (cache.isDirectory() == false){
-	 				cache.mkdirs();
-	 			}
-	 			mFilepath = cachepatch;
-
-	 		}else{
-	 			mFilepath = "";
-	 		}
-
- 		}catch (Exception e) {}
- 	}
-
- 	public void FrechImgFromFile(Handler handler,String uri, String name){
- 		String file = String.format("%s/%s", mFilepath,name);
- 		File sdRoot = new File(file);
-
- 		if(sdRoot.isFile() == false){
- 			HttpGet request = new HttpGet(uri);
- 			FetchImage thread = new FetchImage(handler, httpClient, request,HTTP_FETCH_IMAGE, name);
- 			thread.start();
- 		}
- 	}
-
- 	static public Bitmap LoadIconFromFile(String name){
-    	Bitmap icon = null;
-    	if(TwitterClient.mFilepath.length() != 0){
-    		String filepath = String.format("%s/%s", TwitterClient.mFilepath,name);
-    		icon =  BitmapFactory.decodeFile(filepath);
-    	}else{
-    		FileInputStream is = null;
-			try {
-				is = mCtx.openFileInput(name);
-			} catch (FileNotFoundException e) {}
-    		icon = BitmapFactory.decodeStream(is);
-    	}
-    	return icon;
- 	}
-*/
 
  	public class DownloadPool extends Thread{
 
