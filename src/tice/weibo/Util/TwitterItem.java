@@ -31,7 +31,26 @@ public class TwitterItem implements Parcelable {
     public String mRetweeted_Text;
     
     public void writeToParcel(Parcel dest, int flags) {
+    	dest.writeString(mScreenname);
+    	dest.writeString(mTitle);
+    	dest.writeString(mText);
+    	dest.writeLong(mTime);
+    	dest.writeString(mSource);
+    	dest.writeString(mTimeSource);
     	
+    	dest.writeLong(mID);
+    	dest.writeString(mReplyID);
+    	dest.writeString(mImageurl);
+    	
+    	dest.writeInt((mFavorite == true) ? 1 : 0);
+    	dest.writeInt((mFollowing == true) ? 1 : 0);
+    	dest.writeInt((mLoading == true) ? 1 : 0);
+    	
+    	dest.writeString(mAccount);
+    	dest.writeString(mPicurl);
+    	
+    	dest.writeString(mRetweeted_Screenname);
+    	dest.writeString(mRetweeted_Text);
     }
     
     public int describeContents() {
@@ -52,17 +71,20 @@ public class TwitterItem implements Parcelable {
     private TwitterItem(Parcel in) {
     	mScreenname = in.readString();
         mTitle = in.readString();
+        mText = in.readString();
         mTime = in.readLong();
         mSource = in.readString();
-		mText = in.readString();
+        mTimeSource = in.readString();
+        
         mID = in.readLong();
         mReplyID = in.readString();
-        mFavorite = true;
-        mFollowing = true;
         mImageurl = in.readString();
         mImage = null;
-        mRead = in.readInt();
-        mType = in.readInt();
+        
+        mFavorite = (in.readInt() == 1) ? true : false;
+        mFollowing = (in.readInt() == 1) ? true : false;
+        mLoading = (in.readInt() == 1) ? true : false;
+        
         mAccount = in.readString();
         mPicurl = in.readString();
         mPic = null;
