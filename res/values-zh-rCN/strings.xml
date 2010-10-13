@@ -71,4 +71,10 @@
     <string name="re">回复</string>
     <string name="dm">私信</string>
     
+    <string name="imageviewer_back">返回</string>
+    <string name="comment">评论</string>
+    <string name="forward">转发</string>
+    <string name="itemmenu_bookmark">收藏</string>
+    <string name="more">更多</string>
+    
 </resources>

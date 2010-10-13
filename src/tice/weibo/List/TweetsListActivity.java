@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import tice.weibo.App;
 import tice.weibo.R;
+import tice.weibo.Activities.DetailWeiboActivity;
 import tice.weibo.Activities.DirectActivity;
 import tice.weibo.Activities.FavoriteActivity;
 import tice.weibo.Activities.HomeActivity;
@@ -1311,13 +1312,15 @@ public class TweetsListActivity extends Activity {
 //	    clipboard.setText(_Items.Get(position).mScreenname);
 
 		_CurrentThread = position;
-		PanelAnimationOn(false, _Toolbarpanel);
-		PanelAnimationOff(false, _Statuspanel);
-		_Items.notifyDataSetInvalidated();
+//		PanelAnimationOn(false, _Toolbarpanel);
+//		PanelAnimationOff(false, _Statuspanel);
+		
+//		_Items.notifyDataSetInvalidated();
 
-		_Items.Get(position).mRead = READ_STATE_READ;
+//		_Items.Get(position).mRead = READ_STATE_READ;
+		DetailWeiboActivity.show(this, _Items.Get(position));
 
-		EnableAllButtons();
+//		EnableAllButtons();
 	}
 
 	private void defaultOnItemLongClick(int position){

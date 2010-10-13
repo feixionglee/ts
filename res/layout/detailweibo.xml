@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/tweet_bottom_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_alignParentBottom="true">
+        <TextView android:id="@+id/tvReturn" android:text="@string/imageviewer_back" android:drawableTop="@drawable/detail_back_icon" style="@style/detail_btn" />
+        <TextView android:id="@+id/tvComment" android:text="@string/comment" android:drawableTop="@drawable/detail_comment_icon" style="@style/detail_btn" />
+        <TextView android:id="@+id/tvForward" android:text="@string/forward" android:drawableTop="@drawable/detail_forward_icon" style="@style/detail_btn" />
+        <TextView android:id="@+id/tvFav" android:text="@string/itemmenu_bookmark" android:drawableTop="@drawable/detail_fav_icon" style="@style/detail_btn" />
+        <TextView android:id="@+id/tvMore" android:text="@string/more" android:drawableTop="@drawable/detail_more_icon" style="@style/detail_btn" />
+    </LinearLayout>
+    <ScrollView android:id="@+id/tweet_main_view" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/tweet_bottom_bar">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:id="@+id/tweet_profile" android:background="@android:drawable/list_selector_background" android:paddingBottom="10.0dip" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:id="@+id/tweet_profile_preview" android:layout_width="60.0sp" android:layout_height="60.0sp" android:layout_margin="10.0dip" android:src="@drawable/portrait" />
+                <TextView android:textSize="18.0sp" android:typeface="monospace" android:textStyle="bold" android:textColor="#ff222222" android:ellipsize="marquee" android:id="@+id/tweet_profile_name" android:fadingEdge="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="26.0dip" android:singleLine="true" android:layout_toRightOf="@id/tweet_profile_preview" />
+                <ImageView android:id="@+id/tweet_profile_vip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="26.0dip" android:layout_marginBottom="5.0dip" android:src="@drawable/v" android:layout_toRightOf="@id/tweet_profile_name" />
+                <View android:id="@+id/arrow" android:background="@drawable/ic_arrow" android:layout_width="12.0dip" android:layout_height="22.0dip" android:layout_marginTop="29.0dip" android:layout_marginRight="15.0dip" android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <ImageView android:id="@+id/tweet_divider" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="15.0dip" android:src="@drawable/divider_horizontal_timeline" android:layout_below="@id/tweet_profile" />
+            <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/tweet_divider">
+                <TextView android:textSize="18.0sp" android:textColor="#ff222222" android:id="@+id/tweet_message" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="3.0dip" android:bufferType="spannable" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/src_text_block" android:background="@drawable/popup" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_below="@id/tweet_message">
+                    <TextView android:textSize="16.0sp" android:textColor="#ff222222" android:id="@+id/tweet_oriTxt" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:bufferType="spannable" />
+                    <ImageView android:id="@+id/tweet_upload_pic2" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip" android:layout_marginRight="5.0dip" android:layout_marginBottom="5.0dip" android:scaleType="centerInside" />
+                </LinearLayout>
+                <View android:id="@+id/vDevider" android:layout_width="fill_parent" android:layout_height="10.0sp" android:layout_below="@id/src_text_block" />
+                <ImageView android:id="@+id/tweet_upload_pic" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="5.0dip" android:layout_marginBottom="15.0dip" android:scaleType="centerInside" android:layout_below="@id/vDevider" />
+                <RelativeLayout android:orientation="horizontal" android:id="@+id/rlTextDescBlock" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/tweet_upload_pic">
+                    <TextView android:textSize="14.0sp" android:textColor="#ff7d7d7d" android:id="@+id/tweet_updated" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff009cff" android:id="@+id/tweet_comment" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" />
+                    <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff7d7d7d" android:id="@+id/tweet_redirect" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toLeftOf="@id/tweet_comment" />
+                </RelativeLayout>
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="#ff7d7d7d" android:id="@+id/tweet_via" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/rlTextDescBlock" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

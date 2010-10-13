@@ -72,4 +72,10 @@
     <string name="dm">DM</string>
     
     <string name="get_more_tweets">Click here to load more tweets</string>
+    
+    <string name="imageviewer_back">return</string>
+    <string name="comment">comment</string>
+    <string name="forward">forward</string>
+    <string name="itemmenu_bookmark">favorite</string>
+    <string name="more">more</string>
 </resources>
