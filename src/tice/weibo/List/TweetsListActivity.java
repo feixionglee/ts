@@ -649,7 +649,7 @@ public class TweetsListActivity extends Activity {
 
  	protected void PanelAnimationOn(boolean top, ViewGroup layout){
 
- 		if (layout.getVisibility() == View.INVISIBLE){
+ 		if (layout.getVisibility() != View.VISIBLE){
  			int height = layout.getHeight();
 
  			height = ( ( top == true ) ? ( height * (-1)) : height );
@@ -780,7 +780,7 @@ public class TweetsListActivity extends Activity {
 
  	}
 
- 	private void doReply(){
+ 	public void doReply(){
 
 		TwitterItem item = _Items.Get(_CurrentThread);
 		if(item == null) return;
@@ -822,86 +822,22 @@ public class TweetsListActivity extends Activity {
         _Previewpanel = (LinearLayout)findViewById(R.id.PreviewPanel);
         if(_Previewpanel != null) _Previewpanel.setVisibility(View.GONE);
 
-    	Button reply =  (Button)findViewById(R.id.reply);
-    	Button retweet =  (Button)findViewById(R.id.retweet);
-    	Button destory =  (Button)findViewById(R.id.delete);
+    
     	Button thread =  (Button)findViewById(R.id.thread);
     	Button Send = (Button)findViewById(R.id.Send);
-    	Button favorite = (Button)findViewById(R.id.favorite);
+    	
     	EditText edit = (EditText)findViewById(R.id.EditText);
     	Button gallery = (Button)findViewById(R.id.Gallery);
     	Button closepreview = (Button)findViewById(R.id.ClosePreview);
 //    	Button upload = (Button)findViewById(R.id.Upload);
     	Button posturl = (Button)findViewById(R.id.PostURL);
-    	Button directmsg = (Button)findViewById(R.id.direcrmsg);
+    	
     	Button menubtn = (Button)findViewById(R.id.menubtn);
     	Button inbox = (Button)findViewById(R.id.inbox);
     	Button outbox = (Button)findViewById(R.id.outbox);
     	Button links = (Button)findViewById(R.id.links);
 
-    	if(reply != null){
-	    	reply.setOnClickListener(new OnClickListener(){
-				public void onClick(View v) {
-					String reply="";
-					EditText edit = (EditText)findViewById(R.id.EditText);
-					if(_ActivityType == TwitterClient.HOME_DIRECT){
-						_InputType = INPUT_DIRECT;
-						reply = "";
-						edit.setText(reply);
-						edit.setSelection(reply.length());
-		 				PanelAnimationOn(false, _Statuspanel);
-						PanelAnimationOff(false, _Toolbarpanel);
-					}else{
-						doReply();
-					}
-				}
-	    	});
-    	}
 
-    	if(retweet != null){
-	    	retweet.setOnClickListener(new OnClickListener(){
-				public void onClick(View v) {
-					String retweet="";
-					EditText edit = (EditText)findViewById(R.id.EditText);
-					TwitterItem item = _Items.Get(_CurrentThread);
-					_InputType = INPUT_RETWEET;
-					if (item != null) retweet = String.format("RT @%s: %s ", item.mScreenname, item.mText);
-	 				edit.setText(retweet);
-					PanelAnimationOn(false, _Statuspanel);
-					PanelAnimationOff(false, _Toolbarpanel);
-				}
-	    	});
-    	}
-
-    	if(destory != null){
-        	destory.setOnClickListener(new OnClickListener(){
-    			public void onClick(View v) {
-    				if(_CurrentThread == -1) return;
-    				try{
-	    	            new AlertDialog.Builder(_Context)
-	    	            .setTitle("Delete confirmation")
-	    	            .setMessage("Are you sure want to delete it?")
-	    	            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-	    	                public void onClick(DialogInterface dialog, int whichButton) {
-	    	                }
-	    	            })
-	    	            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-	    	                public void onClick(DialogInterface dialog, int whichButton) {
-	    	                	TwitterItem item = _Items.Get(_CurrentThread);
-	    	                	if(item != null){
-		    	                	long id = item.mID;
-		    	                	setMyProgressBarVisibility(true);
-		    	    				PanelAnimationOff(false, _Statuspanel);
-		    	    				PanelAnimationOff(false, _Toolbarpanel);
-		    	    				if (_App._twitter != null) _App._twitter.Post_destory(_Handler, _ActivityType, id);
-	    	                	}
-	    	                }
-	    	            })
-	    	            .show();
-    				}catch (Exception err){}
-    			}
-        	});
-    	}
 
     	if(thread != null){
         	thread.setOnClickListener(new OnClickListener(){
@@ -987,42 +923,6 @@ public class TweetsListActivity extends Activity {
          	});
     	}
 
-    	if(favorite != null){
-    		favorite.setOnClickListener(new OnClickListener(){
-    			public void onClick(View v) {
-    				TwitterItem item = _Items.Get(_CurrentThread);
-    				setMyProgressBarVisibility(true);
-    	    		PanelAnimationOff(false, _Statuspanel);
-    	    		PanelAnimationOff(false, _Toolbarpanel);
-    				if(item != null){
-    					long id = item.mID;
-	    	            if(item.mFavorite == false){
-	    	            	if (_App._twitter != null) _App._twitter.Post_favorites_create(_Handler, id);
-	    	            }else{
-	    	            	try{
-		        	            new AlertDialog.Builder(_Context)
-		        	            .setTitle("Delete confirmation")
-		        	            .setMessage("Are you sure want to unfavorite it?")
-		        	            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-		        	                public void onClick(DialogInterface dialog, int whichButton) {
-		        	                }
-		        	            })
-		        	            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-		        	                public void onClick(DialogInterface dialog, int whichButton) {
-		        	                	TwitterItem item = _Items.Get(_CurrentThread);
-		        	                	if(item != null){
-			        	                	long id = item.mID;
-			        	                	if (_App._twitter != null) _App._twitter.Post_destory(_Handler, TwitterClient.HOME_FAVORITES, id);
-		        	                	}
-		        	                }
-		        	            })
-		        	            .show();
-	    	            	}catch (Exception err){}
-	    	            }
-    				}
-    			}
-        	});
-    	}
 
     	if(edit != null){
     		edit.addTextChangedListener(new TextWatcher(){
@@ -1135,19 +1035,7 @@ public class TweetsListActivity extends Activity {
 //        	});
 //    	}
 
-    	if(directmsg != null){
-    		directmsg.setOnClickListener(new OnClickListener(){
-    			public void onClick(View v) {
-					TwitterItem item = _Items.Get(_CurrentThread);
-					if(item != null){
-	    				String receiver = item.mScreenname;
-	    		    	Intent i = new Intent(_Context, DirectActivity.class);
-	    		    	i.putExtra("receiver", receiver);
-	    		    	startActivityForResult(i, APP_CHAINCLOSE);
-					}
-    			}
-        	});
-    	}
+
 
     	if(menubtn != null){
     		menubtn.setOnClickListener(new OnClickListener(){

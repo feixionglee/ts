@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"  xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:orientation="horizontal" android:id="@+id/tweet_bottom_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_alignParentBottom="true">
@@ -6,7 +7,7 @@
         <TextView android:id="@+id/tvComment" android:text="@string/comment" android:drawableTop="@drawable/detail_comment_icon" style="@style/detail_btn" />
         <TextView android:id="@+id/tvForward" android:text="@string/forward" android:drawableTop="@drawable/detail_forward_icon" style="@style/detail_btn" />
         <TextView android:id="@+id/tvFav" android:text="@string/itemmenu_bookmark" android:drawableTop="@drawable/detail_fav_icon" style="@style/detail_btn" />
-        <TextView android:id="@+id/tvMore" android:text="@string/more" android:drawableTop="@drawable/detail_more_icon" style="@style/detail_btn" />
+        <TextView android:id="@+id/tvMore" android:text="share" android:drawableTop="@drawable/ic_menu_share1" style="@style/detail_btn" />
     </LinearLayout>
     <ScrollView android:id="@+id/tweet_main_view" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/tweet_bottom_bar">
         <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
@@ -35,3 +36,14 @@
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
+	
+		<LinearLayout android:id="@+id/detailStatusLayout" android:visibility="gone"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal" android:layout_gravity="bottom"
+			android:paddingBottom="2px" android:paddingLeft="5px"
+			android:paddingRight="5px" android:paddingTop="18px"
+			android:background="@drawable/menu_background_fill_parent_width">
+		</LinearLayout>
+	
+
+</FrameLayout>
