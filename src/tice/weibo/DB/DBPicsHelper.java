@@ -103,7 +103,7 @@ public class DBPicsHelper extends SQLiteOpenHelper {
     
     public Cursor fetchPic(Long status_id){
     	if(mDB == null) return null;
-    	Cursor mCursor = mDB.query(true, TABLE_NAME, null, KEY_STATUS_ID + "=" + "\"" + status_id + "\"", null, null, null, null, null);
+    	Cursor mCursor = mDB.query(TABLE_NAME, null, KEY_STATUS_ID + "=" + "\"" + status_id + "\"", null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }

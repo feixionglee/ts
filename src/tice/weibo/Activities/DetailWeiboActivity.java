@@ -2,16 +2,21 @@ package tice.weibo.Activities;
 
 import tice.weibo.App;
 import tice.weibo.R;
+import tice.weibo.DB.DBTweetsHelper;
 import tice.weibo.HttpClient.TwitterClient;
 import tice.weibo.List.TweetsListActivity;
+import tice.weibo.Util.TweetsData;
 import tice.weibo.Util.TwitterItem;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,7 +28,8 @@ import android.widget.TextView;
 
 public class DetailWeiboActivity extends TweetsListActivity {
 	private TwitterItem mItem;
-
+	TweetsListActivity mCtx;
+	
 	
 	public class ViewHolder {
 		TextView title;
@@ -48,6 +54,9 @@ public class DetailWeiboActivity extends TweetsListActivity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
+		mCtx = (TweetsListActivity)this;
+		_Handler = mHandler;
+		
 		super.onCreate(savedInstanceState);
 		
 		mItem = getTweet();
@@ -56,9 +65,17 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		setupViews();
 	}
 	
+    private final Handler mHandler = new Handler() {
+        @Override
+         public void handleMessage(final Message msg) {
+        	defaulthandleMessage(msg);
+//        	processMessage(msg);
+        }
+    }; 
+	
 	public static void show(Context context, TwitterItem item) {
 		final Intent intent = new Intent(ACTION);
-        intent.putExtra(EXTRA_ITEM, item);
+        intent.putExtra(EXTRA_ITEM, item.mID);
         context.startActivity(intent);
 	}
 	
@@ -73,11 +90,16 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		
 		holder.icon = (ImageView) findViewById(R.id.tweet_profile_preview);
 		
-       	if(mItem.mPicurl.length() > 0) {
-       		holder.pic = (ImageView) findViewById(R.id.tweet_upload_pic);
-       		Bitmap picture = _App._twitter.LoadPic(_Handler, mItem.mID, mItem.mPicurl);
-       		holder.pic.setImageBitmap(picture);
-       		if (picture != null) holder.pic.setVisibility(View.VISIBLE);
+       	if(mItem.mImage != null) {
+       		holder.icon = (ImageView) findViewById(R.id.tweet_profile_preview);       		
+       		holder.icon.setImageBitmap(mItem.mImage);
+       		holder.icon.setVisibility(View.VISIBLE);
+       	} 
+       	
+		if(mItem.mPic != null) {
+       		holder.pic = (ImageView) findViewById(R.id.tweet_upload_pic2);
+       		holder.pic.setImageBitmap(mItem.mPic);
+       		holder.pic.setVisibility(View.VISIBLE);
        	} 
        	
        	holder.retweeted_text = (TextView) findViewById(R.id.tweet_oriTxt);
@@ -89,12 +111,21 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	_Statuspanel = (LinearLayout)findViewById(R.id.detailStatusLayout);
     	View.inflate(this.getBaseContext(),R.layout.home_statusbar, _Statuspanel);
     	
+    	TextView back = (TextView)findViewById(R.id.tvReturn);
     	TextView retweet = (TextView)findViewById(R.id.tvForward);
     	TextView reply =  (TextView)findViewById(R.id.reply);
     	
     	TextView destory =  (TextView)findViewById(R.id.delete);
     	TextView favorite = (TextView)findViewById(R.id.favorite);
     	TextView directmsg = (TextView)findViewById(R.id.direcrmsg);
+    	
+    	if(back != null){
+    		back.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				finish();	
+    			}
+    		});
+    	}
     	
     	if(reply != null){
 	    	reply.setOnClickListener(new OnClickListener(){
@@ -220,18 +251,63 @@ public class DetailWeiboActivity extends TweetsListActivity {
         final Bundle extras = intent.getExtras();
         
 		TwitterItem item = null;
+		long id ;
         if (extras != null) {
-        	item = extras.getParcelable(EXTRA_ITEM);
+        	id = extras.getLong(EXTRA_ITEM);
+        	item = ReadStatuses((new Long(id)).toString());
         }
 
         return item;
 	}
-	
-	protected void LoadTweetItemsFromDB(){
-		String screenname,title,text,source,replyid,iconuri,picurl,reteeted_screenname,reteeted_text;
-		long time,id;
-		boolean favorited,following;
-		int read;
-	}
+		
+    private TwitterItem ReadStatuses(String id){
+    	
+    	Cursor c = _App._DbHelper.QueryTweet(_App._Username, -1, id);
+    	
+    	if(c != null){
+    		if(c.getCount() != 0){
+    			c.moveToFirst();
+    			
+    			Bundle b = new Bundle();
+    			TweetsData data = new TweetsData();
+    			TwitterItem item = new TwitterItem();
+
+				item.mScreenname = c.getString(DBTweetsHelper.COL_SCREENNAME);
+				item.mTitle = c.getString(DBTweetsHelper.COL_TITLE);
+				item.mText = c.getString(DBTweetsHelper.COL_TEXT);
+				item.mTime = c.getLong(DBTweetsHelper.COL_TIME);
+				item.mID = c.getLong(DBTweetsHelper.COL_ID);
+				item.mSource = c.getString(DBTweetsHelper.COL_SOURCE);
+				item.mReplyID = c.getString(DBTweetsHelper.COL_REPLYID);
+				item.mFavorite = (c.getInt(DBTweetsHelper.COL_FAVORITE) == 1)? true : false;
+				item.mFollowing = (c.getInt(DBTweetsHelper.COL_FOLLOWING) == 1)? true : false;
+				item.mRead = c.getInt(DBTweetsHelper.COL_READ);
+				item.mImageurl = c.getString(DBTweetsHelper.COL_ICONURL);
+				
+				item.mRetweeted_Screenname = c.getString(DBTweetsHelper.COL_RETWEETED_SCREENNAME);
+				item.mRetweeted_Text = c.getString(DBTweetsHelper.COL_RETWEETED_TEXT);
+				
+				if(item.mScreenname.length() != 0 && _App._twitter != null){
+	            	item.mImage = _App._twitter.LoadIcon(_Handler, item.mScreenname, item.mImageurl);
+	           	}
+				if(item.mScreenname.length() != 0 && item.mPicurl.length() != 0 && _App._twitter != null){
+	        		item.mPic = _App._twitter.LoadPic(_Handler, item.mID, item.mPicurl);
+	        	}
+    			
+    			data.items.add(item);
+ 				b.putSerializable(TwitterClient.KEY, data);
+ 				TwitterClient.SendMessage(mHandler, TwitterClient.HTTP_STATUSES_SHOW, b);
+    			
+ 				c.close();
+    			return item;
+    		}
+    		c.close();
+    	}
+    	
+    	return null;
+    	
+//    	if (_App._twitter != null) _App._twitter.Get_statuses_show(mHandler, id);
+    }
+    
 
 }
