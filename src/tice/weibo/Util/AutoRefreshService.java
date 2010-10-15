@@ -139,7 +139,7 @@ public class AutoRefreshService  extends Service {
 
  		if (_DbHelper.FindTweet(_App._Username, -1, item.mID) == true) return;
  		
- 		_twitter.FrechImg(mHandler, item.mImageurl,item.mScreenname);
+ 		_twitter.EnqueueFetchImg(mHandler, item.mImageurl,item.mScreenname);
 
  		switch (type){
  		case TwitterClient.HOME_HOME:

@@ -823,7 +823,7 @@ public class TweetsListActivity extends Activity {
         if(_Previewpanel != null) _Previewpanel.setVisibility(View.GONE);
 
     
-    	Button thread =  (Button)findViewById(R.id.thread);
+//    	Button thread =  (Button)findViewById(R.id.thread);
     	Button Send = (Button)findViewById(R.id.Send);
     	
     	EditText edit = (EditText)findViewById(R.id.EditText);
@@ -839,21 +839,21 @@ public class TweetsListActivity extends Activity {
 
 
 
-    	if(thread != null){
-        	thread.setOnClickListener(new OnClickListener(){
-    			public void onClick(View v) {
-    				TwitterItem item = _Items.Get(_CurrentThread);
-    				if(item != null){
-	    				PanelAnimationOff(false, _Statuspanel);
-	    				PanelAnimationOff(false, _Toolbarpanel);
-	    				String id = String.valueOf(item.mID);
-	    		    	Intent i = new Intent(_Context, StatusesShowActivity.class);
-	    		    	i.putExtra("replyid", id);
-	    		    	startActivityForResult(i,APP_CHAINCLOSE);
-    				}
-    			}
-        	});
-    	}
+//    	if(thread != null){
+//        	thread.setOnClickListener(new OnClickListener(){
+//    			public void onClick(View v) {
+//    				TwitterItem item = _Items.Get(_CurrentThread);
+//    				if(item != null){
+//	    				PanelAnimationOff(false, _Statuspanel);
+//	    				PanelAnimationOff(false, _Toolbarpanel);
+//	    				String id = String.valueOf(item.mID);
+//	    		    	Intent i = new Intent(_Context, StatusesShowActivity.class);
+//	    		    	i.putExtra("replyid", id);
+//	    		    	startActivityForResult(i,APP_CHAINCLOSE);
+//    				}
+//    			}
+//        	});
+//    	}
 
     	if(Send != null){
          	Send.setOnClickListener(new OnClickListener(){
@@ -1674,7 +1674,7 @@ public class TweetsListActivity extends Activity {
      }
 
 	public boolean defaultDecodeJSON(ArrayList<TwitterItem> items, TwitterItem item){
-		if (_App._twitter != null) _App._twitter.FrechImg(_Handler, item.mImageurl,item.mScreenname);
+		if (_App._twitter != null) _App._twitter.EnqueueFetchImg(_Handler, item.mImageurl,item.mScreenname);
  		addThread(items, item);
  		return true;
     }

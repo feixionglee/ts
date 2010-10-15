@@ -5,8 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,9 +45,9 @@ import tice.weibo.HttpClient.TwitterClient.DownloadPool.DownloadPiece;
 import tice.weibo.Util.Base64;
 import tice.weibo.Util.TweetsData;
 import tice.weibo.Util.TweetsDataDecoder;
-import android.app.AlertDialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -468,18 +467,7 @@ public class TwitterClient {
      				setPriority(Thread.NORM_PRIORITY - 1);
 
      				HttpEntity entity = response.getEntity();
-            // InputStream in = entity.getContent();
-            //  BufferedInputStream bin = new BufferedInputStream(in);
-            //  int shit;
-            // System.out.println("=====================");
-            //  while ( ( shit = bin.read() ) != -1 )
-            //  {
-            //
-            //      char c = (char)shit;
-            //
-            //      System.out.print(""+(char)shit); //This prints out content that is unreadable.
-            //                                    //Isn't it supposed to print out html tag?
-            //  }
+
      				TweetsDataDecoder decoder = new TweetsDataDecoder();
 	 				TweetsData value = decoder.Decoder(mFormat, mHandler, mID, entity, _App._RemoveAD);
 	 				if(value.mError == null){
@@ -584,7 +572,6 @@ public class TwitterClient {
 
     	@Override
     	synchronized public void run() {
-
     		while (true){
     			notifyAll();
 	    		while(GetCount() == 0 || GetThreadCount() == MAX_THREAD_COUNT){
@@ -592,12 +579,11 @@ public class TwitterClient {
 						wait();
 					} catch (InterruptedException e) {}
 	    		}
-
 				DownloadPiece p = Pop();
 				if( p.name != "" && p.status_id == 0l ){
-					FrechImg_Impl(p.handler,p.uri,p.name);
+					FetchImgFromWeb(p.handler,p.uri,p.name);
 				}else if(p.name == "" && p.status_id > 0l){
-					FrechImg_Impl(p.handler,p.uri,p.status_id);
+					FetchImgFromWeb(p.handler,p.uri,p.status_id);
 				}
     		}
     	}
@@ -689,8 +675,7 @@ public class TwitterClient {
  	}
 
 
- 	synchronized public void FrechImg(Handler handler,String uri, String name){
-
+ 	synchronized public void EnqueueFetchImg(Handler handler,String uri, String name){
  		if(_App._Displayicon == false) return;
  		if(uri == null || name == null) return;
  		if(uri.length() == 0 || name.length() == 0) return;
@@ -705,15 +690,12 @@ public class TwitterClient {
 				break;
 			}
 		}
-
 		if(bfound == false){
 			_App.mDownloadPool.Push(handler, uri, name);
 	 	}
  	}
 
- 	synchronized public void FrechImg(Handler handler,String uri, Long status_id){
-
-    // if(_App._Displayicon == false) return;
+ 	synchronized public void EnqueueFetchImg(Handler handler,String uri, Long status_id){
  		if(uri == null || status_id == null) return;
  		if(uri.length() == 0 || status_id <= 0) return;
 
@@ -727,14 +709,13 @@ public class TwitterClient {
 				break;
 			}
 		}
-
 		if(bfound == false){
 			_App.mDownloadPool.Push(handler, uri, status_id);
 	 	}
  	}
 
 
- 	public void FrechImg_Impl(Handler handler,String uri, String name){
+ 	public void FetchImgFromWeb(Handler handler,String uri, String name){
  		if (_App._DbHelper == null) return;
  		if(uri == null || name == null) return;
 		Cursor imageCursor = _App._DbHelper.fetchImage(name);
@@ -761,7 +742,7 @@ public class TwitterClient {
 		imageCursor.close();
  	}
 
- 	public void FrechImg_Impl(Handler handler,String uri, Long status_id){
+ 	public void FetchImgFromWeb(Handler handler,String uri, Long status_id){
  		if (_App._DbHelper == null) return;
  		if(uri == null || status_id == null) return;
 		Cursor imageCursor = _App._DbHelper.fetchPics(status_id);
@@ -770,31 +751,12 @@ public class TwitterClient {
 			_App.mDownloadPool.ActiveThread_Push();uri = Uri.encode(uri,":/");
 			HttpGet request = new HttpGet(uri);
 			FetchImage thread = new FetchImage(handler, httpClient, request,HTTP_FETCH_IMAGE, status_id);
-			thread.setPriority(Thread.NORM_PRIORITY - 3);
+			thread.setPriority(Thread.NORM_PRIORITY);
 			thread.start();
 		}
-    // else{
-//			Date now = new Date();
-//			long time = imageCursor.getLong(DBPicsHelper.COL_TIME);
-//			if( now.getTime() - time >= 3 * 24 * 60 * 60 * 1000){
-        // _App.mDownloadPool.ActiveThread_Push();uri = Uri.encode(uri,":/");
-        // HttpGet request = new HttpGet(uri);
-        // FetchImage thread = new FetchImage(handler, httpClient, request,HTTP_FETCH_IMAGE, status_id);
-        // thread.setPriority(Thread.NORM_PRIORITY - 3);
-        // thread.start();
-//			}else{
-//			}
-    // }
-
 		imageCursor.close();
  	}
 
- 	public void FrechImg_Impl2(Handler handler,String uri, String name){
-		HttpGet request = new HttpGet(uri);
-		FetchImage thread = new FetchImage(handler, httpClient, request,HTTP_FETCH_IMAGE, name);
-		thread.setPriority(Thread.MIN_PRIORITY);
-		thread.start();
- 	}
 
  	synchronized public void SaveIcon(String name, byte[] data){
  		if (_App._DbHelper == null) return;
@@ -829,7 +791,7 @@ public class TwitterClient {
         	}
     	}else{
     		if(iconuri != null && iconuri.length() != 0){
-    			FrechImg(handler,iconuri, name);
+    			EnqueueFetchImg(handler,iconuri, name);
     		}
     	}
 
@@ -863,7 +825,7 @@ public class TwitterClient {
         }
     }else{
       if(picurl != null && picurl.length() != 0){
-        FrechImg(handler,picurl, status_id);
+        EnqueueFetchImg(handler,picurl, status_id);
       }
     }
 

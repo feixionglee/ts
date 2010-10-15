@@ -82,7 +82,7 @@ public class StatusesShowActivity extends TweetsListActivity {
  			ReadStatuses(replyid);
  		}
 
- 		if(_App._twitter != null) _App._twitter.FrechImg(mHandler, item.mImageurl,item.mScreenname);
+ 		if(_App._twitter != null) _App._twitter.EnqueueFetchImg(mHandler, item.mImageurl,item.mScreenname);
 
 // 		if(id > _LastID){
 // 			_LastID = id;
