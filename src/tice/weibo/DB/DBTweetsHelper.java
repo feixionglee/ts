@@ -51,6 +51,7 @@ public class DBTweetsHelper extends SQLiteOpenHelper {
     public static final String KEY_ACCOUNT = "account";
     public static final String KEY_RETWEETED_SCREENNAME = "retweeted_screenname";
     public static final String KEY_RETWEETED_TEXT = "retweeted_text";
+    public static final String KEY_PICURI = "picuri";
     
     
     public static final String KEY_USERNAME = "username";
@@ -73,8 +74,7 @@ public class DBTweetsHelper extends SQLiteOpenHelper {
                     "replyid text not null, " +
                     "favorite INTEGER not null, " +
                     "following INTEGER not null, " +
-                    "iconuri text not null," +
-                    
+                    "iconuri text not null," + 
                     "type INTEGER not null," +
                     "read INTEGER not null," +
                     "account text not null," +
@@ -148,10 +148,10 @@ public class DBTweetsHelper extends SQLiteOpenHelper {
         values.put(KEY_TYPE, item.mType);
         values.put(KEY_READ, item.mRead);
         values.put(KEY_ACCOUNT, item.mAccount);
-        
         values.put(KEY_RETWEETED_SCREENNAME, item.mRetweeted_Screenname);
         values.put(KEY_RETWEETED_TEXT, item.mRetweeted_Text);
-      
+        values.put(KEY_PICURI, item.mPicurl);
+        
         return values;
 	}
    

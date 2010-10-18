@@ -96,11 +96,13 @@ public class DetailWeiboActivity extends TweetsListActivity {
        		holder.icon.setVisibility(View.VISIBLE);
        	} 
        	
-		if(mItem.mPic != null) {
-       		holder.pic = (ImageView) findViewById(R.id.tweet_upload_pic2);
+		if(mItem.mPicurl != null) {
+			mItem.mPic = _App._twitter.LoadPic(_Handler, mItem.mID, mItem.mPicurl);	
+       		
+			holder.pic = (ImageView) findViewById(R.id.tweet_upload_pic2);
        		holder.pic.setImageBitmap(mItem.mPic);
        		holder.pic.setVisibility(View.VISIBLE);
-       	} 
+       	}
        	
        	holder.retweeted_text = (TextView) findViewById(R.id.tweet_oriTxt);
        	holder.retweeted_text.setText(mItem.mRetweeted_Text);
