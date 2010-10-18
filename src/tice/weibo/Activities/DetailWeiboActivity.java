@@ -1,5 +1,7 @@
 package tice.weibo.Activities;
 
+import java.util.Date;
+
 import tice.weibo.App;
 import tice.weibo.R;
 import tice.weibo.DB.DBTweetsHelper;
@@ -35,7 +37,9 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		TextView title;
 		TextView text;
 		TextView retweeted_text;
-		TextView timesource;
+		TextView time;
+		TextView source;
+//		TextView timesource;
 		ImageView icon;
 		//IconImageView icon_right;
 		LinearLayout itemline;
@@ -87,6 +91,15 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		holder.text = (TextView) findViewById(R.id.tweet_message);
 		holder.text.setText(mItem.mText);
 		holder.text.setVisibility(View.VISIBLE);
+		
+		holder.time = (TextView) findViewById(R.id.tweet_updated);
+		holder.time.setText(new Date(mItem.mTime).toLocaleString());
+		holder.time.setVisibility(View.VISIBLE);
+		
+		holder.source = (TextView) findViewById(R.id.tweet_via);
+		holder.source.setText(mItem.mSource);
+		holder.source.setVisibility(View.VISIBLE);
+		
 		
 		holder.icon = (ImageView) findViewById(R.id.tweet_profile_preview);
 		
