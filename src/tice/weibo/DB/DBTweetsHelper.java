@@ -28,6 +28,7 @@ public class DBTweetsHelper extends SQLiteOpenHelper {
 	
 	final public static int COL_RETWEETED_SCREENNAME = 14;
 	final public static int COL_RETWEETED_TEXT = 15;
+	final public static int COL_PICURL = 16;
 
 	final public static int COL_USERNAME = 1;
 	final public static int COL_PASSWORD = 2;
@@ -73,11 +74,13 @@ public class DBTweetsHelper extends SQLiteOpenHelper {
                     "favorite INTEGER not null, " +
                     "following INTEGER not null, " +
                     "iconuri text not null," +
+                    
                     "type INTEGER not null," +
                     "read INTEGER not null," +
                     "account text not null," +
                     "retweeted_screenname text not null," +
-                    "retweeted_text text not null)";
+                    "retweeted_text text not null," +
+                    "picuri text not null)";
 
     private static final String ACCOUNTS_DATABASE_CREATE =
         "create table Accounts" + " (_id integer primary key autoincrement, " +

@@ -803,8 +803,6 @@ public class TwitterClient {
   public Bitmap LoadPic(Handler handler, Long status_id, String picurl){
     Bitmap icon = null;
     byte[] imagedata = null;
-    System.out.println("status_id:::::::::::"+status_id);
-    System.out.println("picurl:::::::::::"+picurl);
 
     if(_App._DbHelper == null) return null;
     if(status_id == null || status_id <= 0) return icon;
@@ -824,9 +822,7 @@ public class TwitterClient {
           }
         }
     }else{
-      if(picurl != null && picurl.length() != 0){
         EnqueueFetchImg(handler,picurl, status_id);
-      }
     }
 
     imageCursor.close();
