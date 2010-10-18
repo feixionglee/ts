@@ -1,5 +1,6 @@
 package tice.weibo.Activities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import tice.weibo.App;
@@ -93,7 +94,8 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		holder.text.setVisibility(View.VISIBLE);
 		
 		holder.time = (TextView) findViewById(R.id.tweet_updated);
-		holder.time.setText(new Date(mItem.mTime).toLocaleString());
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd h:mm a");
+		holder.time.setText( df.format(new Date(mItem.mTime)));
 		holder.time.setVisibility(View.VISIBLE);
 		
 		holder.source = (TextView) findViewById(R.id.tweet_via);
