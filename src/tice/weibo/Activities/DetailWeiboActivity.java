@@ -99,7 +99,11 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		if(mItem.mPicurl != null) {
 			mItem.mPic = _App._twitter.LoadPic(_Handler, mItem.mID, mItem.mPicurl);	
        		
-			holder.pic = (ImageView) findViewById(R.id.tweet_upload_pic2);
+			if(mItem.mRetweeted_Text.length() > 0){
+				holder.pic = (ImageView) findViewById(R.id.tweet_upload_pic2);
+			}else{
+				holder.pic = (ImageView) findViewById(R.id.tweet_upload_pic);
+			}
        		holder.pic.setImageBitmap(mItem.mPic);
        		holder.pic.setVisibility(View.VISIBLE);
        	}

@@ -12,6 +12,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,12 +128,11 @@ public class ItemAdapter extends BaseAdapter {
     }
 
     synchronized public View getView(int position, View convertView, ViewGroup parent) {
-
     	if(position >= mItem.size()) return convertView;
 
         ViewHolder holder;
         TwitterItem item = mItem.get(position);
-
+                
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.list_item, null);
 
@@ -153,7 +153,7 @@ public class ItemAdapter extends BaseAdapter {
 
            	holder.imagelayout = (LinearLayout) convertView.findViewById(R.id.image_left);
            	holder.icon = (ImageView) convertView.findViewById(R.id.icon_left);
-           	holder.pic = (ImageView) convertView.findViewById(R.id.status_pic);
+           	
            	//holder.icon = (ImageView) new IconImageView(mCtx);
            	//holder.imagelayout.addView(holder.icon, 50, 50);
 
@@ -172,23 +172,36 @@ public class ItemAdapter extends BaseAdapter {
         	holder.conversation = (ImageView) convertView.findViewById(R.id.conversation);
         	holder.conversation.setImageBitmap(mConversation);
 
-        	if(item.mScreenname.length() != 0 && _App._twitter != null){
-            	item.mImage = _App._twitter.LoadIcon(mCtx._Handler, item.mScreenname, item.mImageurl);
-            	
-           	}
-        	if(item.mScreenname.length() != 0 && item.mPicurl.length() != 0 && _App._twitter != null){
-        		item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
-        	}
-        	
         	//holder.text.setLinksClickable(false);
         	//holder.text.setLinkTextColor(0xaa0000ff);
 
         	convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        
+        if(item.mScreenname.length() != 0 && _App._twitter != null){
+        	item.mImage = _App._twitter.LoadIcon(mCtx._Handler, item.mScreenname, item.mImageurl);
+        }
+    	if (item.mPicurl.length() > 0){
+    		item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
+          	
+    		if(item.mRetweeted_Text.length() <= 0){              	
+    			convertView.findViewById(R.id.retweeted_status_pic).setVisibility(View.GONE);
+       			holder.pic = (ImageView) convertView.findViewById(R.id.status_pic);
+       		}else{
+       			convertView.findViewById(R.id.status_pic).setVisibility(View.GONE);
+       			holder.pic = (ImageView) convertView.findViewById(R.id.retweeted_status_pic);
+       		}
+       		
+       		holder.pic.setImageBitmap(item.mPic);
+       		holder.pic.setVisibility(View.VISIBLE);
+    	}else{
+    		convertView.findViewById(R.id.status_pic).setVisibility(View.GONE);
+    		convertView.findViewById(R.id.retweeted_status_pic).setVisibility(View.GONE);
+    	}	
 
+    	
 /*
         LinearLayout imagelayout = holder.imagelayout_left;
         ImageView icon = holder.icon_left;
@@ -210,10 +223,15 @@ public class ItemAdapter extends BaseAdapter {
 	    		if(temp.mImage != null){
 	    			temp.mImage.recycle();
 	    			temp.mImage = null;
-//	    			holder.icon.setImageBitmap(null);
+	    			holder.icon.setImageBitmap(null);
 //	    			holder.unread.setImageBitmap(null);
 //	    			holder.favorite.setImageBitmap(null);
 //	    			holder.conversation.setImageBitmap(null);
+	    		}
+	    		if(temp.mPic != null){
+	    			temp.mPic.recycle();
+	    			temp.mPic = null;
+	    			holder.pic.setImageBitmap(null);
 	    		}
 	    	}
 	    }else{
@@ -223,10 +241,15 @@ public class ItemAdapter extends BaseAdapter {
 	    		if(temp.mImage != null){
 	    			temp.mImage.recycle();
 	    			temp.mImage = null;
-//	    			holder.icon.setImageBitmap(null);
+	    			holder.icon.setImageBitmap(null);
 //	    			holder.unread.setImageBitmap(null);
 //	    			holder.favorite.setImageBitmap(null);
 //	    			holder.conversation.setImageBitmap(null);
+	    		}
+	    		if(temp.mPic != null){
+	    			temp.mPic.recycle();
+	    			temp.mPic = null;
+	    			holder.pic.setImageBitmap(null);
 	    		}
 	    	}
 	    }
@@ -309,7 +332,6 @@ public class ItemAdapter extends BaseAdapter {
       	holder.timesource.setText(item.mTimeSource);
        	holder.text.setText(item.mText);
        	
-       	holder.retweeted_text.setVisibility(View.VISIBLE);
        	LinearLayout shit = (LinearLayout) convertView.findViewById(R.id.retweeted_text_wrap);
        	
        	if (item.mRetweeted_Text.length() > 0){
@@ -320,27 +342,6 @@ public class ItemAdapter extends BaseAdapter {
        		shit.setVisibility(View.GONE);
        	}
 
-       	
-//       	holder.pic.setImageBitmap(mBlank);
-
-//       	switch (mScrollState) {
-//        case OnScrollListener.SCROLL_STATE_IDLE:
-//        case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-//        	if(item.mPic == null && item.mID >= 0 && item.mPicurl.length() > 0 && _App._twitter != null){
-//            	item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
-//           	}
-//        }
-       	
-    	if(item.mPic == null && item.mPicurl.length() > 0 && _App._twitter != null){
-        	item.mPic = _App._twitter.LoadPic(mCtx._Handler, item.mID, item.mPicurl);
-       	}
-
-       	if(item.mPic != null ){
-       		holder.pic.setVisibility(View.VISIBLE);
-        	holder.pic.setImageBitmap(item.mPic);
-        }else{
-        	holder.pic.setVisibility(View.GONE);
-        }
 
        	if (item.mScreenname.length() == 0){
         	holder.title.setText("");
@@ -350,9 +351,9 @@ public class ItemAdapter extends BaseAdapter {
         	holder.icon.setVisibility(View.INVISIBLE);
         }
 
- 		//Linkify.addLinks(holder.text, p1, "");
- 		//Linkify.addLinks(holder.text, p2, "");
- 		//Linkify.addLinks(holder.text, p3, "");
+// 		Linkify.addLinks(holder.text, p1, "");
+// 		Linkify.addLinks(holder.text, p2, "");
+// 		Linkify.addLinks(holder.text, p3, "");
 
         return convertView;
     }

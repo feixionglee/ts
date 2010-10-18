@@ -65,10 +65,15 @@
 				android:paddingRight="3px" android:textSize="16px"
 				android:layout_height="wrap_content" android:layout_gravity="center_vertical"
 				android:paddingLeft="2px" />
+			
+			<ImageView android:id="@+id/retweeted_status_pic" android:visibility="gone"
+				android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="centerInside"
+				android:gravity="left|center" android:layout_gravity="center_vertical"
+				android:paddingTop="3px" android:paddingLeft="2px" />
 
 		</LinearLayout>
 
-		<ImageView android:id="@+id/status_pic"
+		<ImageView android:id="@+id/status_pic"  android:visibility="gone"
 			android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="centerInside"
 			android:gravity="left|center" android:layout_gravity="center_vertical"
 			android:paddingTop="3px" android:paddingLeft="2px" />
