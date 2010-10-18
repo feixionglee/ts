@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DetailWeiboActivity extends TweetsListActivity {
@@ -89,6 +90,10 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		
 		InitButtons();
 		
+		holder.title = (TextView) findViewById(R.id.tweet_profile_name);
+		holder.title.setText(mItem.mScreenname);
+		holder.title.setVisibility(View.VISIBLE);
+		
 		holder.text = (TextView) findViewById(R.id.tweet_message);
 		holder.text.setText(mItem.mText);
 		holder.text.setVisibility(View.VISIBLE);
@@ -139,6 +144,17 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	TextView destory =  (TextView)findViewById(R.id.delete);
     	TextView favorite = (TextView)findViewById(R.id.favorite);
     	TextView directmsg = (TextView)findViewById(R.id.direcrmsg);
+    	View profile = (RelativeLayout)findViewById(R.id.tweet_profile);
+    	
+    	if (profile != null){
+    		profile.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				Intent i = new Intent(mCtx, UserInfoActivity.class);
+        			i.putExtra("user", mItem.mScreenname);
+                    startActivityForResult(i,APP_CHAINCLOSE);	
+    			}
+    		});
+    	}
     	
     	if(back != null){
     		back.setOnClickListener(new OnClickListener(){
