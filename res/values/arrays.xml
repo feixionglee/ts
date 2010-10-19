@@ -121,6 +121,10 @@
 		<item>2131165185</item>
 		<item>2131165186</item>
 	</string-array>
-
+	
+    <string-array name="share_dialog_list">
+        <item>@string/short_message</item>
+        <item>@string/email</item>
+    </string-array>
 	
 </resources>

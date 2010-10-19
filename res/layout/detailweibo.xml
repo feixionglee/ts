@@ -7,7 +7,7 @@
 	        <TextView android:id="@+id/tvComment" android:text="@string/comment" android:drawableTop="@drawable/detail_comment_icon" style="@style/detail_btn" />
 	        <TextView android:id="@+id/tvForward" android:text="@string/forward" android:drawableTop="@drawable/detail_forward_icon" style="@style/detail_btn" />
 	        <TextView android:id="@+id/tvFav" android:text="@string/itemmenu_bookmark" android:drawableTop="@drawable/detail_fav_icon" style="@style/detail_btn" />
-	        <TextView android:id="@+id/tvMore" android:text="share" android:drawableTop="@drawable/ic_menu_share1" style="@style/detail_btn" />
+	        <TextView android:id="@+id/tvShare" android:text="share" android:drawableTop="@drawable/ic_menu_share1" style="@style/detail_btn" />
 	    </LinearLayout>
 	    <ScrollView android:id="@+id/tweet_main_view" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/tweet_bottom_bar">
 	        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">

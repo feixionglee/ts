@@ -144,6 +144,7 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	TextView destory =  (TextView)findViewById(R.id.delete);
     	TextView favorite = (TextView)findViewById(R.id.favorite);
     	TextView directmsg = (TextView)findViewById(R.id.direcrmsg);
+    	TextView share = (TextView)findViewById(R.id.tvShare);
     	View profile = (RelativeLayout)findViewById(R.id.tweet_profile);
     	
     	ImageView imageview = mItem.mRetweeted_Text.length() >0 ? (ImageView) findViewById(R.id.tweet_upload_pic2) : (ImageView) findViewById(R.id.tweet_upload_pic);
@@ -166,13 +167,17 @@ public class DetailWeiboActivity extends TweetsListActivity {
     		});
     	}
     	
-//    	if(imageview2 != null){
-//    		imageview2.setOnClickListener(new OnClickListener(){
-//    			public void onClick(View v){
-//    				ImageViewerActivity.show(mCtx, mItem.mID);
-//    			}
-//    		});
-//    	}
+    	if(share != null){
+    		share.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				Intent intent = new Intent();
+    				intent.setAction(Intent.ACTION_SEND);
+    				intent.setType("text/plain");
+    				intent.putExtra(Intent.EXTRA_TEXT, mItem.mText);
+    				startActivity(Intent.createChooser(intent, "Share Content"));
+    			}
+    		});
+    	}
     	
     	if(back != null){
     		back.setOnClickListener(new OnClickListener(){

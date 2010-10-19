@@ -79,4 +79,7 @@
     <string name="itemmenu_bookmark">favorite</string>
     <string name="more">more</string>
     <string name="save">save</string>
+    
+    <string name="short_message">short_message</string>
+    <string name="email">email</string>
 </resources>
