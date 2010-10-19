@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailWeiboActivity extends TweetsListActivity {
 	private TwitterItem mItem;
@@ -129,7 +130,7 @@ public class DetailWeiboActivity extends TweetsListActivity {
        	}
        	
        	holder.retweeted_text = (TextView) findViewById(R.id.tweet_oriTxt);
-       	holder.retweeted_text.setText(mItem.mRetweeted_Text);
+       	holder.retweeted_text.setText("@"+mItem.mRetweeted_Screenname+": "+mItem.mRetweeted_Text);
        	if (mItem.mRetweeted_Text.length() > 0) findViewById(R.id.src_text_block).setVisibility(View.VISIBLE);
 	}
 	
@@ -170,11 +171,15 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	if(share != null){
     		share.setOnClickListener(new OnClickListener(){
     			public void onClick(View v){
-    				Intent intent = new Intent();
-    				intent.setAction(Intent.ACTION_SEND);
-    				intent.setType("text/plain");
-    				intent.putExtra(Intent.EXTRA_TEXT, mItem.mText);
-    				startActivity(Intent.createChooser(intent, "Share Content"));
+    				try {
+    					Intent intent = new Intent();
+	    				intent.setAction(Intent.ACTION_SEND);
+	    				intent.setType("text/plain");
+	    				intent.putExtra(Intent.EXTRA_TEXT, mItem.mText);
+	    				startActivity(Intent.createChooser(intent, "Share Content"));
+    				}catch (Exception ex) {
+        				Toast.makeText(_Context, "Can't launch application" ,Toast.LENGTH_SHORT).show();
+        			}
     			}
     		});
     	}
