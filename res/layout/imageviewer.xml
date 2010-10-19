@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:layout_gravity="top" android:orientation="horizontal" android:id="@+id/lyIvTitle" android:background="@drawable/toolbar_bg" android:layout_width="fill_parent" android:layout_height="50.0sp" android:divider="@android:drawable/divider_horizontal_bright">
+        <Button android:id="@+id/btIvBack" android:background="@drawable/image_viewer_bg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="2.0dip" android:text="@string/imageviewer_back" android:layout_weight="1.0" />
+        <TextView android:textSize="21.0dip" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/tvIvText" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="" android:singleLine="true" android:layout_weight="4.0" />
+        <Button android:id="@+id/btIvSave" android:background="@drawable/image_viewer_bg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="2.0dip" android:text="@string/save" android:layout_weight="1.0" />
+    </LinearLayout>
+    <ScrollView android:id="@+id/imageContainer" android:scrollbars="none" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/lyIvTitle">
+        <HorizontalScrollView android:scrollbars="none" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ImageView android:id="@+id/ivImage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="fitXY" />
+        </HorizontalScrollView>
+    </ScrollView>
+    <ZoomControls android:orientation="horizontal" android:id="@+id/zcZooms" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+    <LinearLayout android:orientation="horizontal" android:id="@+id/ibTurnButtons" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <ImageButton android:id="@+id/ibTurnLeft" android:background="@drawable/turn_btn_bg" android:layout_width="80.0dip" android:layout_height="48.0dip" android:layout_marginRight="20.0dip" android:src="@drawable/turn_left" />
+        <ImageButton android:id="@+id/ibTurnRight" android:background="@drawable/turn_btn_bg" android:layout_width="80.0dip" android:layout_height="48.0dip" android:src="@drawable/turn_right" />
+    </LinearLayout>
+</RelativeLayout>

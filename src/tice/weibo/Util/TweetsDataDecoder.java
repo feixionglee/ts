@@ -124,7 +124,7 @@ public class TweetsDataDecoder{
 		 				item.mID = aline.getLong("id");
 		 				item.mImageurl = aline.getString("profile_image_url");
 		 				try{
-		 					item.mPicurl = aline.getString("thumbnail_pic");
+		 					item.mPicurl = aline.getString("bmiddle_pic");
 		 				}catch(Exception e) {}
 		 				item.mReplyID = "null";
 		 				source = aline.getString("source");

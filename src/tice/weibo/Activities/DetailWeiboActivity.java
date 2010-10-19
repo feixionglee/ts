@@ -146,6 +146,8 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	TextView directmsg = (TextView)findViewById(R.id.direcrmsg);
     	View profile = (RelativeLayout)findViewById(R.id.tweet_profile);
     	
+    	ImageView imageview = mItem.mRetweeted_Text.length() >0 ? (ImageView) findViewById(R.id.tweet_upload_pic2) : (ImageView) findViewById(R.id.tweet_upload_pic);
+    	    	   	
     	if (profile != null){
     		profile.setOnClickListener(new OnClickListener(){
     			public void onClick(View v){
@@ -155,6 +157,22 @@ public class DetailWeiboActivity extends TweetsListActivity {
     			}
     		});
     	}
+    	
+    	if(imageview != null){
+    		imageview.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				ImageViewerActivity.show(mCtx, mItem.mID);
+    			}
+    		});
+    	}
+    	
+//    	if(imageview2 != null){
+//    		imageview2.setOnClickListener(new OnClickListener(){
+//    			public void onClick(View v){
+//    				ImageViewerActivity.show(mCtx, mItem.mID);
+//    			}
+//    		});
+//    	}
     	
     	if(back != null){
     		back.setOnClickListener(new OnClickListener(){

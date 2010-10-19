@@ -521,7 +521,8 @@ public class TwitterClient {
     			if (status != HttpStatus.SC_OK) {
     			} else {
     				try{
-	    				byte[] buffer = RoundImage(EntityUtils.toByteArray(response.getEntity()));
+//	    				byte[] buffer = RoundImage(EntityUtils.toByteArray(response.getEntity()));
+	    				byte[] buffer = EntityUtils.toByteArray(response.getEntity());
 	    				//SaveIcon(mName, EntityUtils.toByteArray(response.getEntity()));
 	    				if (mName != "" && mStatus_id == 0l){
 	    					SaveIcon(mName, buffer);
