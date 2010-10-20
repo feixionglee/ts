@@ -212,7 +212,6 @@ public class DetailWeiboActivity extends TweetsListActivity {
 				public void onClick(View v) {
 					String retweet="";
 					EditText edit = (EditText)findViewById(R.id.EditText);
-					TwitterItem item = _Items.Get(_CurrentThread);
 					_InputType = INPUT_RETWEET;
 					if (mItem != null) retweet = String.format("RT @%s: %s ", mItem.mScreenname, mItem.mText);
 	 				edit.setText(retweet);
@@ -255,7 +254,6 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	if(favorite != null){
     		favorite.setOnClickListener(new OnClickListener(){
     			public void onClick(View v) {
-    				TwitterItem item = _Items.Get(_CurrentThread);
     				setMyProgressBarVisibility(true);
     	    		PanelAnimationOff(false, _Statuspanel);
 //    	    		PanelAnimationOff(false, _Toolbarpanel);
@@ -274,7 +272,6 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		        	            })
 		        	            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		        	                public void onClick(DialogInterface dialog, int whichButton) {
-		        	                	TwitterItem item = _Items.Get(_CurrentThread);
 		        	                	if(mItem != null){
 			        	                	long id = mItem.mID;
 			        	                	if (_App._twitter != null) _App._twitter.Post_destory(_Handler, TwitterClient.HOME_FAVORITES, id);
