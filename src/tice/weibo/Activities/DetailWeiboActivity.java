@@ -138,7 +138,7 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	TextView reply =  (TextView)findViewById(R.id.reply);
     	
     	TextView destory =  (TextView)findViewById(R.id.delete);
-    	TextView favorite = (TextView)findViewById(R.id.favorite);
+    	TextView favorite = (TextView)findViewById(R.id.tvFav);
     	TextView directmsg = (TextView)findViewById(R.id.direcrmsg);
     	TextView share = (TextView)findViewById(R.id.tvShare);
     	View profile = (RelativeLayout)findViewById(R.id.tweet_profile);
@@ -259,9 +259,9 @@ public class DetailWeiboActivity extends TweetsListActivity {
     				setMyProgressBarVisibility(true);
     	    		PanelAnimationOff(false, _Statuspanel);
 //    	    		PanelAnimationOff(false, _Toolbarpanel);
-    				if(item != null){
-    					long id = item.mID;
-	    	            if(item.mFavorite == false){
+    				if(mItem != null){
+    					long id = mItem.mID;
+	    	            if(mItem.mFavorite == false){
 	    	            	if (_App._twitter != null) _App._twitter.Post_favorites_create(_Handler, id);
 	    	            }else{
 	    	            	try{
@@ -275,8 +275,8 @@ public class DetailWeiboActivity extends TweetsListActivity {
 		        	            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		        	                public void onClick(DialogInterface dialog, int whichButton) {
 		        	                	TwitterItem item = _Items.Get(_CurrentThread);
-		        	                	if(item != null){
-			        	                	long id = item.mID;
+		        	                	if(mItem != null){
+			        	                	long id = mItem.mID;
 			        	                	if (_App._twitter != null) _App._twitter.Post_destory(_Handler, TwitterClient.HOME_FAVORITES, id);
 		        	                	}
 		        	                }

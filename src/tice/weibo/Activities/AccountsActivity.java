@@ -19,11 +19,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class AccountsActivity extends Activity {
@@ -58,6 +60,74 @@ public class AccountsActivity extends Activity {
         		}
 			}
         });
+        
+        TextView add = (TextView)findViewById(R.id.aaddaccount);
+        TextView del = (TextView)findViewById(R.id.adelaccount);
+        
+
+        
+        
+        final LayoutInflater factory = LayoutInflater.from(this);
+        add.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v){
+                final View textEntryView = factory.inflate(R.layout.userpass, null);
+	            new AlertDialog.Builder(AccountsActivity.this)
+                .setTitle("Add account")
+                .setView(textEntryView)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        EditText user = (EditText) textEntryView.findViewById(R.id.username_edit);
+                        EditText pass = (EditText) textEntryView.findViewById(R.id.password_edit);
+                    	String username = user.getText().toString();
+                    	String password = pass.getText().toString();
+                    	if(TextUtils.isEmpty(username) == false && TextUtils.isEmpty(password) == false){
+                	    	ContentValues initialValues = new ContentValues();    	
+                	    	initialValues.put(DBTweetsHelper.KEY_USERNAME, username);
+                	    	initialValues.put(DBTweetsHelper.KEY_PASSWORD, password);
+                    		_App._DbHelper.updateAccounts(username, initialValues);
+                    		SaveUsernameAndPassword(username, password);
+                    		LoadAccountsFromDB();
+                    	}
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                }).show();
+        	}
+        });
+        
+        del.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v){
+        		if(GetCkeckItem() == -1) return;
+	            new AlertDialog.Builder(AccountsActivity.this)
+                .setTitle("Delete account")
+                .setMessage("Are you sure want to delete it?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                	int position = GetCkeckItem();
+                	public void onClick(DialogInterface dialog, int whichButton) {
+                		String password;
+                		String username = (String)listadapter.getItem(position);
+                    	_App._DbHelper.deleteAccount(username);
+                    	LoadAccountsFromDB();
+                    	username = ""; password="";
+                    	int count = listadapter.getCount() - 1;
+                    	if(count >=0 ){
+                    		username = (String)listadapter.getItem(0);
+                    		password = GetPasswordFromUsername(username);
+                    	}
+                    	SaveUsernameAndPassword(username,password);
+                    	LoadAccountsFromDB();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                }).show();	
+        	}
+        });
 
     }
 	
@@ -67,15 +137,15 @@ public class AccountsActivity extends Activity {
         LoadAccountsFromDB();
 	}
 
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.accounts,menu);
-
-        return true;
-    }
+//	@Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        super.onCreateOptionsMenu(menu);
+//
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.accounts,menu);
+//
+//        return true;
+//    }
  	
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
@@ -107,7 +177,7 @@ public class AccountsActivity extends Activity {
 	                })
 	                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 	                    public void onClick(DialogInterface dialog, int whichButton) {
-
+	                    	
 	                    }
 	                }).show();
 	            break;

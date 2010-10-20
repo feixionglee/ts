@@ -27,9 +27,9 @@
     <string name="refreonlaunch">启动时刷新</string>
     <string name="fontsize">字体大小</string>
     <string name="trends">趋势</string>
-    <string name="trends_current">Current</string>
-    <string name="trends_daily">Daily</string>
-    <string name="trends_weekly">Weekly</string>
+    <string name="trends_current">当前</string>
+    <string name="trends_daily">每天</string>
+    <string name="trends_weekly">每周</string>
     <string name="clearcache">清除图片缓存</string>
     <string name="notification">通知</string>
     <string name="notification_setting">通知设置</string>
@@ -48,8 +48,8 @@
     <string name="notification_led">LED</string>
     <string name="exit">退出</string>
     <string name="friendsfollowers">朋友</string>
-    <string name="following">Following</string>
-    <string name="followers">Followers</string>
+    <string name="following">你跟随的</string>
+    <string name="followers">跟随你的</string>
     <string name="longclick">长按打开菜单</string>
     <string name="autohidetoolbar">自动隐藏工具栏</string>
     <string name="about">关于</string>
