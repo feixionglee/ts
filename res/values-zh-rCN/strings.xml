@@ -77,4 +77,7 @@
     <string name="itemmenu_bookmark">收藏</string>
     <string name="more">更多</string>
     
+    <string name="comment_add_forward">同时发一条微博</string>
+    <string name="new_label">可输入字数：</string>
+    
 </resources>

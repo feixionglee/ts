@@ -158,7 +158,9 @@ public class TwitterClient {
 	public final static int HTTP_CHECK_VERSION = 48;
 
 	public final static int HTTP_RATE_LIMIT = 49;
-
+	
+	public final static int HTTP_COMMENTS_TIMELINE = 50;
+	
 	public final static int UI_REFRESHVIEWS = 100;
 	public final static int UI_REFRESHVIEWS_PRE = 101;
 
@@ -984,6 +986,17 @@ public class TwitterClient {
 			Bundle err = new Bundle();
 			err.putString(KEY, e.getLocalizedMessage());
 			SendMessage(handler, HTTP_ERROR, err);
+		}
+	}
+	
+	public void Get_comments_timeline(Handler handler, long id){
+		try{
+			String url = String.format("%s/statuses/comments.xml?/%d",mBaseURI,id);
+			HttpGet request = new HttpGet(url);
+		 	GetThread thread = new GetThread(REQUEST_TYPE_XML, handler, httpClient, request, HTTP_COMMENTS_TIMELINE);
+		 	thread.start();
+		} catch (Exception e){
+			
 		}
 	}
 

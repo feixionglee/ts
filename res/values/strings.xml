@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ajjzz</string>
+    <string name="app_name">Jjzz</string>
     <string name="author">Tice, Jason</string>
     <string name="thanks">ch.linghu</string>
     <string name="refresh">Refresh</string>
@@ -82,4 +82,7 @@
     
     <string name="short_message">short_message</string>
     <string name="email">email</string>
+    
+    <string name="comment_add_forward">send as a weibo</string>
+    <string name="new_label">you can input：</string>
 </resources>

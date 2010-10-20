@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText android:gravity="top" android:id="@+id/etCmtReason" android:layout_width="fill_parent" android:layout_height="80.0dip" android:text="" android:singleLine="false" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="#ff000000" android:id="@+id/tvCmtLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:layout_marginBottom="3.0dip" android:text="@string/new_label" android:layout_weight="1.0" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+        <RadioButton android:textColor="#ff000000" android:id="@+id/rb_forward" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/comment_add_forward" android:layout_below="@+id/tvCmtLabel" android:layout_alignParentLeft="true" />
+        <Button android:id="@+id/btCmtSend" android:layout_width="85.0dip" android:layout_height="@dimen/button_height" android:layout_margin="5.0dip" android:layout_marginBottom="3.0dip" android:text="@string/comment" android:layout_alignBottom="@+id/rb_forward" android:layout_alignParentRight="true" />
+    </RelativeLayout>
+    <TextView android:textColor="#ffffffff" android:gravity="center_vertical" android:id="@+id/tvCmtTitle" android:background="#ffcccccc" android:layout_width="fill_parent" android:layout_height="20.0dip" android:text="" />
+    <ListView android:id="@+id/lvCmt" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content" android:cacheColorHint="#ffffffff" android:divider="@android:drawable/divider_horizontal_bright" android:dividerHeight="2.0dip" android:layout_weight="1.0" />
+</LinearLayout>
