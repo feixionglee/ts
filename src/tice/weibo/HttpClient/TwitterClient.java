@@ -521,8 +521,8 @@ public class TwitterClient {
     			if (status != HttpStatus.SC_OK) {
     			} else {
     				try{
-//	    				byte[] buffer = RoundImage(EntityUtils.toByteArray(response.getEntity()));
-	    				byte[] buffer = EntityUtils.toByteArray(response.getEntity());
+	    				byte[] buffer = RoundImage(EntityUtils.toByteArray(response.getEntity()));
+//	    				byte[] buffer = EntityUtils.toByteArray(response.getEntity());
 	    				//SaveIcon(mName, EntityUtils.toByteArray(response.getEntity()));
 	    				if (mName != "" && mStatus_id == 0l){
 	    					SaveIcon(mName, buffer);
@@ -635,20 +635,20 @@ public class TwitterClient {
 
  		try{
 	 		Bitmap bitmap;
-	 		int samplesize = 12;
+	 		int samplesize = 2;
 	 		BitmapFactory.Options options;
 	 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 
 	    	options = new BitmapFactory.Options();
 	    	options.inJustDecodeBounds = true;
 	    	BitmapFactory.decodeByteArray(data, 0, data.length, options);
-
-	    	if(options.outHeight >= options.outHeight){
-	    		samplesize = options.outHeight / 48;
-	    	}else{
-	    		samplesize = options.outWidth / 48;
-	    	}
-
+//
+//	    	if(options.outHeight <= options.outWidth){
+//	    		samplesize = options.outHeight / 96;
+//	    	}else{
+//	    		samplesize = options.outWidth / 96;
+//	    	}
+//	    	System.out.println(samplesize);
 	    	options.inDither = true;
 	    	options.inSampleSize = samplesize;
 	    	options.inJustDecodeBounds = false;

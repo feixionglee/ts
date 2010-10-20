@@ -2,27 +2,22 @@ package tice.weibo.Activities;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import tice.weibo.App;
 import tice.weibo.R;
 import tice.weibo.DB.DBTweetsHelper;
 import tice.weibo.HttpClient.TwitterClient;
 import tice.weibo.List.TweetsListActivity;
 import tice.weibo.Util.TweetsData;
 import tice.weibo.Util.TwitterItem;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
