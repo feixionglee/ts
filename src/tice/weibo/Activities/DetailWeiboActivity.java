@@ -136,6 +136,7 @@ public class DetailWeiboActivity extends TweetsListActivity {
     	TextView back = (TextView)findViewById(R.id.tvReturn);
     	TextView retweet = (TextView)findViewById(R.id.tvForward);
     	TextView reply =  (TextView)findViewById(R.id.reply);
+    	TextView comment =  (TextView)findViewById(R.id.tvComment);
     	
     	TextView destory =  (TextView)findViewById(R.id.delete);
     	TextView favorite = (TextView)findViewById(R.id.tvFav);
@@ -217,6 +218,14 @@ public class DetailWeiboActivity extends TweetsListActivity {
 	 				edit.setText(retweet);
 					PanelAnimationOn(false, _Statuspanel);
 //					PanelAnimationOff(false, _Toolbarpanel);
+				}
+	    	});
+    	}
+    	
+    	if(comment != null){
+    		comment.setOnClickListener(new OnClickListener(){
+				public void onClick(View v) {
+					CommentActivity.show(mCtx, mItem);
 				}
 	    	});
     	}

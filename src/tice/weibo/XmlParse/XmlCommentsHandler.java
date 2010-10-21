@@ -6,8 +6,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import tice.weibo.Util.TweetsData;
-import tice.weibo.Util.TwitterItem;
+import tice.weibo.Util.CommentItem;
+import tice.weibo.Util.CommentsData;
 import android.text.Html;
 
 public class XmlCommentsHandler extends DefaultHandler {
@@ -20,11 +20,11 @@ public class XmlCommentsHandler extends DefaultHandler {
     private boolean in_error = false;
     
     private StringBuilder builder;
-    private TwitterItem mItem = null;
-	private TweetsData mTweetsData = null;
+    private CommentItem mItem = null;
+	private CommentsData mCommentsData = null;
     
-	public TweetsData GetParsedData() { 
-		return mTweetsData; 
+	public CommentsData GetParsedData() { 
+		return mCommentsData; 
 	} 
     
 	public XmlCommentsHandler(int type){
@@ -33,7 +33,7 @@ public class XmlCommentsHandler extends DefaultHandler {
 	
     @Override 
     public void startDocument() throws SAXException { 
-         mTweetsData = new TweetsData(); 
+         mCommentsData = new CommentsData(); 
     } 
 
     @Override 
@@ -45,8 +45,8 @@ public class XmlCommentsHandler extends DefaultHandler {
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException { 
     	if (localName.equals("status")){
         	in_status = true;
-        	mItem = new TwitterItem();
-        	mItem.mType = mType;
+        	mItem = new CommentItem();
+//        	mItem.mType = mType;
         	builder = new StringBuilder();
         }else if (localName.equals("comment")){
         	in_comment = true;
@@ -65,7 +65,7 @@ public class XmlCommentsHandler extends DefaultHandler {
         
     	if (localName.equals("status")){
         	in_status = false;
-        	mTweetsData.items.add(mItem);
+        	mCommentsData.items.add(mItem);
         } else if (localName.equals("comment")){
         	in_comment = false;
         } else if (localName.equals("user")){
@@ -74,7 +74,7 @@ public class XmlCommentsHandler extends DefaultHandler {
         	in_retweet_details = false;
         }else if (localName.equals("error")){
         	in_error = false;
-        	mTweetsData.mError = builder.toString();
+        	mCommentsData.mError = builder.toString();
         	builder.setLength(0);
         }
     	
@@ -124,12 +124,13 @@ public class XmlCommentsHandler extends DefaultHandler {
 		        	mItem.mText = String.format("%s", Html.fromHtml(body));
 		        } 
     		}
+    		builder.setLength(0);
     	} 
     } 
      
     @Override 
 	public void characters(char ch[], int start, int length) { 
-    	if (in_status || in_error == true){
+    	if (in_comment || in_error == true){
     		if(ch[start] == '\r' || ch[start] == '\n') return;
     		builder.append(ch, start, length);
     	}

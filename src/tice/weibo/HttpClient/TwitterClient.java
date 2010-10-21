@@ -43,6 +43,7 @@ import tice.weibo.DB.DBImagesHelper;
 import tice.weibo.DB.DBPicsHelper;
 import tice.weibo.HttpClient.TwitterClient.DownloadPool.DownloadPiece;
 import tice.weibo.Util.Base64;
+import tice.weibo.Util.CommentsData;
 import tice.weibo.Util.TweetsData;
 import tice.weibo.Util.TweetsDataDecoder;
 
@@ -472,6 +473,71 @@ public class TwitterClient {
 
      				TweetsDataDecoder decoder = new TweetsDataDecoder();
 	 				TweetsData value = decoder.Decoder(mFormat, mHandler, mID, entity, _App._RemoveAD);
+	 				if(value.mError == null){
+	 					b.putSerializable(KEY, value);
+	 					SendMessage(mHandler, mID, b);
+	 				}
+	 				else{
+	 					throw new Exception(value.mError);
+	 				}
+     			}
+
+    		} catch (Exception e) {
+    			httpget.abort();
+    			Bundle err = new Bundle();
+    			err.putString(KEY, e.getMessage());
+    			SendMessage(mHandler, HTTP_ERROR, err);
+    		}
+    	}
+	}
+	
+	class GetCommentsThread extends Thread {
+		private DefaultHttpClient httpClient;
+    	private HttpGet httpget;
+    	private int mID;
+    	private Handler mHandler;
+    	private int mFormat;
+
+    	public GetCommentsThread(int format, Handler handler, DefaultHttpClient httpClient, HttpGet httpget, int id) {
+    		String us = httpget.getURI().toASCIIString();
+    		System.out.println("us:::::::::::::::::::::::::::"+us);
+    		if (us.contains("?")){
+    			this.httpget = new HttpGet(us+"&source=1390045420");
+    		} else {
+    			this.httpget = new HttpGet(us+"?source=1390045420");
+    		}
+    		this.httpClient = httpClient;
+//    		this.httpget = httpget;
+    		this.mID = id;
+    		this.mHandler = handler;
+    		this.mFormat = format;
+    	}
+
+    	@Override
+    	public void run() {
+
+            String error = "", data = "";
+			Bundle b = new Bundle();
+
+    		try {
+    			SetCredentials(httpget);
+    			HttpResponse response = httpClient.execute(httpget);
+
+    	 		int status = response.getStatusLine().getStatusCode();
+
+    	 		if (status != HttpStatus.SC_OK) {
+     				error = response.getStatusLine().getReasonPhrase();
+     				HttpEntity entity = response.getEntity();
+	 				data = TweetsDataDecoder.inputStreamToString(entity);
+     				b.putString(KEY, error + ":" + DecodeJSON(data));
+	 				SendMessage(mHandler, HTTP_ERROR, b);
+     			} else {
+     				setPriority(Thread.NORM_PRIORITY - 1);
+
+     				HttpEntity entity = response.getEntity();
+
+     				TweetsDataDecoder decoder = new TweetsDataDecoder();
+	 				CommentsData value = decoder.Decoder(mFormat, mHandler, mID, entity, _App._RemoveAD,1);
 	 				if(value.mError == null){
 	 					b.putSerializable(KEY, value);
 	 					SendMessage(mHandler, mID, b);
@@ -989,11 +1055,11 @@ public class TwitterClient {
 		}
 	}
 	
-	public void Get_comments_timeline(Handler handler, long id){
+	public void Get_comments_timeline(Handler handler, long id, int page){
 		try{
-			String url = String.format("%s/statuses/comments.xml?/%d",mBaseURI,id);
+			String url = String.format("%s/statuses/comments.xml?id=%d&page=%d",mBaseURI,id,page);
 			HttpGet request = new HttpGet(url);
-		 	GetThread thread = new GetThread(REQUEST_TYPE_XML, handler, httpClient, request, HTTP_COMMENTS_TIMELINE);
+			GetCommentsThread thread = new GetCommentsThread(REQUEST_TYPE_XML, handler, httpClient, request, HTTP_COMMENTS_TIMELINE);
 		 	thread.start();
 		} catch (Exception e){
 			

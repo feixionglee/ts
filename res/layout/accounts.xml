@@ -10,7 +10,7 @@
 	  <TextView android:id="@id/android:empty"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent"
-	        android:textStyle="italic" android:textSize="18px" android:gravity="center" android:text="Click Menu to add new account"/>
+	        android:textStyle="italic" android:textSize="18px" android:gravity="center" android:text="Click Add to add new account"/>
    
    
    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_alignParentBottom="true">

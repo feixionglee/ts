@@ -20,6 +20,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import tice.weibo.HttpClient.TwitterClient;
+import tice.weibo.XmlParse.XmlCommentsHandler;
 import tice.weibo.XmlParse.XmlDirectsHandler;
 import tice.weibo.XmlParse.XmlFavoritesHandler;
 import tice.weibo.XmlParse.XmlFriendsHandler;
@@ -81,6 +82,22 @@ public class TweetsDataDecoder{
 				return DecoderJSON(handler, type, RemoveAD(removead, inputStreamToString(data)));
 			}else if (format == TwitterClient.REQUEST_TYPE_XML){
 				return DecoderXML(handler, type, RemoveAD(removead, data.getContent()));
+			}
+		} catch (Exception e) {
+			Bundle err = new Bundle();
+			String strerr = String.format("%s", e.getLocalizedMessage());
+			err.putString(TwitterClient.KEY, strerr);
+			TwitterClient.SendMessage(handler, TwitterClient.HTTP_ERROR, err);
+		}
+
+		return null;
+	}
+	
+	public CommentsData Decoder(int format, Handler handler, int type, HttpEntity data, boolean removead,int shit){
+		try{
+			
+			if (format == TwitterClient.REQUEST_TYPE_XML){
+				return DecoderXML(handler, type, RemoveAD(removead, data.getContent()),shit);
 			}
 		} catch (Exception e) {
 			Bundle err = new Bundle();
@@ -277,6 +294,36 @@ public class TweetsDataDecoder{
 				}
 			}
 
+		} catch (Exception e) {
+			Bundle err = new Bundle();
+			String strerr = String.format("%s", e.getLocalizedMessage());
+			err.putString(TwitterClient.KEY, strerr);
+			TwitterClient.SendMessage(handler, TwitterClient.HTTP_ERROR, err);
+		}
+
+		return value;
+	}
+	
+	private CommentsData DecoderXML(Handler handler, int type, InputStream data, int shit){
+		CommentsData value = null;
+		if(data == null) return null;
+		
+		try{
+
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			SAXParser sp = spf.newSAXParser();
+			XMLReader xr = sp.getXMLReader();
+
+			switch (type){
+			case TwitterClient.HTTP_COMMENTS_TIMELINE:{
+					XmlCommentsHandler home = new XmlCommentsHandler(0);
+					xr.setContentHandler(home);
+					xr.parse(new InputSource(data));
+					value = home.GetParsedData();
+					break;
+				}
+			
+			}
 		} catch (Exception e) {
 			Bundle err = new Bundle();
 			String strerr = String.format("%s", e.getLocalizedMessage());
