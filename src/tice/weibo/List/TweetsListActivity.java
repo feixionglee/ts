@@ -619,33 +619,6 @@ public class TweetsListActivity extends Activity {
         return ret;
     }
 
-/*    protected void InitTwitterClient(){
-
-        int port;
-        String url,searchurl;
-
-        if(_App._Https == true){
-        	url = String.format("https://%s", _App._Baseapi);
-        	searchurl = String.format("https://%s", _App._Searchapi);
-        	port = PORTSSL;
-        }else{
-        	url = String.format("http://%s", _App._Baseapi);
-        	searchurl = String.format("http://%s", _App._Searchapi);
-        	port = PORT;
-        }
-
-        URI host = null;
-		try {
-			host = new URI(url);
-
-			_App._twitter = new TwitterClient(this, host.getHost(), port, url, searchurl, _App._Username, _App._Password);
-
-		} catch (URISyntaxException e) {
-			Bundle err = new Bundle();
-			err.putString(TwitterClient.KEY, e.getLocalizedMessage());
-			TwitterClient.SendMessage(_Handler, TwitterClient.HTTP_ERROR, err);
-		}
-    }*/
 
  	protected void PanelAnimationOn(boolean top, ViewGroup layout){
 
@@ -838,23 +811,6 @@ public class TweetsListActivity extends Activity {
     	Button links = (Button)findViewById(R.id.links);
 
 
-
-//    	if(thread != null){
-//        	thread.setOnClickListener(new OnClickListener(){
-//    			public void onClick(View v) {
-//    				TwitterItem item = _Items.Get(_CurrentThread);
-//    				if(item != null){
-//	    				PanelAnimationOff(false, _Statuspanel);
-//	    				PanelAnimationOff(false, _Toolbarpanel);
-//	    				String id = String.valueOf(item.mID);
-//	    		    	Intent i = new Intent(_Context, StatusesShowActivity.class);
-//	    		    	i.putExtra("replyid", id);
-//	    		    	startActivityForResult(i,APP_CHAINCLOSE);
-//    				}
-//    			}
-//        	});
-//    	}
-
     	if(Send != null){
          	Send.setOnClickListener(new OnClickListener(){
         		public void onClick(View v) {
@@ -1009,32 +965,6 @@ public class TweetsListActivity extends Activity {
     			}
         	});
     	}
-
-//    	if(upload != null){
-//    		upload.setOnClickListener(new OnClickListener(){
-//    			public void onClick(View v) {
-//    	        	if (_UploadFile == null) return;
-//
-//                	_Progressdialog = new ProgressDialog(_Context);
-//                	_Progressdialog.setMessage("Uploading picture ...");
-//                	_Progressdialog.setIndeterminate(true);
-//                	_Progressdialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//                	_Progressdialog.setCancelable(false);
-//                	_Progressdialog.show();
-//
-//                	Button closepreview = (Button)findViewById(R.id.ClosePreview);
-//                	Button upload = (Button)findViewById(R.id.Upload);
-//                	Button posturl = (Button)findViewById(R.id.PostURL);
-//
-//                	closepreview.setEnabled(false);
-//                	upload.setEnabled(false);
-//                	posturl.setEnabled(false);
-//
-//                	if (_App._twitter != null) _App._twitter.Post_image(_Handler, _App._Pictureapi, _App._Username, _App._Password, _UploadFile);
-//    			}
-//        	});
-//    	}
-
 
 
     	if(menubtn != null){
