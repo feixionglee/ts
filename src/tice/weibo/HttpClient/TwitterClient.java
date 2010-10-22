@@ -976,6 +976,30 @@ public class TwitterClient {
 
 	}
 	
+	public void Post_retweeted_statuses(Handler handler, long retweeted_status_id, String text){
+	 	try{
+			String url = String.format("%s/statuses/repost.json",mBaseURI);
+
+		 	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		 	nameValuePairs.add(new BasicNameValuePair("id", String.valueOf(retweeted_status_id)));
+			nameValuePairs.add(new BasicNameValuePair("status", text));
+//			nameValuePairs.add(new BasicNameValuePair("source", "Twigee"));
+
+//		 	if(retweeted_status_id != 0){
+//		 		nameValuePairs.add(new BasicNameValuePair("in_reply_to_status_id", String.valueOf(replyid)));
+//		 	}
+
+		 	HttpPost request = new HttpPost(url);
+		 	PostThread thread = new PostThread(true, handler, httpClient, request,nameValuePairs, HTTP_STATUSES_UPDATE);
+		 	thread.start();
+		} catch (Exception e) {
+			Bundle err = new Bundle();
+			err.putString(KEY, e.getLocalizedMessage());
+			SendMessage(handler, HTTP_ERROR, err);
+		}
+
+	}
+	
 	public void Post_comment(Handler handler, long status_id, String text){
 		try{
 			String url = String.format("%s/statuses/comment.json",mBaseURI);

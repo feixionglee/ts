@@ -13,9 +13,12 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.ToggleButton;
 import tice.weibo.App;
 import tice.weibo.R;
 import tice.weibo.HttpClient.TwitterClient;
@@ -66,15 +69,21 @@ public class CommentActivity extends Activity {
 	
 	public void setupView(){
 		Button combtn = (Button)findViewById(R.id.btCmtSend);
-				
+
 		if(combtn != null){
 			combtn.setOnClickListener(new OnClickListener(){
 				public void onClick(View v){
 					EditText edit = (EditText)findViewById(R.id.etCmtReason);
 					String text = edit.getText().toString();
 					
+					CheckBox state = (CheckBox)findViewById(R.id.rb_forward);
+					
 					if(text.length() > 0){
+						if (state.isChecked()){
+							_App._twitter.Post_retweeted_statuses(mHandler,status_id,text);
+						}
 						_App._twitter.Post_comment(mHandler,status_id,text);
+						
 					}
 				}
 			});
