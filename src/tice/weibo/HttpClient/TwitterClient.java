@@ -507,7 +507,6 @@ public class TwitterClient {
     			this.httpget = new HttpGet(us+"?source=1390045420");
     		}
     		this.httpClient = httpClient;
-//    		this.httpget = httpget;
     		this.mID = id;
     		this.mHandler = handler;
     		this.mFormat = format;
@@ -528,16 +527,17 @@ public class TwitterClient {
     	 		if (status != HttpStatus.SC_OK) {
      				error = response.getStatusLine().getReasonPhrase();
      				HttpEntity entity = response.getEntity();
+     				
 	 				data = TweetsDataDecoder.inputStreamToString(entity);
-     				b.putString(KEY, error + ":" + DecodeJSON(data));
+	 				b.putString(KEY, error + ":" + DecodeJSON(data));
 	 				SendMessage(mHandler, HTTP_ERROR, b);
      			} else {
      				setPriority(Thread.NORM_PRIORITY - 1);
-
+     				System.out.println("ok====");
      				HttpEntity entity = response.getEntity();
-
+     				     				
      				TweetsDataDecoder decoder = new TweetsDataDecoder();
-	 				CommentsData value = decoder.Decoder(mFormat, mHandler, mID, entity, _App._RemoveAD,1);
+	 				CommentsData value = decoder.Decoder(mFormat, mHandler, entity);
 	 				if(value.mError == null){
 	 					b.putSerializable(KEY, value);
 	 					SendMessage(mHandler, mID, b);

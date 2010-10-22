@@ -39,10 +39,7 @@ public class CommentAdapter extends BaseAdapter {
     public class ViewHolder {
     	TextView screenname;
     	TextView text;
-    	TextView time;
-
-    	ProgressBar progressbar;
-    	
+    	TextView time;   	
     }
 
     boolean mInRefresh = false;
@@ -133,8 +130,6 @@ public class CommentAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
 
-			holder.progressbar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
-			holder.progressbar.setVisibility(View.GONE);
 			
             holder.screenname = (TextView) convertView.findViewById(R.id.tvItemCmtNickname);
             holder.text = (TextView) convertView.findViewById(R.id.tvItemCmtContent);
@@ -170,8 +165,6 @@ public class CommentAdapter extends BaseAdapter {
 //           	holder.text.setTextColor(mtextviewcolorselect);
 //        }
 
-    	holder.progressbar.setVisibility(View.GONE);
-
     	SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
 		String ret = String.format("%s", df2.format(new Date(item.mTime)));
 		
@@ -179,7 +172,7 @@ public class CommentAdapter extends BaseAdapter {
       	holder.time.setText(ret);
        	holder.text.setText(item.mText);
        	
-       	LinearLayout shit = (LinearLayout) convertView.findViewById(R.id.retweeted_text_wrap);
+//       	LinearLayout shit = (LinearLayout) convertView.findViewById(R.id.retweeted_text_wrap);
        	
        	if (item.mScreenname.length() == 0){
         	holder.screenname.setText("");
@@ -232,7 +225,7 @@ public class CommentAdapter extends BaseAdapter {
     }
     
     
-    public void addThread(Long id, String screenname, String text, long time){
+    public void addThread(long id, String screenname, String text, long time){
 
     	int count = mItem.size();
     	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;

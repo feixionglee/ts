@@ -93,12 +93,9 @@ public class TweetsDataDecoder{
 		return null;
 	}
 	
-	public CommentsData Decoder(int format, Handler handler, int type, HttpEntity data, boolean removead,int shit){
+	public CommentsData Decoder(int format, Handler handler, HttpEntity data){	
 		try{
-			
-			if (format == TwitterClient.REQUEST_TYPE_XML){
-				return DecoderXML(handler, type, RemoveAD(removead, data.getContent()),shit);
-			}
+			return DecoderCommentsXML(handler, data.getContent()); 
 		} catch (Exception e) {
 			Bundle err = new Bundle();
 			String strerr = String.format("%s", e.getLocalizedMessage());
@@ -304,26 +301,20 @@ public class TweetsDataDecoder{
 		return value;
 	}
 	
-	private CommentsData DecoderXML(Handler handler, int type, InputStream data, int shit){
+	private CommentsData DecoderCommentsXML(Handler handler, InputStream data){
 		CommentsData value = null;
 		if(data == null) return null;
-		
+			
 		try{
-
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 			SAXParser sp = spf.newSAXParser();
 			XMLReader xr = sp.getXMLReader();
-
-			switch (type){
-			case TwitterClient.HTTP_COMMENTS_TIMELINE:{
-					XmlCommentsHandler home = new XmlCommentsHandler(0);
-					xr.setContentHandler(home);
-					xr.parse(new InputSource(data));
-					value = home.GetParsedData();
-					break;
-				}
 			
-			}
+			XmlCommentsHandler comments = new XmlCommentsHandler();
+			xr.setContentHandler(comments);
+			xr.parse(new InputSource(data));
+
+			value = comments.GetParsedData();
 		} catch (Exception e) {
 			Bundle err = new Bundle();
 			String strerr = String.format("%s", e.getLocalizedMessage());

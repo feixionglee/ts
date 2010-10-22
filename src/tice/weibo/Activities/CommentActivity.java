@@ -31,7 +31,8 @@ public class CommentActivity extends Activity {
 	public final static int ADD_TYPE_REPLACE = 2;
 	protected int mAddType = ADD_TYPE_INSERT;
 	
-	private TwitterItem tItem;
+	private long status_id;
+	private int page = 1;
 	private CommentItem cItem;
 	CommentAdapter _adapter;
 //	TweetsListActivity mCtx;
@@ -48,15 +49,16 @@ public class CommentActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.commentblog);
 		
-				
+		status_id = getIntent().getExtras().getLong(EXTRA_ITEM);	
 		ListView _list = (ListView)findViewById(R.id.lvCmt);
 		
 		_adapter = new CommentAdapter(this);
 		
 		_list.setAdapter(_adapter);
+		loadComments(status_id);
 	
 	}
-	
+		
 	static void show(Context context, TwitterItem item){
 		final Intent intent = new Intent(ACTION);
         intent.putExtra(EXTRA_ITEM, item.mID);
@@ -84,11 +86,19 @@ public class CommentActivity extends Activity {
 //    		_Refresh = false;
 //    		_LastID = 0;
 //    		_PrevID = Long.MAX_VALUE;
-    		defaultUpdateListViewThread(msg.getData(),mAddType, true );
-    		break;
+    		defaultUpdateListViewThread(msg.getData(),ADD_TYPE_INSERT, true );
+    		break; 
+    	case TwitterClient.UI_REFRESHVIEWS:
+       		_adapter.notifyDataSetChanged();
+       		break; 
     	}
 	}
     
+	public void defaultUpdateListViewThread(Bundle bundle,int addtype, boolean order){
+		bundle.putInt("append", addtype);
+		new defaultUpdateListAsyncTask().execute(bundle);
+    }
+
 	public void defaultUpdateListViewProcessFrontEnd(ProgressData tweets){
 
 		ArrayList<CommentItem> items = tweets.citems;
@@ -119,33 +129,6 @@ public class CommentActivity extends Activity {
 	 				_adapter.Remove(index);
 	 			}
 	 		}
- 		}else if (addtype == ADD_TYPE_REPLACE){
- 			mAddType = ADD_TYPE_INSERT;
- 	 		for (index = 0; index < mincount; index++){
-	 			t = items.get(index);
-	 			if(t == null) continue;
- 	 			_adapter.ReplaceThread(index, t, 1);
-  			}
-
-  			for (; index < count; index++){
-	 			t = items.get(index);
-	 			if(t == null) continue;
-				_adapter.addThread(index, t, addtype, 1);
- 	 		}
-
- 	 		for (index = _adapter.getCount() - 1; index >= count;index = _adapter.getCount() - 1){
- 	 			_adapter.Remove(index);
- 	 		}
- 		} else if (addtype == ADD_TYPE_APPEND){
- 			if(count !=0 && _adapter.getCount() != 0){
- 	 			_adapter.Remove(_adapter.getCount() - 1);
- 	 		}
-
- 			for (index = 0; index < count; index++){
-	 			t = items.get(index);
-	 			if(t == null) continue;
- 				_adapter.addThread(index, t, addtype, 1);
- 			}
  		}
 
  		//_adapter.notifyDataSetChanged();
@@ -155,67 +138,29 @@ public class CommentActivity extends Activity {
  			_adapter.SetLoadingItem();
  		}
 
-// 		new Thread(new Runnable(){
-//				public void run() {
-//					SaveTweetItemsToDB();
-//				}
-//		}).start();
-
  		TwitterClient.SendMessage(mHandler, TwitterClient.UI_REFRESHVIEWS, null);
 	}
-	
-    
-	public void defaultUpdateListViewThread(Bundle bundle,int addtype, boolean order){
-		bundle.putInt("append", addtype);
-		new defaultUpdateListAsyncTask().execute(bundle);
-    }
 	
 	public void defaultUpdateListViewProcessBackEnd(ProgressData tweets, Bundle bundle){
 
 		ArrayList<CommentItem> items = tweets.citems;
-
 		if (_App._twitter != null) _App._twitter.Get_rate_limit_status(mHandler);
 
 		CommentsData data = (CommentsData) bundle.getSerializable(TwitterClient.KEY);
+		System.out.println("======="+data.items.size());
 
  		if(data == null || data.items == null) return;
 
  		int index = 0;
- 		boolean ret = false;
- 		Bundle userdata = new Bundle();
  		int count = ( (data.items == null) ? 0 : data.items.size() );
  		CommentItem insertitem;
- 		int readstate;
 
 		for (index = 0; index < count; index++){
 			insertitem = data.Get(index);
 			if(insertitem != null){
-//				readstate = _App._DbHelper.FindTweet(_App._Username, _ActivityType, insertitem.mID) == false ? READ_STATE_UNKNOW : READ_STATE_READ;
-				if( mAddType != ADD_TYPE_REPLACE ){
-					items.add(null);
-					continue;
-				}
-//				insertitem.mRead = readstate;
-//				ret = defaultDecodeJSON(items, insertitem);
 				items.add(insertitem);
 			}
 		}
-
-		count = _adapter.getCount();
-		TwitterItem item;
-//		for(index=0;index<count;index++){
-//			item = _adapter.Get(index);
-//			if(item != null){
-//				item.mTimeSource = CreateTimeSource(item.mTime, item.mSource);;
-//			}
-//		}
-//
-//	 	if(_ActivityType == TwitterClient.HOME_USERINFO && data.user != null){
-//
-//	 		userdata.putBoolean("ret", ret);
-//	 		userdata.putSerializable(TwitterClient.KEY, data.user);
-//	 		TwitterClient.SendMessage(_Handler, TwitterClient.UI_REFRESHVIEWS_PRE, userdata);
-//	 	}
 	}
 	
 	private class defaultUpdateListAsyncTask extends AsyncTask <Bundle, ProgressData, Long> {
@@ -224,6 +169,7 @@ public class CommentActivity extends Activity {
 		protected void onPreExecute(){
 //			_Refresh = true;
 //			setMyProgressBarVisibility(true);
+			System.out.print("update...");
 		}
 
 		@Override
@@ -247,6 +193,13 @@ public class CommentActivity extends Activity {
 //        	_Refresh = false;
         }
 
+	}
+	
+	private void loadComments(long status_id){
+		_App._twitter.Get_comments_timeline(mHandler, status_id, page);
+		page += 1;
+		_adapter.addThread(0,"","",0);
+		_adapter.SetLoadingItem();
 	}
 	
 }
