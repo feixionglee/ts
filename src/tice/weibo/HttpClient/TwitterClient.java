@@ -161,6 +161,7 @@ public class TwitterClient {
 	public final static int HTTP_RATE_LIMIT = 49;
 	
 	public final static int HTTP_COMMENTS_TIMELINE = 50;
+	public final static int HTTP_POST_COMMENT = 51;
 	
 	public final static int UI_REFRESHVIEWS = 100;
 	public final static int UI_REFRESHVIEWS_PRE = 101;
@@ -958,7 +959,7 @@ public class TwitterClient {
 
 		 	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("status", text));
-			nameValuePairs.add(new BasicNameValuePair("source", "Twigee"));
+//			nameValuePairs.add(new BasicNameValuePair("source", "Twigee"));
 
 		 	if(replyid != 0){
 		 		nameValuePairs.add(new BasicNameValuePair("in_reply_to_status_id", String.valueOf(replyid)));
@@ -973,6 +974,29 @@ public class TwitterClient {
 			SendMessage(handler, HTTP_ERROR, err);
 		}
 
+	}
+	
+	public void Post_comment(Handler handler, long status_id, String text){
+		try{
+			String url = String.format("%s/statuses/comment.json",mBaseURI);
+
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("id", String.valueOf(status_id)));
+			nameValuePairs.add(new BasicNameValuePair("comment", text));
+//			nameValuePairs.add(new BasicNameValuePair("source", "Twigee"));
+//
+//		 	if(status_id != 0){
+//		 		nameValuePairs.add(new BasicNameValuePair("in_reply_to_status_id", String.valueOf(status_id)));
+//		 	}
+
+		 	HttpPost request = new HttpPost(url);
+		 	PostThread thread = new PostThread(true, handler, httpClient, request, nameValuePairs, HTTP_POST_COMMENT);
+		 	thread.start();
+		} catch (Exception e){
+			Bundle err = new Bundle();
+			err.putString(KEY, e.getLocalizedMessage());
+			SendMessage(handler, HTTP_ERROR, err);
+		}
 	}
 
 	public void Post_direct_messages_new(Handler handler, String screenname, String text){

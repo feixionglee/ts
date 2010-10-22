@@ -10,6 +10,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import tice.weibo.App;
@@ -48,6 +52,7 @@ public class CommentActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.commentblog);
+		setupView();
 		
 		status_id = getIntent().getExtras().getLong(EXTRA_ITEM);	
 		ListView _list = (ListView)findViewById(R.id.lvCmt);
@@ -57,6 +62,23 @@ public class CommentActivity extends Activity {
 		_list.setAdapter(_adapter);
 		loadComments(status_id);
 	
+	}
+	
+	public void setupView(){
+		Button combtn = (Button)findViewById(R.id.btCmtSend);
+				
+		if(combtn != null){
+			combtn.setOnClickListener(new OnClickListener(){
+				public void onClick(View v){
+					EditText edit = (EditText)findViewById(R.id.etCmtReason);
+					String text = edit.getText().toString();
+					
+					if(text.length() > 0){
+						_App._twitter.Post_comment(mHandler,status_id,text);
+					}
+				}
+			});
+		}
 	}
 		
 	static void show(Context context, TwitterItem item){
@@ -87,7 +109,10 @@ public class CommentActivity extends Activity {
 //    		_LastID = 0;
 //    		_PrevID = Long.MAX_VALUE;
     		defaultUpdateListViewThread(msg.getData(),ADD_TYPE_INSERT, true );
-    		break; 
+    		break;
+    	case TwitterClient.HTTP_POST_COMMENT:
+    		finish();
+    		break;
     	case TwitterClient.UI_REFRESHVIEWS:
        		_adapter.notifyDataSetChanged();
        		break; 
