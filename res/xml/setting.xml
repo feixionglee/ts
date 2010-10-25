@@ -18,6 +18,7 @@
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android">
 
+<!--
 		<PreferenceCategory
             android:title="@string/twitteraccount">
 
@@ -25,7 +26,7 @@
 	            android:key="accounts"
 	            android:title="@string/accounts"
 	            android:summary="Your favorite weibo accounts"/>
-<!--  
+  
 	        <EditTextPreference
 	        		android:key="username"
 	                android:title="@string/username"
@@ -36,9 +37,10 @@
 	        		android:password="true"
 	                android:title="@string/password"
 	                android:summary="Your twitter password"/>
--->	                
-		</PreferenceCategory>
-		
+	                
+		</PreferenceCategory>		
+-->
+
 <!--	
 		<PreferenceCategory
             android:title="@string/connect">     

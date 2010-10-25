@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import tice.weibo.App;
 import tice.weibo.R;
+import tice.weibo.Activities.AccountsActivity;
 import tice.weibo.Activities.DetailWeiboActivity;
 import tice.weibo.Activities.DirectActivity;
 import tice.weibo.Activities.FavoriteActivity;
@@ -1403,6 +1404,11 @@ public class TweetsListActivity extends Activity {
     	Intent i;
 
     	switch(item.getItemId()) {
+    	case R.id.accounts:
+        	i = new Intent(this, AccountsActivity.class);
+        	if(_App._MainAtivity != null) _App._MainAtivity.startActivityForResult(i,APP_CHAINCLOSE);
+            if(_ActivityType != TwitterClient.HOME_HOME) finish();
+        	break;
         case R.id.home:
         	i = new Intent(this, HomeActivity.class);
         	if(_App._MainAtivity != null) _App._MainAtivity.startActivityForResult(i,APP_CHAINCLOSE);
@@ -1470,17 +1476,6 @@ public class TweetsListActivity extends Activity {
         	i.putExtra("type",TwitterClient.HOME_FOLLOWERS);
         	if(_App._MainAtivity != null) _App._MainAtivity.startActivityForResult(i,APP_CHAINCLOSE);
             if(_ActivityType != TwitterClient.HOME_HOME) finish();
-        	break;
-        case R.id.newpost:
-			EditText edit = (EditText)findViewById(R.id.EditText);
-			edit.setSelection(edit.getText().toString().length());
-			PanelAnimationOn(false, _Statuspanel);
-			PanelAnimationOff(false, _Toolbarpanel);
-			if(_ActivityType == TwitterClient.HOME_DIRECT){
-				_InputType = INPUT_DIRECT;
-			}else{
-				_InputType = INPUT_NEWPOST;
-			}
         	break;
     	}
 
