@@ -231,7 +231,7 @@ public class ItemAdapter extends BaseAdapter {
 	    		if(temp.mPic != null){
 	    			temp.mPic.recycle();
 	    			temp.mPic = null;
-	    			holder.pic.setImageBitmap(null);
+//	    			holder.pic.setImageBitmap(null);
 	    		}
 	    	}
 	    }else{
@@ -249,7 +249,7 @@ public class ItemAdapter extends BaseAdapter {
 	    		if(temp.mPic != null){
 	    			temp.mPic.recycle();
 	    			temp.mPic = null;
-	    			holder.pic.setImageBitmap(null);
+//	    			holder.pic.setImageBitmap(null);
 	    		}
 	    	}
 	    }
