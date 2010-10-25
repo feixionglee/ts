@@ -155,4 +155,9 @@ public class DirectActivity extends TweetsListActivity {
 
         return super.onMenuItemSelected(featureId, item);
     }
+    
+    public void onStart(){
+    	super.onStart();
+    	directs.setChecked(true);
+    }
 }

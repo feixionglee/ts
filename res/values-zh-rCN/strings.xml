@@ -17,7 +17,7 @@
     <string name="mentions">\@提到我</string>
     <string name="direct">私信</string>
     <string name="favorites">收藏夹</string>
-    <string name="newpost">新微博</string>
+    <string name="newpost">写微博</string>
     <string name="listlength">微博条数</string>
     <string name="display">显示</string>
     <string name="search">搜索</string>
@@ -73,11 +73,13 @@
     
     <string name="imageviewer_back">返回</string>
     <string name="comment">评论</string>
+    <string name="comments">评论</string>
     <string name="forward">转发</string>
     <string name="itemmenu_bookmark">收藏</string>
     <string name="more">更多</string>
     
     <string name="comment_add_forward">同时发一条微博</string>
     <string name="new_label">可输入字数：</string>
+    <string name="direct_messages">私信</string>
     
 </resources>

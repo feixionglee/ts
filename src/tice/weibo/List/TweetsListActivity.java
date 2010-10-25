@@ -81,6 +81,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
@@ -145,7 +146,9 @@ public class TweetsListActivity extends Activity {
 	protected boolean mScrolling = false;
 	protected int mAddType = ADD_TYPE_INSERT;
 	protected String mOldAccount = "";
-
+	
+	public RadioButton home, mentions, comments, directs, newpost;
+	
 	//protected boolean _InRefresh = false;
 
 	//protected int _HomeType = TwitterClient.HOME_HOME;
@@ -309,6 +312,9 @@ public class TweetsListActivity extends Activity {
 
         setTheme(_App._Theme);
         setContentView(R.layout.main);
+        
+
+        
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title_1);
         setMyProgressBarVisibility(false);
 
@@ -809,8 +815,64 @@ public class TweetsListActivity extends Activity {
     	Button inbox = (Button)findViewById(R.id.inbox);
     	Button outbox = (Button)findViewById(R.id.outbox);
     	Button links = (Button)findViewById(R.id.links);
+    	
+    	home = (RadioButton)findViewById(R.id.tvHome);
+    	mentions = (RadioButton)findViewById(R.id.tvMentions);
+    	comments = (RadioButton)findViewById(R.id.tvComments);
+    	directs = (RadioButton)findViewById(R.id.tvDirects);
+    	newpost = (RadioButton)findViewById(R.id.tvNew);
 
-
+    	if(home != null){
+    		home.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				Intent i = new Intent(_Context, HomeActivity.class);
+    				startActivity(i);
+    			}
+    		});
+    	}
+		
+    	if(mentions != null){
+    		mentions.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				Intent i = new Intent(_Context, MentionActivity.class);
+    				startActivity(i);
+    			}
+    		});		
+		}
+		if(comments != null){
+			comments.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				Intent i = new Intent(_Context, HomeActivity.class);
+    				startActivity(i);
+    			}
+    		});
+		}
+		
+		if(directs != null){
+			directs.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				Intent i = new Intent(_Context, DirectActivity.class);
+    				startActivity(i);
+    			}
+    		});
+		}
+		
+		if(newpost != null){
+			newpost.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				EditText edit = (EditText)findViewById(R.id.EditText);
+    				edit.setSelection(edit.getText().toString().length());
+    				PanelAnimationOn(false, _Statuspanel);
+    				PanelAnimationOff(false, _Toolbarpanel);
+    				if(_ActivityType == TwitterClient.HOME_DIRECT){
+    					_InputType = INPUT_DIRECT;
+    				}else{
+    					_InputType = INPUT_NEWPOST;
+    				}
+    			}
+    		});
+		}
+		
     	if(Send != null){
          	Send.setOnClickListener(new OnClickListener(){
         		public void onClick(View v) {

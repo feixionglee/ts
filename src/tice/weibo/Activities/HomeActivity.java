@@ -57,7 +57,7 @@ public class HomeActivity extends TweetsListActivity {
     	
         InitButtons();
         SetWindowTitle(ACTOVITY_TYPE_ID);
-       
+        
         String text = "";
         Intent intent = getIntent();
         int type = intent.getIntExtra("nextlaunch", TwitterClient.HOME_HOME);
@@ -215,5 +215,10 @@ public class HomeActivity extends TweetsListActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		_App._tracker.stop();
+	}
+	
+	public void onStart(){
+		super.onStart();
+		home.setChecked(true);
 	}
 }

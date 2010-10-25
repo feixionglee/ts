@@ -116,4 +116,9 @@ public class MentionActivity extends TweetsListActivity {
     	
         return super.onMenuItemSelected(featureId, item);
     }
+    
+    public void onStart(){
+    	super.onStart();
+    	mentions.setChecked(true);
+    }
 }

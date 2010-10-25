@@ -11,11 +11,16 @@
 		admobsdk:textColor="#000000"
 		admobsdk:keywords="android twitter client java mobile iphone game web social network facebook application" />
 -->
+           
 	<FrameLayout android:id="@+id/FrameLayout00"
 		android:layout_height="fill_parent" android:layout_width="fill_parent">
+		
+
 
 		<LinearLayout android:orientation="vertical"
 			android:layout_width="fill_parent" android:layout_height="fill_parent" android:id="@+id/MainFrame">
+			
+
 
 			<LinearLayout android:id="@+id/InfoLayout"
 				android:layout_width="fill_parent" android:layout_height="wrap_content">
@@ -27,6 +32,14 @@
 				android:nextFocusRight="@+id/menubtn" android:listSelector="@drawable/shape_5"
 				android:drawSelectorOnTop="true">
 			</ListView>
+			
+			<RadioGroup android:orientation="horizontal" android:id="@+id/main_bottom_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_alignParentBottom="true">
+		        <RadioButton android:id="@+id/tvHome" android:text="@string/home" android:drawableTop="@drawable/icon_1" style="@style/main_tab_bottom" android:clickable = "true" />
+		        <RadioButton android:id="@+id/tvMentions" android:text="@string/mentions" android:drawableTop="@drawable/icon_4" style="@style/main_tab_bottom" android:clickable = "true" />
+		        <RadioButton android:id="@+id/tvComments" android:text="@string/comments" android:drawableTop="@drawable/icon_3" style="@style/main_tab_bottom" android:clickable = "true" />
+		        <RadioButton android:id="@+id/tvDirects" android:text="@string/direct_messages" android:drawableTop="@drawable/icon_2" style="@style/main_tab_bottom" android:clickable = "true" />
+		        <RadioButton android:id="@+id/tvNew" android:text="@string/newpost" android:drawableTop="@drawable/icon_5" style="@style/main_tab_bottom" android:clickable = "true" />
+		    </RadioGroup>
 
 			<LinearLayout android:id="@+id/FixToolbarLayout"
 				android:layout_width="fill_parent" android:orientation="horizontal"
@@ -64,6 +77,9 @@
 			android:paddingLeft="5px" android:paddingRight="5px"
 			android:background="@drawable/menu_background_fill_parent_width">
 		</LinearLayout>
+		
+		
+
 
 	</FrameLayout>
 
