@@ -75,6 +75,7 @@
     
     <string name="imageviewer_back">return</string>
     <string name="comment">comment</string>
+    <string name="comments">comments</string>
     <string name="forward">forward</string>
     <string name="itemmenu_bookmark">favorite</string>
     <string name="more">more</string>
