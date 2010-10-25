@@ -61,7 +61,7 @@ public class XmlCommentsHandler extends DefaultHandler {
     	if (localName.equals("comment")){
         	in_comment = false;
         	mCommentsData.items.add(mItem);
-        } else if (localName.equals("status")){
+        } else if (localName.equals("status") && in_user == false){
         	in_status = false;
         } else if (localName.equals("user")){
         	in_user = false;
@@ -71,9 +71,10 @@ public class XmlCommentsHandler extends DefaultHandler {
         	builder.setLength(0);
         }
     	
-    	if (in_comment){
+    	if (in_comment == true && in_status == false){
     		String body = builder.toString().trim();
-    		if(in_user == false && in_status == false){
+    		
+    		if(in_user == false ){
 	    		if (localName.equals("created_at")){
 		        	mItem.mTime = Date.parse(body);
 		        } else if (localName.equals("id") ){
@@ -81,6 +82,10 @@ public class XmlCommentsHandler extends DefaultHandler {
 		        } else if (localName.equals("text")){
 		        	mItem.mText = String.format("%s", Html.fromHtml(body));
 		        } 
+    		} else {
+    			if (localName.equals("screen_name")){
+		        	mItem.mScreenname = body;
+		        }
     		}
     		builder.setLength(0);
     	} 

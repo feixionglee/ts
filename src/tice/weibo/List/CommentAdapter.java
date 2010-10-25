@@ -62,22 +62,11 @@ public class CommentAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
         mCtx = (CommentActivity)context;
 
-        mFav = BitmapFactory.decodeResource(context.getResources(), R.drawable.star_on);
-        mUnFav = BitmapFactory.decodeResource(context.getResources(), R.drawable.star_off);
-        mBlank = BitmapFactory.decodeResource(context.getResources(), R.drawable.default_profile_1_normal);
-        mUnRead = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_sms_unread_msg_indicator);
-        mConversation = BitmapFactory.decodeResource(context.getResources(), R.drawable.conversationt);
-
 	    TypedArray atts = context.obtainStyledAttributes(new int []
 	                                  {R.attr.ListViewBackground,	R.attr.ListViewBackgroundAt,
 	                                   R.attr.ListViewBackgroundMy, R.attr.ListViewBackgroundSelect,
 	                                   R.attr.TextViewColor, R.attr.TextViewColorSelect});
 
-
-	    mListbackground = atts.getResourceId(0, R.drawable.theme_default_listbackground);
-	    mListbackgroundat = atts.getResourceId(1, R.drawable.theme_default_listbackgroundat);
-	    mListbackgroundmy = atts.getResourceId(2, R.drawable.theme_default_listbackgroundmy);
-	    mListbackgroundselset = atts.getResourceId(3, R.drawable.theme_default_listbackgroundselect);
 	    mtextviewcolor = atts.getColor(4, 0xff313031);
 	    mtextviewcolorselect = atts.getColor(5, 0xff313031);
 
@@ -134,7 +123,6 @@ public class CommentAdapter extends BaseAdapter {
             holder.screenname = (TextView) convertView.findViewById(R.id.tvItemCmtNickname);
             holder.text = (TextView) convertView.findViewById(R.id.tvItemCmtContent);
             holder.time = (TextView) convertView.findViewById(R.id.tvItemCmtDate);
-            
 
            	holder.screenname.setTextSize(_App._Fontsize);
            	holder.text.setTextSize(_App._Fontsize);
@@ -152,18 +140,6 @@ public class CommentAdapter extends BaseAdapter {
       	holder.time.setTextColor(mtextviewcolor);
        	holder.text.setTextColor(mtextviewcolor);
 
-        String search = "@" + _App._Username;
-
-        
-
-//        if(position == mCtx._CurrentThread){
-//
-//        	//holder.itemline.setBackgroundColor(0xffffc82e);
-//
-//           	holder.screenname.setTextColor(mtextviewcolorselect);
-//          	holder.time.setTextColor(mtextviewcolorselect);
-//           	holder.text.setTextColor(mtextviewcolorselect);
-//        }
 
     	SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
 		String ret = String.format("%s", df2.format(new Date(item.mTime)));
@@ -172,17 +148,11 @@ public class CommentAdapter extends BaseAdapter {
       	holder.time.setText(ret);
        	holder.text.setText(item.mText);
        	
-//       	LinearLayout shit = (LinearLayout) convertView.findViewById(R.id.retweeted_text_wrap);
-       	
        	if (item.mScreenname.length() == 0){
         	holder.screenname.setText("");
         	holder.time.setText("");
         	holder.text.setText(item.mText);
         }
-
-// 		Linkify.addLinks(holder.text, p1, "");
-// 		Linkify.addLinks(holder.text, p2, "");
-// 		Linkify.addLinks(holder.text, p3, "");
 
         return convertView;
     }
