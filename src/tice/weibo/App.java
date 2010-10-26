@@ -168,19 +168,10 @@ public class App extends Application {
         }
 
         try{
-			try {
-				host = new URI(url);
-			} catch (URISyntaxException e) {
-		        if(_Https == true){
-		        	host = new URI("https://twitter.com");
-		        }else{
-		        	host = new URI("http://twitter.com");
-		        }
-			} 
+        	host = new URI(url);
         }catch (Exception e){}
         
 		_twitter = new TwitterClient(this, host.getHost(), port, url, searchurl, _Username, _Password);
-
     }
     
 	@Override
