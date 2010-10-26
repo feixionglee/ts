@@ -81,5 +81,6 @@
     <string name="comment_add_forward">同时发一条微博</string>
     <string name="new_label">可输入字数：</string>
     <string name="direct_messages">私信</string>
+    <string name="count_comments">条评论</string>
     
 </resources>

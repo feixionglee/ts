@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import tice.weibo.App;
 import tice.weibo.R;
 import tice.weibo.HttpClient.TwitterClient;
@@ -40,6 +41,9 @@ public class CommentActivity extends Activity {
 	private int _Count = 100;
 	CommentAdapter _adapter;
 	protected boolean _Refresh = false;
+	public TextView tv;
+	
+	public ArrayList<CommentItem> items;
 	
 	static final String ACTION = "tice.weibo.Activities.CommentActivity";
 	private static final String EXTRA_ITEM = "tice.weibo.Util.TwittterItem";
@@ -73,6 +77,8 @@ public class CommentActivity extends Activity {
 	
 	public void setupView(){
 		Button combtn = (Button)findViewById(R.id.btCmtSend);
+		tv = (TextView) findViewById(R.id.tvCmtTitle);
+		
 
 		if(combtn != null){
 			combtn.setOnClickListener(new OnClickListener(){
@@ -98,11 +104,6 @@ public class CommentActivity extends Activity {
 		final Intent intent = new Intent(ACTION);
         intent.putExtra(EXTRA_ITEM, item.mID);
         context.startActivity(intent);
-	}
-	
-	
-	public void loadCommentsFromWeibo(long status_id){
-		
 	}
 	
 	private final Handler mHandler = new Handler() {
@@ -133,7 +134,7 @@ public class CommentActivity extends Activity {
 
 	public void defaultUpdateListViewProcessFrontEnd(ProgressData tweets){
 
-		ArrayList<CommentItem> items = tweets.citems;
+		items = tweets.citems;
 
  		if(items.size() == 0) {
  			TwitterClient.SendMessage(mHandler, TwitterClient.UI_REFRESHVIEWS, null);
@@ -165,7 +166,7 @@ public class CommentActivity extends Activity {
 
 		CommentsData data = (CommentsData) bundle.getSerializable(TwitterClient.KEY);
 		System.out.println("======="+data.items.size());
-
+		
  		if(data == null || data.items == null) return;
 
  		int index = 0;
@@ -207,6 +208,7 @@ public class CommentActivity extends Activity {
         @Override
         protected void onPostExecute(Long Result){
         	_Refresh = false;
+        	tv.setText(items.size() +" "+ getString(R.string.count_comments));
         }
 
 	}

@@ -87,4 +87,5 @@
     <string name="comment_add_forward">send as a weibo</string>
     <string name="new_label">you can input：</string>
     <string name="direct_messages">messages</string>
+    <string name="count_comments">comments</string>
 </resources>
