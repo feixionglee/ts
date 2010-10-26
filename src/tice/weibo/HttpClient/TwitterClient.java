@@ -1103,9 +1103,9 @@ public class TwitterClient {
 		}
 	}
 	
-	public void Get_comments_timeline(Handler handler, long id, int page){
+	public void Get_comments_timeline(Handler handler, long id, int count){
 		try{
-			String url = String.format("%s/statuses/comments.xml?id=%d&page=%d",mBaseURI,id,page);
+			String url = String.format("%s/statuses/comments.xml?id=%d&count=%d",mBaseURI,id,count);
 			HttpGet request = new HttpGet(url);
 			GetCommentsThread thread = new GetCommentsThread(REQUEST_TYPE_XML, handler, httpClient, request, HTTP_COMMENTS_TIMELINE);
 		 	thread.start();

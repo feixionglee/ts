@@ -205,26 +205,25 @@ public class CommentAdapter extends BaseAdapter {
     	notifyDataSetChanged();
     }
 
-    public void SetLoadingItem(){
-    	int count = mItem.size();
-    	if(count == 0) return;
-    	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;
-    	CommentItem item = mItem.get(count - 1);
-		if (item.mScreenname.length() == 0){
-			item.mText = "more";
-//			item.mLoading = false;
-		}
-    }
-
-    public void SetStartLoadingItem(){
-    	int count = mItem.size();
-    	if(count == 0) return;
-    	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;
-    	CommentItem item = mItem.get(count - 1);
-    	if (item.mScreenname.length() == 0){
-			item.mText = "  Loading more tweets ...";
-//			item.mLoading = true;
-		}
-    	notifyDataSetChanged();
-    }
+//    public void SetLoadingItem(){
+//    	int count = mItem.size();
+//    	if(count == 0) return;
+//    	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;
+//    	CommentItem item = mItem.get(count - 1);
+//		if (item.mScreenname.length() == 0){
+//			item.mText = "more";
+//
+//		}
+//    }
+//
+//    public void SetStartLoadingItem(){
+//    	int count = mItem.size();
+//    	if(count == 0) return;
+//    	if(count >= TwitterClient.MAX_TWEETS_COUNT) return;
+//    	CommentItem item = mItem.get(count - 1);
+//    	if (item.mScreenname.length() == 0){
+//			item.mText = "  Loading more tweets ...";
+//		}
+//    	notifyDataSetChanged();
+//    }
 }

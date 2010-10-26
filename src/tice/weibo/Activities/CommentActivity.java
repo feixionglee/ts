@@ -3,27 +3,25 @@ package tice.weibo.Activities;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.ToggleButton;
+import android.widget.ProgressBar;
 import tice.weibo.App;
 import tice.weibo.R;
 import tice.weibo.HttpClient.TwitterClient;
 import tice.weibo.List.CommentAdapter;
-import tice.weibo.List.TweetsListActivity;
 import tice.weibo.Util.CommentItem;
 import tice.weibo.Util.CommentsData;
 import tice.weibo.Util.ProgressData;
@@ -39,10 +37,9 @@ public class CommentActivity extends Activity {
 	protected int mAddType = ADD_TYPE_INSERT;
 	
 	private long status_id;
-	private int page = 1;
-	private CommentItem cItem;
+	private int _Count = 100;
 	CommentAdapter _adapter;
-//	TweetsListActivity mCtx;
+	protected boolean _Refresh = false;
 	
 	static final String ACTION = "tice.weibo.Activities.CommentActivity";
 	private static final String EXTRA_ITEM = "tice.weibo.Util.TwittterItem";
@@ -54,7 +51,13 @@ public class CommentActivity extends Activity {
 //		_Handler = mHandler;
 		
 		super.onCreate(savedInstanceState);
+
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		
 		setContentView(R.layout.commentblog);
+		
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title_1);
+		
 		setupView();
 		
 		status_id = getIntent().getExtras().getLong(EXTRA_ITEM);	
@@ -63,6 +66,7 @@ public class CommentActivity extends Activity {
 		_adapter = new CommentAdapter(this);
 		
 		_list.setAdapter(_adapter);
+		setMyProgressBarVisibility(true);
 		loadComments(status_id);
 	
 	}
@@ -104,19 +108,13 @@ public class CommentActivity extends Activity {
 	private final Handler mHandler = new Handler() {
         @Override
          public void handleMessage(final Message msg) {
-//        	defaulthandleMessage(msg);
         	processMessage(msg);
         }
     };
     
     public void processMessage(Message msg) {
     	switch (msg.what){
-
     	case TwitterClient.HTTP_COMMENTS_TIMELINE:
-//    		_Page = 1;
-//    		_Refresh = false;
-//    		_LastID = 0;
-//    		_PrevID = Long.MAX_VALUE;
     		defaultUpdateListViewThread(msg.getData(),ADD_TYPE_INSERT, true );
     		break;
     	case TwitterClient.HTTP_POST_COMMENT:
@@ -138,7 +136,6 @@ public class CommentActivity extends Activity {
 		ArrayList<CommentItem> items = tweets.citems;
 
  		if(items.size() == 0) {
- 			_adapter.SetLoadingItem();
  			TwitterClient.SendMessage(mHandler, TwitterClient.UI_REFRESHVIEWS, null);
  			return;
  		}
@@ -147,7 +144,6 @@ public class CommentActivity extends Activity {
  		int count;
 
  		int addtype = tweets.addtype;
- 		int mincount = Math.min(items.size(), _adapter.getCount());
  		count = items.size();
  		CommentItem t;
 
@@ -157,19 +153,6 @@ public class CommentActivity extends Activity {
 	 			if(t == null) continue;
 	 			_adapter.addThread(index, t, addtype, 1);
 	 		}
-
-	 		if(_adapter.getCount() >= TwitterClient.MAX_TWEETS_COUNT){
-	 			for (index = _adapter.getCount() - 1; index >= _App._Tweetscount; index = _adapter.getCount() - 1){
-	 				_adapter.Remove(index);
-	 			}
-	 		}
- 		}
-
- 		//_adapter.notifyDataSetChanged();
-
- 		if (items.size() != 0 && _adapter.getCount() <= TwitterClient.MAX_TWEETS_COUNT){
-// 			_adapter.addThread(READ_STATE_READ, "", "", "", 0, "", 0, "null", false, false, "", true, "");
- 			_adapter.SetLoadingItem();
  		}
 
  		TwitterClient.SendMessage(mHandler, TwitterClient.UI_REFRESHVIEWS, null);
@@ -201,9 +184,8 @@ public class CommentActivity extends Activity {
 
 		@Override
 		protected void onPreExecute(){
-//			_Refresh = true;
-//			setMyProgressBarVisibility(true);
-			System.out.print("update...");
+			_Refresh = true;
+			setMyProgressBarVisibility(false);
 		}
 
 		@Override
@@ -224,16 +206,18 @@ public class CommentActivity extends Activity {
 
         @Override
         protected void onPostExecute(Long Result){
-//        	_Refresh = false;
+        	_Refresh = false;
         }
 
 	}
 	
+	public void setMyProgressBarVisibility(boolean visibilty){
+		ProgressBar progressbar = (ProgressBar) findViewById(R.id.titleProgressBar);
+		progressbar.setVisibility(visibilty == true? View.VISIBLE: View.INVISIBLE);
+	}
+	
 	private void loadComments(long status_id){
-		_App._twitter.Get_comments_timeline(mHandler, status_id, page);
-		page += 1;
-		_adapter.addThread(0,"","",0);
-		_adapter.SetLoadingItem();
+		_App._twitter.Get_comments_timeline(mHandler, status_id, _Count);
 	}
 	
 }

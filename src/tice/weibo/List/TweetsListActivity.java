@@ -20,7 +20,6 @@ import tice.weibo.Activities.FavoriteActivity;
 import tice.weibo.Activities.HomeActivity;
 import tice.weibo.Activities.MentionActivity;
 import tice.weibo.Activities.SearchActivity;
-import tice.weibo.Activities.StatusesShowActivity;
 import tice.weibo.Activities.TrendsActivity;
 import tice.weibo.Activities.UserInfoActivity;
 import tice.weibo.Activities.UserStatusesActivity;
@@ -675,33 +674,6 @@ public class TweetsListActivity extends Activity {
 	        layout.startAnimation(animSet);
 	        layout.setVisibility(View.INVISIBLE);
  		}
- 	}
-
- 	private void EnableAllButtons(){
-
- 		TwitterItem item = _Items.Get(_CurrentThread);
-
- 		Button threads =  (Button)findViewById(R.id.thread);
-		Button delete =  (Button)findViewById(R.id.delete);
-
-		if(threads != null){
-			threads.setEnabled(false);
-			if(item != null){
-				String replyid = item.mReplyID;
-				if(replyid.length() != 0 && replyid.matches("null") == false){
-					threads.setEnabled(true);
-				}
-			}
-		}
-
-		if(delete != null){
-			delete.setEnabled(false);
-			if (item != null){
-				if(item.mScreenname.matches(_App._Username)){
-					delete.setEnabled(true);
-				}
-			}
-		}
  	}
 
  	private void doReplySingle(){
