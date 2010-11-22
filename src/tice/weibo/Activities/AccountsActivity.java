@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,8 +62,9 @@ public class AccountsActivity extends Activity {
 			}
         });
         
-        TextView add = (TextView)findViewById(R.id.aaddaccount);
-        TextView del = (TextView)findViewById(R.id.adelaccount);
+        TextView add = (TextView)findViewById(R.id.addaccount);
+        TextView edit = (TextView)findViewById(R.id.editaccount);
+        TextView del = (TextView)findViewById(R.id.delaccount);
         
 
         
@@ -78,6 +80,38 @@ public class AccountsActivity extends Activity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         EditText user = (EditText) textEntryView.findViewById(R.id.username_edit);
                         EditText pass = (EditText) textEntryView.findViewById(R.id.password_edit);
+                    	String username = user.getText().toString();
+                    	String password = pass.getText().toString();
+                    	if(TextUtils.isEmpty(username) == false && TextUtils.isEmpty(password) == false){
+                	    	ContentValues initialValues = new ContentValues();    	
+                	    	initialValues.put(DBTweetsHelper.KEY_USERNAME, username);
+                	    	initialValues.put(DBTweetsHelper.KEY_PASSWORD, password);
+                    		_App._DbHelper.updateAccounts(username, initialValues);
+                    		SaveUsernameAndPassword(username, password);
+                    		LoadAccountsFromDB();
+                    	}
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                }).show();
+        	}
+        });
+        
+        edit.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v){
+                final View textEntryView = factory.inflate(R.layout.userpass, null);
+                final EditText user = (EditText) textEntryView.findViewById(R.id.username_edit);
+                final EditText pass = (EditText) textEntryView.findViewById(R.id.password_edit);
+                user.setText(_App._Username);
+                pass.setText(_App._Password);
+	            new AlertDialog.Builder(AccountsActivity.this)
+                .setTitle("Edit account")
+                .setView(textEntryView)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
                     	String username = user.getText().toString();
                     	String password = pass.getText().toString();
                     	if(TextUtils.isEmpty(username) == false && TextUtils.isEmpty(password) == false){
